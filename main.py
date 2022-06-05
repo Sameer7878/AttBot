@@ -1,7 +1,7 @@
 import datetime
 import os
 import time
-
+import logging
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
@@ -2349,8 +2349,9 @@ count = 0
 temp_count = 0
 
 options = Options()
+path='/Users/sameershaik/PycharmProjects/Checkme/static/chromedriver'
 options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-options.add_argument("--headless")
+#options.add_argument("--headless")
 options.add_argument("--disable-gpu")
 options.add_argument("--no-sandbox")
 options.add_argument("enable-automation")
@@ -2475,13 +2476,16 @@ web.find_element(By.XPATH, '//*[@id="loginForm"]/div/div[1]/div/label/input').se
 web.find_element(By.XPATH, '//*[@id="loginForm"]/div/div[2]/div/label/input').send_keys('Nbkr@1234')
 time.sleep(2)
 web.find_element(By.XPATH, '//*[@id="loginForm"]/div/div[3]/button').click()
+logging.info('Login Successful')
 try:
     time.sleep(2)
     web.find_element(By.XPATH, '//*[@id="react-root"]/section/main/div/div/div/div/button').click()
+    logging.info('click not now')
 except:
     pass
 try:
     web.find_element(By.XPATH, '//button[@class="_a9-- _a9_1"]').click()
+    logging.info('click not now')
 except:
     pass
 
@@ -2532,7 +2536,9 @@ def readmsg(oldmsg):
 
 web.execute_script("window.open('');")
 read_unread_msgs()
+logging.info('Bot is Online')
 while (True):
+
     if ((datetime.datetime.now().hour == 12) or (datetime.datetime.now().hour == 16)):
         if count == temp_count:
             send_att_time()
