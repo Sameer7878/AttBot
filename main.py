@@ -2351,7 +2351,7 @@ temp_count = 0
 options = Options()
 path='/Users/sameershaik/PycharmProjects/Checkme/static/chromedriver'
 options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-#options.add_argument("--headless")
+options.add_argument("--headless")
 options.add_argument("--disable-gpu")
 options.add_argument("--no-sandbox")
 options.add_argument("enable-automation")
