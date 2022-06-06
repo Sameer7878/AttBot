@@ -2379,12 +2379,13 @@ def send_att_time():
 
 def login(web):
     try:
-        user = web.find_element_by_xpath('//*[@id="username"]')
+        user = web.find_element(By.XPATH,'//*[@id="username"]')
         user.send_keys('rohini')
-        passw = web.find_element_by_xpath('//*[@id="password"]')
+        passw = web.find_element(By.XPATH,'//*[@id="password"]')
         passw.send_keys('rohini')
         sub = web.find_element(By.XPATH, '/html/body/table[2]/tbody/tr[2]/td/form/table/tbody/tr[6]/td/input')
         sub.click()
+        print("attendance site logined")
     except Exception as error:
         print('Error in Login',error)
 
