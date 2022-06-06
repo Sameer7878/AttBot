@@ -1,7 +1,6 @@
 import datetime
 import os
 import time
-import logging
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
@@ -2357,8 +2356,8 @@ options.add_argument("--no-sandbox")
 options.add_argument("enable-automation")
 options.add_argument("--disable-infobars")
 options.add_argument("--disable-dev-shm-usage")
-web = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=options)
-web.implicitly_wait(43200)
+web = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"),options=options)
+web.implicitly_wait(5)
 register_id = {}
 time_slot_bookings = []
 
@@ -2379,12 +2378,15 @@ def send_att_time():
 
 
 def login(web):
-    user = web.find_element_by_xpath('//*[@id="username"]')
-    user.send_keys('rohini')
-    passw = web.find_element_by_xpath('//*[@id="password"]')
-    passw.send_keys('rohini')
-    sub = web.find_element(By.XPATH, '/html/body/table[2]/tbody/tr[2]/td/form/table/tbody/tr[6]/td/input')
-    sub.click()
+    try:
+        user = web.find_element_by_xpath('//*[@id="username"]')
+        user.send_keys('rohini')
+        passw = web.find_element_by_xpath('//*[@id="password"]')
+        passw.send_keys('rohini')
+        sub = web.find_element(By.XPATH, '/html/body/table[2]/tbody/tr[2]/td/form/table/tbody/tr[6]/td/input')
+        sub.click()
+    except Exception as error:
+        print('Error in Login',error)
 
 
 def provide_rollno(username):
@@ -2470,24 +2472,33 @@ def get_data(adyear, branch, sec1, rollno):
     except NoSuchElementException:
         return att  # sub,datt,datt2
 
+def login_insta(usern,passw):
+    try:
+        web.find_element(By.XPATH, '//*[@id="loginForm"]/div/div[1]/div/label/input').send_keys(usern)
+        time.sleep(2)
+        web.find_element(By.XPATH, '//*[@id="loginForm"]/div/div[2]/div/label/input').send_keys(passw)
+        time.sleep(2)
+        web.find_element(By.XPATH, '//*[@id="loginForm"]/div/div[3]/button').click()
+        print('Login Successful')
+    except Exception as error:
+        print('Not Logined')
+def not_now():
+    try:
+        WebDriverWait(web,10).until(EC.presence_of_element_located((By.XPATH,'//*[@id="react-root"]/section/main/div/div/div/div/button'))).click()
+        print('Not Now clicked')
+        time.sleep(3)
+        WebDriverWait(web, 10).until(EC.presence_of_element_located(
+            (By.XPATH, '//button[@class="_a9-- _a9_1"]'))).click()
+    except NoSuchElementException:
+        print('Not Found And passed')
+        pass
+    except Exception as error:
+        print(error)
+
 
 web.get('https://www.instagram.com/direct/inbox/general/')
-web.find_element(By.XPATH, '//*[@id="loginForm"]/div/div[1]/div/label/input').send_keys('attnbkrist@gmail.com')
-web.find_element(By.XPATH, '//*[@id="loginForm"]/div/div[2]/div/label/input').send_keys('Nbkr@1234')
-time.sleep(2)
-web.find_element(By.XPATH, '//*[@id="loginForm"]/div/div[3]/button').click()
-logging.info('Login Successful')
-try:
-    time.sleep(2)
-    web.find_element(By.XPATH, '//*[@id="react-root"]/section/main/div/div/div/div/button').click()
-    logging.info('click not now')
-except:
-    pass
-try:
-    web.find_element(By.XPATH, '//button[@class="_a9-- _a9_1"]').click()
-    logging.info('click not now')
-except:
-    pass
+login_insta('attnbkrist@gmail.com','Nbkr@1234')
+not_now()
 
 
 def read_unread_msgs():
@@ -2496,9 +2507,11 @@ def read_unread_msgs():
     global web_url
     web.get('https://www.instagram.com/direct/inbox/general/')
     try:
-        web.find_element(By.XPATH, '//div[@class=" _ab8l _ab8n _ab8w  _ab94 _ab99 _ab9f _ab9m _ab9p"]').click()
+        WebDriverWait(web,43000).until(EC.presence_of_element_located((By.XPATH, '//div[@class=" _ab8l _ab8n _ab8w  _ab94 _ab99 _ab9f _ab9m _ab9p"]'))).click()
         web_url = web.title
+        print("Unread msg found")
     except:
+        print('Time out')
         pass
 
 
@@ -2510,12 +2523,13 @@ def send_msg(msg_data):
     time.sleep(1)
     web.find_element(By.XPATH,
                      '/html/body/div[1]/div/div[1]/div/div[1]/div/div/div[1]/div[1]/div/section/div/div[2]/div/div/div[2]/div[2]/div/div[2]/div/div/div[3]/button').click()
-
+    print('msg sent')
 
 def get_username():
     WebDriverWait(web, 10).until(
         EC.element_to_be_clickable((By.XPATH, "//button[@class='_acan _acao _acaq _acat']"))).click()
     username = web.find_element(By.XPATH, "//h2[@class='_aacl _aacs _aact _aacx _aada']").text
+    print('get Username')
     time.sleep(0.3)
     web.back()
     return username
@@ -2525,18 +2539,26 @@ temp = ''
 
 
 def readmsg(oldmsg):
+    count=0
     while (True):
-        msg = web.find_element(By.XPATH, "(//div[@class=' _acd3 _acd4'])[last()]").text
+        print(count)
+        time.sleep(1)
+        msg = WebDriverWait(web,10).until(EC.presence_of_element_located((By.XPATH, "(//div[@class=' _acd3 _acd4'])[last()]"))).text
+        if count == 30:
+            send_msg('Late respose Please try after some time')
+            return read_unread_msgs()
         if oldmsg == msg:
+            count +=1
             continue
         else:
             break
+    print('New msg read')
     return msg
 
 
 web.execute_script("window.open('');")
+print('Bot is Online')
 read_unread_msgs()
-logging.info('Bot is Online')
 while (True):
 
     if ((datetime.datetime.now().hour == 12) or (datetime.datetime.now().hour == 16)):
