@@ -2503,11 +2503,11 @@ not_now()
 
 def read_unread_msgs():
     global temp_count
-    if ((datetime.datetime.now().minute == 8 ) or (datetime.datetime.now().hour == 16)):#checks for booking slots reservation
+    if ((datetime.datetime.now().hour == 12 ) or (datetime.datetime.now().hour == 16)):#checks for booking slots reservation
         if count == temp_count:
             send_att_time()
             print('time_slots_send')
-    elif (datetime.datetime.now().minute == 10 or datetime.datetime.now().hour == 17) and temp_count != count:
+    elif (datetime.datetime.now().hour == 13 or datetime.datetime.now().hour == 17) and temp_count != count:
         temp_count = count
     time.sleep(1)
     web.switch_to.window(web.window_handles[0])
