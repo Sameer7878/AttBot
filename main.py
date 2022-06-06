@@ -7,7 +7,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
+from selenium.webdriver.common.keys import Keys
 student_names = {'21KB1A0301': 'ALLAM HARSHAVARDHAN', '21KB1A0302': 'ANANTANENI TEJA KIRAN',
                  '21KB1A0303': 'ARUMULLA HARSHA VARDHAN', '21KB1A0304': 'BANDILA HARSHA',
                  '21KB1A0305': 'BANDLA KARTHIK', '21KB1A0306': 'BELLAMKONDA SARATH KUMAR',
@@ -2344,9 +2344,10 @@ student_data = {'21KB1A0301': '3 1 1', '21KB1A0302': '3 1 1', '21KB1A0303': '3 1
                 '19KB5A0415': '8 3 4', '19KB5A0416': '8 3 4', '19KB5A0417': '8 3 4', '19KB5A0418': '8 3 4',
                 '19KB5A0419': '8 3 4', '19KB5A0420': '8 3 4', '17KB1A0460': '8 3 4'}
 
+booked_urls={}
 count = 0
 temp_count = 0
-
+thank_you=['THANK YOU','TQ','TQ U','THANKS','THANK']
 options = Options()
 path='/Users/sameershaik/PycharmProjects/Checkme/static/chromedriver'
 options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
@@ -2369,10 +2370,7 @@ def send_att_time():
     count = count + 1
     for roll in time_slot_bookings:
         att = provide_rollno(roll)
-        web.get(f'https://www.instagram.com/{roll}/')
-        web.find_element(By.XPATH,
-                         '/html/body/div[1]/div/div[1]/div/div[1]/div/div/div[1]/div['
-                         '1]/section/main/div/header/section/div[2]/div/div[1]/button').click()
+        web.get(booked_urls[roll])
         send_msg(f'Attendance Till Now: {att}')
     read_unread_msgs()
 
@@ -2486,10 +2484,10 @@ def login_insta(usern,passw):
 def not_now():
     try:
         WebDriverWait(web,10).until(EC.presence_of_element_located((By.XPATH,'//*[@id="react-root"]/section/main/div/div/div/div/button'))).click()
-        print('Not Now clicked')
         time.sleep(3)
         WebDriverWait(web, 10).until(EC.presence_of_element_located(
             (By.XPATH, '//button[@class="_a9-- _a9_1"]'))).click()
+        print('Not Now clicked')
     except NoSuchElementException:
         print('Not Found And passed')
         pass
@@ -2498,16 +2496,25 @@ def not_now():
 
 
 web.get('https://www.instagram.com/direct/inbox/general/')
+print('Login initiate')
 login_insta('attnbkrist@gmail.com','Nbkr@1234')
 not_now()
 
 
 def read_unread_msgs():
+    global temp_count
+    if ((datetime.datetime.now().minute == 8 ) or (datetime.datetime.now().hour == 16)):#checks for booking slots reservation
+        if count == temp_count:
+            send_att_time()
+            print('time_slots_send')
+    elif (datetime.datetime.now().minute == 10 or datetime.datetime.now().hour == 17) and temp_count != count:
+        temp_count = count
     time.sleep(1)
     web.switch_to.window(web.window_handles[0])
     global web_url
     web.get('https://www.instagram.com/direct/inbox/general/')
     try:
+        print('Bot is waiting messages')
         WebDriverWait(web,43000).until(EC.presence_of_element_located((By.XPATH, '//div[@class=" _ab8l _ab8n _ab8w  _ab94 _ab99 _ab9f _ab9m _ab9p"]'))).click()
         web_url = web.title
         print("Unread msg found")
@@ -2517,11 +2524,11 @@ def read_unread_msgs():
 
 
 def send_msg(msg_data):
-    time.sleep(0.5)
+    msg_data=msg_data.replace("\n",(Keys.SHIFT+Keys.ENTER+Keys.ENTER+Keys.SHIFT))
     web.find_element(By.XPATH,
                      '/html/body/div[1]/div/div[1]/div/div[1]/div/div/div[1]/div[1]/div/section/div/div[2]/div/div/div[2]/div[2]/div/div[2]/div/div/div[2]/textarea').send_keys(
         msg_data)
-    time.sleep(1)
+    time.sleep(0.5)
     web.find_element(By.XPATH,
                      '/html/body/div[1]/div/div[1]/div/div[1]/div/div/div[1]/div[1]/div/section/div/div[2]/div/div/div[2]/div[2]/div/div[2]/div/div/div[3]/button').click()
     print('msg sent')
@@ -2535,16 +2542,18 @@ def get_username():
     web.back()
     return username
 
-
-temp = ''
+temp=''
 
 
 def readmsg(oldmsg):
     count=0
     while (True):
-        print(count)
         time.sleep(1)
         msg = WebDriverWait(web,10).until(EC.presence_of_element_located((By.XPATH, "(//div[@class=' _acd3 _acd4'])[last()]"))).text
+        if msg.isdigit():
+            pass
+        else:
+            msg = msg.upper()
         if count == 30:
             send_msg('Late respose Please try after some time')
             return read_unread_msgs()
@@ -2556,101 +2565,112 @@ def readmsg(oldmsg):
     print('New msg read')
     return msg
 
-
 web.execute_script("window.open('');")
 print('Bot is Online')
 read_unread_msgs()
+username=None
+msg=None
+msg_count=0
 while (True):
-
-    if ((datetime.datetime.now().hour == 12) or (datetime.datetime.now().hour == 16)):
-        if count == temp_count:
-            send_att_time()
-    elif (datetime.datetime.now().hour == 13 or datetime.datetime.now().hour == 17) and temp_count != count:
-        temp_count = count
-    username = get_username()
-    time.sleep(1)
-    msg = readmsg('')
-    temp = msg
-    if msg and username not in register_id:
-        send_msg('Hello, This AttNbkrist Attendance BOT.')
-        send_msg('Please Enter to your Roll No to register with InstaID.')
+    try:
         msg = readmsg(msg)
-        if msg.upper() in student_data:
-            register_id[username] = msg.upper()
-            send_msg('Roll NO Registered Successfully.\n Type "Start"')
-            time.sleep(0.5)
-            msg = readmsg(msg)
-        else:
-            send_msg('RollNo not available.')
-            send_msg('Please try After Some Time.')
+        if not username:
+            username = get_username() #to get username
+        if msg.isdigit():
+            msg_count=0
+        if msg in thank_you:
+            send_msg('You are welcome')
             read_unread_msgs()
+            username=None
             continue
-    else:
-        msg = readmsg('')
-    if msg.lower() == 'start':
-        send_msg('Type "1" For Immediate Attendance')
-        send_msg('Type "2" For Book Requests By Time.')
-        msg = readmsg(msg)
-    if msg == '1':
-        att = provide_rollno(username)
-        send_msg(f'Attendance Till Now: {att}')
-        send_msg('If You want again Type "1"')
-        send_msg('Thank you. You are in Queue for next message')
-        time.sleep(0.5)
-        read_unread_msgs()
-        continue
-    elif msg == '2':
-        if username in time_slot_bookings:
-            send_msg('Your Already Subscribed.')
-            read_unread_msgs()
-            continue
-        else:
-            send_msg('We are automatically sent your attendance two times in a day')
-            send_msg('12:00 PM and 4:30 PM')
-            send_msg('Confirm Type "yes" or "no" to Cancel')
+        if msg and username not in register_id:
+            send_msg('Hello, This AttNbkrist Attendance BOT\nPlease Enter to your Roll No to register with InstaID')
             msg = readmsg(msg)
-            if msg.lower() == 'yes':
-                send_msg('Thank You For Subscribe.')
-                time_slot_bookings.append(username)
-                att = provide_rollno(username)
-                send_msg(f'Attendance Till Now: {att}')
-                time.sleep(0.8)
+            if msg in student_data:
+                register_id[username] = msg
+                send_msg('Roll NO Registered Successfully\nType "Start"')
+                time.sleep(0.5)
+                msg = readmsg(msg)
+            else:
+                send_msg('RollNo not available\nPlease try After Some Time')
                 read_unread_msgs()
+                username=None
                 continue
-            elif msg.lower() == 'no':
-                send_msg('Not a Problem.')
-                send_msg('Thank you. You are in Queue for next message')
+        '''else:
+            msg = readmsg('')'''
+        if msg == 'START':
+            send_msg('Type "1" For Immediate Attendance\nType "2" For Book Requests By Time')
+            continue
+        elif msg == '1':
+            att = provide_rollno(username)
+            send_msg(f'Attendance Till Now: {att}.')
+            send_msg('If You want again Type "1"\nThank you. You are in Queue for next message')
+            time.sleep(0.5)
+            read_unread_msgs()
+            username=None
+            continue
+        elif msg == '2':
+            if username in time_slot_bookings:
+                send_msg('Your Already Subscribed.')
                 read_unread_msgs()
+                username=None
+                msg=None
                 continue
             else:
-                send_msg('Command not found')
-                send_msg('Thank you. You are in Queue for next message')
-                read_unread_msgs()
-                continue
-    elif username in register_id and msg:
-        send_msg('You are already registered')
-        send_msg('Type "1" for Immediate Attendance')
-        send_msg('Type "2" For Book Requests By Time.')
-        send_msg('Type "change" to change RollNo.')
-        msg = readmsg(msg)
-        if msg.lower() == 'change':
+                send_msg('We are automatically sent your attendance two times in a day\n12:00 PM and 4:30 PM\nConfirm Type "yes" or "no" to Cancel')
+                msg = readmsg(msg)
+                if msg == 'YES':
+                    send_msg('Thank You For Subscribe.')
+                    time_slot_bookings.append(username)
+                    booked_urls[username]=web.current_url
+                    att = provide_rollno(username)
+                    send_msg(f'Attendance Till Now: {att}')
+                    time.sleep(0.5)
+                    read_unread_msgs()
+                    msg = None
+                    username=None
+                    continue
+                elif msg == 'NO':
+                    send_msg('Not a Problem\nThank you, You are in Queue for next message')
+                    read_unread_msgs()
+                    username=None
+                    msg = None
+                    continue
+                else:
+                    send_msg('Command not found\nThank you, You are in Queue for next message')
+                    username=None
+                    msg = None
+                    read_unread_msgs()
+                    continue
+        elif msg == '3':
             send_msg('Enter Roll Number.')
             msg = readmsg(msg)
-            if msg.upper() in student_data:
-                register_id[username] = msg.upper()
-                send_msg('RollNO Changed Successfully.')
-                send_msg('Type "1" for attendance.')
-                msg = readmsg(msg)
-                att = provide_rollno(username)
-                send_msg(f'Attendance Till Now: {att}')
-                read_unread_msgs()
+            if msg in student_data:
+                register_id[username] = msg
+                send_msg('RollNO Changed Successfully.\nType "1" for attendance.')
                 continue
             else:
-                send_msg('Your RollNO is not Found')
-                send_msg('Please Try Again')
+                send_msg('Your RollNO is not Found\nPlease Try Again')
                 read_unread_msgs()
+                msg=None
+                username=None
                 continue
-    else:
-        send_msg('Invalid Command,Please after Some Time.')
+        elif username in register_id and msg and msg_count==0:
+            msg_count +=1
+            send_msg('You are already registered\nType "1" for Immediate Attendance\nType "2" For Book Requests By Time.\nType "3" to change RollNo.')
+            #msg = readmsg(msg)
+            continue
+
+
+        else:
+            send_msg('Invalid Command,Please after Some Time.')
+            read_unread_msgs()
+            username=None
+            msg=None
+            msg_count=0
+            continue
+    except Exception as error:
+        username=None
+        msg=None
+        msg_count=0
         read_unread_msgs()
-        continue
