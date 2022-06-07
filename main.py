@@ -2576,8 +2576,11 @@ while (True):
         msg = readmsg(msg)
         if not username:
             username = get_username() #to get username
-        if msg.isdigit():
-            msg_count=0
+        try:
+            if msg.isdigit():
+                msg_count=0
+        except:
+            pass
         if msg in thank_you:
             send_msg('You are welcome')
             read_unread_msgs()
