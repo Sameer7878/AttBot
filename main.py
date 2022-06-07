@@ -2344,7 +2344,7 @@ student_data = {'21KB1A0301': '3 1 1', '21KB1A0302': '3 1 1', '21KB1A0303': '3 1
                 '19KB5A0415': '8 3 4', '19KB5A0416': '8 3 4', '19KB5A0417': '8 3 4', '19KB5A0418': '8 3 4',
                 '19KB5A0419': '8 3 4', '19KB5A0420': '8 3 4', '17KB1A0460': '8 3 4'}
 
-booked_urls={}
+booked_urls={'user_not_found_x20':'https://www.instagram.com/direct/t/340282366841710300949128261639375730110','a__.r_.u_.n__':'https://www.instagram.com/direct/t/340282366841710300949128112412132056751','vishnu_teja__reddy':'https://www.instagram.com/direct/t/340282366841710300949128256992573720881','rithwick_reddy_143':'https://www.instagram.com/direct/t/340282366841710300949128195749188449478','future_aviator_karthik':'https://www.instagram.com/direct/t/340282366841710300949128178723993801833'}
 count = 0
 temp_count = 0
 thank_you=['THANK YOU','TQ','TQ U','THANKS','THANK']
@@ -2359,8 +2359,8 @@ options.add_argument("--disable-infobars")
 options.add_argument("--disable-dev-shm-usage")
 web = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"),options=options)
 web.implicitly_wait(5)
-register_id = {}
-time_slot_bookings = []
+register_id = {'rithwick_reddy_143':'21KB1A0327','user_not_found_x20':'19KB1A1244','a__.r_.u_.n__':'19KB1A1222','future_aviator_karthik':'21KB5A0342','vishnu_teja__reddy':'19KB1A1229'}
+time_slot_bookings = ['rithwick_reddy_143','user_not_found_x20','a__.r_.u_.n__','future_aviator_karthik','vishnu_teja__reddy']
 
 web_url = ''
 
@@ -2515,12 +2515,12 @@ def read_unread_msgs():
     web.get('https://www.instagram.com/direct/inbox/general/')
     try:
         print('Bot is waiting messages')
-        WebDriverWait(web,43000).until(EC.presence_of_element_located((By.XPATH, '//div[@class=" _ab8l _ab8n _ab8w  _ab94 _ab99 _ab9f _ab9m _ab9p"]'))).click()
+        WebDriverWait(web,300).until(EC.presence_of_element_located((By.XPATH, '//div[@class=" _ab8l _ab8n _ab8w  _ab94 _ab99 _ab9f _ab9m _ab9p"]'))).click()
         web_url = web.title
         print("Unread msg found")
     except:
         print('Time out')
-        pass
+        read_unread_msgs()
 
 
 def send_msg(msg_data):
@@ -2567,6 +2567,8 @@ def readmsg(oldmsg):
 
 web.execute_script("window.open('');")
 print('Bot is Online')
+print(register_id)
+print(booked_urls)
 read_unread_msgs()
 username=None
 msg=None
