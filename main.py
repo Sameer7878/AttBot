@@ -2567,112 +2567,113 @@ def readmsg(oldmsg):
 
 web.execute_script("window.open('');")
 print('Bot is Online')
-print(register_id)
-print(booked_urls)
 read_unread_msgs()
 username=None
 msg=None
 msg_count=0
 while (True):
-    msg = readmsg(msg)
-    if not username:
-        username = get_username() #to get username
-    if msg.isdigit():
-        msg_count=0
-    if msg in thank_you:
-        send_msg('You are welcome')
-        read_unread_msgs()
-        username=None
-        continue
-    if msg and username not in register_id:
-        send_msg('Hello, This AttNbkrist Attendance BOT\nPlease Enter to your Roll No to register with InstaID')
+    try:
         msg = readmsg(msg)
-        if msg in student_data:
-            register_id[username] = msg
-            send_msg('Roll NO Registered Successfully\nType "Start"')
-            time.sleep(0.5)
-            msg = readmsg(msg)
-        else:
-            send_msg('RollNo not available\nPlease try After Some Time')
+        if not username:
+            username = get_username() #to get username
+        if msg.isdigit():
+            msg_count=0
+        if msg in thank_you:
+            send_msg('You are welcome')
             read_unread_msgs()
             username=None
             continue
-    '''else:
-         msg = readmsg('')'''
-    if msg == 'START':
-        send_msg('Type "1" For Immediate Attendance\nType "2" For Book Requests By Time')
-        continue
-    elif msg == '1':
-        att = provide_rollno(username)
-        send_msg(f'Attendance Till Now: {att}.')
-        send_msg('If You want again Type "1"\nThank you. You are in Queue for next message')
-        time.sleep(0.5)
-        read_unread_msgs()
-        username=None
-        continue
-    elif msg == '2':
-        if username in time_slot_bookings:
-            send_msg('Your Already Subscribed.')
-            read_unread_msgs()
-            username=None
-            msg=None
-            continue
-        else:
-            send_msg('We are automatically sent your attendance two times in a day\n12:00 PM and 4:30 PM\nConfirm Type "yes" or "no" to Cancel')
+        if msg and username not in register_id:
+            send_msg('Hello, This AttNbkrist Attendance BOT\nPlease Enter to your Roll No to register with InstaID')
             msg = readmsg(msg)
-            if msg == 'YES':
-                send_msg('Thank You For Subscribe.')
-                time_slot_bookings.append(username)
-                booked_urls[username]=web.current_url
-                att = provide_rollno(username)
-                send_msg(f'Attendance Till Now: {att}')
+            if msg in student_data:
+                register_id[username] = msg
+                send_msg('Roll NO Registered Successfully\nType "Start"')
+                print(register_id)
                 time.sleep(0.5)
+                msg = readmsg(msg)
+            else:
+                send_msg('RollNo not available\nPlease try After Some Time')
                 read_unread_msgs()
-                msg = None
                 username=None
                 continue
-            elif msg == 'NO':
-                send_msg('Not a Problem\nThank you, You are in Queue for next message')
+        '''else:
+             msg = readmsg('')'''
+        if msg == 'START':
+            send_msg('Type "1" For Immediate Attendance\nType "2" For Book Requests By Time')
+            continue
+        elif msg == '1':
+            att = provide_rollno(username)
+            send_msg(f'Attendance Till Now: {att}.')
+            send_msg('If You want again Type "1"\nThank you. You are in Queue for next message')
+            time.sleep(0.5)
+            read_unread_msgs()
+            username=None
+            continue
+        elif msg == '2':
+            if username in time_slot_bookings:
+                send_msg('Your Already Subscribed.')
                 read_unread_msgs()
                 username=None
-                msg = None
+                msg=None
                 continue
             else:
-                send_msg('Command not found\nThank you, You are in Queue for next message')
-                username=None
-                msg = None
-                read_unread_msgs()
+                send_msg('We are automatically sent your attendance two times in a day\n12:00 PM and 4:30 PM\nConfirm Type "yes" or "no" to Cancel')
+                msg = readmsg(msg)
+                if msg == 'YES':
+                    send_msg('Thank You For Subscribe.')
+                    time_slot_bookings.append(username)
+                    booked_urls[username]=web.current_url
+                    print(booked_urls)
+                    att = provide_rollno(username)
+                    send_msg(f'Attendance Till Now: {att}')
+                    time.sleep(0.5)
+                    read_unread_msgs()
+                    msg = None
+                    username=None
+                    continue
+                elif msg == 'NO':
+                    send_msg('Not a Problem\nThank you, You are in Queue for next message')
+                    read_unread_msgs()
+                    username=None
+                    msg = None
+                    continue
+                else:
+                    send_msg('Command not found\nThank you, You are in Queue for next message')
+                    username=None
+                    msg = None
+                    read_unread_msgs()
+                    continue
+        elif msg == '3':
+            send_msg('Enter Roll Number.')
+            msg = readmsg(msg)
+            if msg in student_data:
+                register_id[username] = msg
+                send_msg('RollNO Changed Successfully.\nType "1" for attendance.')
                 continue
-    elif msg == '3':
-        send_msg('Enter Roll Number.')
-        msg = readmsg(msg)
-        if msg in student_data:
-            register_id[username] = msg
-            send_msg('RollNO Changed Successfully.\nType "1" for attendance.')
+            else:
+                send_msg('Your RollNO is not Found\nPlease Try Again')
+                read_unread_msgs()
+                msg=None
+                username=None
+                continue
+        elif username in register_id and msg and msg_count==0:
+            msg_count +=1
+            send_msg('You are already registered\nType "1" for Immediate Attendance\nType "2" For Book Requests By Time.\nType "3" to change RollNo.')
+                #msg = readmsg(msg)
             continue
+
+
         else:
-            send_msg('Your RollNO is not Found\nPlease Try Again')
+            send_msg('Invalid Command,Please after Some Time.')
             read_unread_msgs()
-            msg=None
             username=None
+            msg=None
+            msg_count=0
             continue
-    elif username in register_id and msg and msg_count==0:
-        msg_count +=1
-        send_msg('You are already registered\nType "1" for Immediate Attendance\nType "2" For Book Requests By Time.\nType "3" to change RollNo.')
-            #msg = readmsg(msg)
-        continue
-
-
-    else:
-        send_msg('Invalid Command,Please after Some Time.')
-        read_unread_msgs()
-        username=None
-        msg=None
-        msg_count=0
-        continue
-'''except Exception as error:
+    except Exception as error:
         print(error)
         username=None
         msg=None
         msg_count=0
-        read_unread_msgs()'''
+        read_unread_msgs()

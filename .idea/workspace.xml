@@ -41,8 +41,6 @@
       <change beforePath="$PROJECT_DIR$/../FeePayment/templates/PayFee.html" beforeDir="false" afterPath="$PROJECT_DIR$/../FeePayment/templates/PayFee.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../FeePayment/templates/busfee.html" beforeDir="false" afterPath="$PROJECT_DIR$/../FeePayment/templates/busfee.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../FeePayment/templates/status.html" beforeDir="false" afterPath="$PROJECT_DIR$/../FeePayment/templates/status.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,7 +108,7 @@
       <workItem from="1654347371538" duration="4893000" />
       <workItem from="1654512217713" duration="9904000" />
       <workItem from="1654524401193" duration="12869000" />
-      <workItem from="1654565339843" duration="2596000" />
+      <workItem from="1654565339843" duration="2973000" />
     </task>
     <servers />
   </component>
