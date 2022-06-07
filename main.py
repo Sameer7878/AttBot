@@ -2350,14 +2350,14 @@ temp_count = 0
 thank_you=['THANK YOU','TQ','TQ U','THANKS','THANK']
 options = Options()
 path='/Users/sameershaik/PycharmProjects/Checkme/static/chromedriver'
-#options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
 options.add_argument("--headless")
 options.add_argument("--disable-gpu")
 options.add_argument("--no-sandbox")
 options.add_argument("enable-automation")
 options.add_argument("--disable-infobars")
 options.add_argument("--disable-dev-shm-usage")
-web = webdriver.Chrome(executable_path=path)
+web = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=options)
 web.implicitly_wait(5)
 register_id = {'rithwick_reddy_143':'21KB1A0327','user_not_found_x20':'19KB1A1244','a__.r_.u_.n__':'19KB1A1222','future_aviator_karthik':'21KB5A0342','vishnu_teja__reddy':'19KB1A1229'}
 time_slot_bookings = ['rithwick_reddy_143','user_not_found_x20','a__.r_.u_.n__','future_aviator_karthik','vishnu_teja__reddy']
