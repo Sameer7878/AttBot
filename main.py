@@ -2640,7 +2640,7 @@ while (True):
                     'Now you will get attendance twice a day automatically\n01:00 PM and 4:30 PM\nType "yes" to Confirm\nType "no" to cancel')
                 msg = readmsg(msg)
                 if msg == 'YES':
-                    send_msg('Thank For Subscribe.')
+                    send_msg('Thanks For Subscribe.')
                     time_slot_bookings.append(username)
                     booked_urls[ username ] = web.current_url
                     print(booked_urls)
@@ -2671,7 +2671,7 @@ while (True):
                 send_msg('ROLL NO Changed Successfully.\nType "1" for attendance.')
                 continue
             else:
-                send_msg('ROLL NO not Found\nPlease Try Again')
+                send_msg('Invalid ROLL NO\nTry Again.!')
                 read_unread_msgs()
                 msg = None
                 username = None
