@@ -2349,7 +2349,7 @@ register_id = {'rithwick_reddy_143': '21KB1A0327', 'user_not_found_x20': '19KB1A
 time_slot_bookings = ['user_not_found_x20', 'a__.r_.u_.n__', 'vishnu_teja__reddy', 'rithwick_reddy_143', 'future_aviator_karthik', 'tharun6744', 'lalith_allias_karan_3', 'j.a.y.a.n.t.h__', 'challa_is__the_brand', 'revanth____007', 'srikanth_sree012', '__lovable_i_d_i_o_t__', 'reddy___gari___abbay___']
 count = 0
 temp_count = 0
-thank_you = [ 'THANK YOU', 'TQ', 'TQ U', 'THANKS', 'THANK' ]
+thank_you = [ 'THANK YOU', 'TQ', 'TQ U', 'THANKS', 'THANK','THANK U','THANKYOU' ]
 options = Options()
 path = '/Users/sameershaik/PycharmProjects/Checkme/static/chromedriver'
 options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
@@ -2602,7 +2602,7 @@ while (True):
             username = None
             continue
         if msg and username not in register_id:
-            send_msg('Hello, This AttNbkrist Attendance BOT\nPlease Enter your Roll N')
+            send_msg('Hello, I am NBKRIST Attendance BOT\nPlease Enter your Roll No')
             msg = readmsg(msg)
             if msg in student_data:
                 register_id[ username ] = msg
@@ -2611,7 +2611,7 @@ while (True):
                 time.sleep(0.5)
                 msg = readmsg(msg)
             else:
-                send_msg('RollNo not available\nPlease try After Some Time')
+                send_msg('RollNo not available\nPlease try Again')
                 read_unread_msgs()
                 username = None
                 continue
@@ -2658,7 +2658,7 @@ while (True):
                     msg = None
                     continue
                 else:
-                    send_msg('Command not found\nThank you, You are in Queue for next message')
+                    send_msg("Sorry, I can't understand")
                     username = None
                     msg = None
                     read_unread_msgs()
@@ -2668,10 +2668,10 @@ while (True):
             msg = readmsg(msg)
             if msg in student_data:
                 register_id[ username ] = msg
-                send_msg('RollNO Changed Successfully.\nType "1" for attendance.')
+                send_msg('ROLL NO Changed Successfully.\nType "1" for attendance.')
                 continue
             else:
-                send_msg('RollNO not Found\nPlease Try Again')
+                send_msg('ROLL NO not Found\nPlease Try Again')
                 read_unread_msgs()
                 msg = None
                 username = None
@@ -2679,13 +2679,13 @@ while (True):
         elif username in register_id and msg and msg_count == 0:
             msg_count += 1
             send_msg(
-                'You are already registered\nType "1" for Attendance\nType "2" to Book Requests By Time.\nType "3" to change RollNo.')
+                'You registered already\nType "1" for Attendance\nType "2" to Book Requests By Time.\nType "3" to change RollNo.')
             # msg = readmsg(msg)
             continue
 
 
         else:
-            send_msg('Invalid Command,Please after Some Time.')
+            send_msg("Sorry, I can't understand")
             read_unread_msgs()
             username = None
             msg = None
