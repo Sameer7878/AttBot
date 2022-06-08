@@ -2602,11 +2602,11 @@ while (True):
             username = None
             continue
         if msg and username not in register_id:
-            send_msg('Hello, This AttNbkrist Attendance BOT\nPlease Enter to your Roll No to register with InstaID')
+            send_msg('Hello, This AttNbkrist Attendance BOT\nPlease Enter your Roll N')
             msg = readmsg(msg)
             if msg in student_data:
                 register_id[ username ] = msg
-                send_msg('Roll NO Registered Successfully\nType "Start"')
+                send_msg('Roll No Registered Successfully\nType "Start"')
                 print(register_id)
                 time.sleep(0.5)
                 msg = readmsg(msg)
@@ -2618,7 +2618,7 @@ while (True):
         '''else:
              msg = readmsg('')'''
         if msg == 'START':
-            send_msg('Type "1" For Immediate Attendance\nType "2" For Book Requests By Time')
+            send_msg('Type "1" For Attendance\nType "2" to Book Requests By Time')
             continue
         elif msg == '1':
             att = provide_rollno(username)
@@ -2630,17 +2630,17 @@ while (True):
             continue
         elif msg == '2':
             if username in time_slot_bookings:
-                send_msg('Your Already Subscribed.')
+                send_msg("Don't worry...You Subscribed Already.")
                 read_unread_msgs()
                 username = None
                 msg = None
                 continue
             else:
                 send_msg(
-                    'Now you will get attendance twice a day automatically\n12:00 PM and 4:30 PM\nType "yes" to Confirm\nType "no" to cancel')
+                    'Now you will get attendance twice a day automatically\n01:00 PM and 4:30 PM\nType "yes" to Confirm\nType "no" to cancel')
                 msg = readmsg(msg)
                 if msg == 'YES':
-                    send_msg('Thank You For Subscribe.')
+                    send_msg('Thank For Subscribe.')
                     time_slot_bookings.append(username)
                     booked_urls[ username ] = web.current_url
                     print(booked_urls)
@@ -2671,7 +2671,7 @@ while (True):
                 send_msg('RollNO Changed Successfully.\nType "1" for attendance.')
                 continue
             else:
-                send_msg('Your RollNO is not Found\nPlease Try Again')
+                send_msg('RollNO not Found\nPlease Try Again')
                 read_unread_msgs()
                 msg = None
                 username = None
@@ -2679,7 +2679,7 @@ while (True):
         elif username in register_id and msg and msg_count == 0:
             msg_count += 1
             send_msg(
-                'You are already registered\nType "1" for Immediate Attendance\nType "2" For Book Requests By Time.\nType "3" to change RollNo.')
+                'You are already registered\nType "1" for Attendance\nType "2" to Book Requests By Time.\nType "3" to change RollNo.')
             # msg = readmsg(msg)
             continue
 
