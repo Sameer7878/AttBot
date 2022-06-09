@@ -2782,7 +2782,6 @@ while (True):
             msg_count += 1
             send_msg(
                 'You registered already\nType "1" for Attendance\nType "2" to Book Requests By Time.\nType "3" to change RollNo.')
-            msg=None
             continue
 
 
