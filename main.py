@@ -2345,7 +2345,7 @@ student_data = {'21KB1A0301': '3 1 1', '21KB1A0302': '3 1 1', '21KB1A0303': '3 1
                 '19KB5A0419': '8 3 4', '19KB5A0420': '8 3 4', '17KB1A0460': '8 3 4'}
 
 booked_urls={'user_not_found_x20': 'https://www.instagram.com/direct/t/340282366841710300949128261639375730110', 'a__.r_.u_.n__': 'https://www.instagram.com/direct/t/340282366841710300949128112412132056751', 'vishnu_teja__reddy': 'https://www.instagram.com/direct/t/340282366841710300949128256992573720881', 'rithwick_reddy_143': 'https://www.instagram.com/direct/t/340282366841710300949128195749188449478', 'future_aviator_karthik': 'https://www.instagram.com/direct/t/340282366841710300949128178723993801833', 'tharun6744': 'https://www.instagram.com/direct/t/340282366841710300949128135465880988033', 'lalith_allias_karan_3': 'https://www.instagram.com/direct/t/340282366841710300949128184231858784637', 'j.a.y.a.n.t.h__': 'https://www.instagram.com/direct/t/340282366841710300949128183195682698363', 'challa_is__the_brand': 'https://www.instagram.com/direct/t/340282366841710300949128214134085321158', 'revanth____007': 'https://www.instagram.com/direct/t/340282366841710300949128254824785767860', 'srikanth_sree012': 'https://www.instagram.com/direct/t/340282366841710300949128450223581436620', '__lovable_i_d_i_o_t__': 'https://www.instagram.com/direct/t/340282366841710300949128255084240765846', 'reddy___gari___abbay___': 'https://www.instagram.com/direct/t/340282366841710300949128204668329490101', 'p_mahendra_143': 'https://www.instagram.com/direct/t/340282366841710300949128395567187548212', 'muni_volley_8': 'https://www.instagram.com/direct/t/340282366841710300949128224542111135117', 'v_e_n_k_y_1626': 'https://www.instagram.com/direct/t/340282366841710300949128205175059544790', 'khaliqss': 'https://www.instagram.com/direct/t/340282366841710300949128191828890684146', 'likith.45': 'https://www.instagram.com/direct/t/340282366841710300949128202526791508696', '5u34n_': 'https://www.instagram.com/direct/t/340282366841710300949128229515331035110', 'sweety__1229': 'https://www.instagram.com/direct/t/340282366841710300949128486803811439299'}
-register_id = {'rithwick_reddy_143': '21KB1A0327', 'user_not_found_x20': '19KB1A1244', 'a__.r_.u_.n__': '19KB1A1222', 'future_aviator_karthik': '21KB5A0342', 'vishnu_teja__reddy': '19KB1A1229', 'srikanth_sree012': '20KB1A0201', 'dheerajkrishna0492020': '19KB1A1223', 'revanth____007': '20KB1A0283', 'its_mehemuuu': '19KB1A04G3', '__lovable_i_d_i_o_t__': '20KB1A1204', 'jyothi886677': '20KB1A0205', 'reddy___gari___abbay___': '20KB5A0315', 'challa_is__the_brand': '21KB1A0424', 'p_mahendra_143': '21KB1A04A4', 'b_h_a_n_u_prakashreddy': '19KB1A04J1', 'muni_volley_8': '21KB1A04C0', 'inid2022': '21KB1A0460', 'v_e_n_k_y_1626': '19KB1A0558', 'jaswanth_sai30': '20KB5A0201', 'lalith_allias_karan_3': '21KB1A1212', 'khaliqss': '19KB1A1240', 'j.a.y.a.n.t.h__': '21KB1A0419', 'likith.45': '20KB1A03B9', 'dorababu_0831': '20KB5A0403', '5u34n_': '19KB1A0521', 'vishnuvardhanmalipati': '20KB1A0487', 'niharika_challa_niha': '20KB1A3008', 'sweety__1229': '21KB1A0513'}
+register_id = {'rithwick_reddy_143': '21KB1A0327', 'user_not_found_x20': '19KB1A1244', 'a__.r_.u_.n__': '19KB1A1222', 'future_aviator_karthik': '21KB5A0342', 'vishnu_teja__reddy': '19KB1A1229', 'srikanth_sree012': '20KB1A0201', 'dheerajkrishna0492020': '19KB1A1223', 'revanth____007': '20KB1A0283', 'its_mehemuuu': '19KB1A04G3', '__lovable_i_d_i_o_t__': '20KB1A1204', 'jyothi886677': '20KB1A0205', 'reddy___gari___abbay___': '20KB5A0315', 'challa_is__the_brand': '21KB1A0424', 'p_mahendra_143': '21KB1A04A4', 'b_h_a_n_u_prakashreddy': '19KB1A04J1', 'muni_volley_8': '21KB1A04C0', 'inid2022': '21KB1A0460', 'v_e_n_k_y_1626': '19KB1A0558', 'jaswanth_sai30': '20KB5A0201', 'lalith_allias_karan_3': '21KB1A1212', 'khaliqss': '19KB1A1240', 'j.a.y.a.n.t.h__': '21KB1A0419', 'likith.45': '20KB1A03B9', 'dorababu_0831': '20KB5A0403', '5u34n_': '19KB1A0521', 'vishnuvardhanmalipati': '20KB1A0487', 'niharika_challa_niha': '20KB1A3008', 'sweety__1229': '21KB1A0513', 'sushwanth_k_u_m_a_r': '19KB1A05H3'}
 time_slot_bookings = ['user_not_found_x20', 'a__.r_.u_.n__', 'vishnu_teja__reddy', 'rithwick_reddy_143', 'future_aviator_karthik', 'tharun6744', 'lalith_allias_karan_3', 'j.a.y.a.n.t.h__', 'challa_is__the_brand', 'revanth____007', 'srikanth_sree012', '__lovable_i_d_i_o_t__', 'reddy___gari___abbay___', 'p_mahendra_143', 'muni_volley_8', 'v_e_n_k_y_1626', 'khaliqss', 'likith.45', '5u34n_', 'sweety__1229']
 count = 0
 temp_count = 0
@@ -2607,7 +2607,7 @@ def readmsg(oldmsg):
             username=None
             msg=None
             msg_count=0
-            return read_unread_msgs()
+            return None
         if oldmsg == msg:
             count += 1
             continue
@@ -2638,7 +2638,7 @@ while (True):
             read_unread_msgs()
             username = None
             continue
-        if msg and username not in register_id:
+        if msg and (username not in register_id):
             send_msg('Hello, This is An Att | Bot \nPlease Enter your Roll No')
             msg = readmsg(msg)
             if msg in student_data:
@@ -2646,11 +2646,13 @@ while (True):
                 send_msg('Roll No Registered Successfully\nType "Start"')
                 print(register_id)
                 time.sleep(0.5)
-                msg = readmsg(msg)
+                continue
             else:
                 send_msg('RollNo not available\nPlease try Again')
                 read_unread_msgs()
                 username = None
+                msg=None
+                msg_count=0
                 continue
         '''else:
              msg = readmsg('')'''
@@ -2662,21 +2664,27 @@ while (True):
             send_msg(f'Attendance Till Now: {att}.')
             send_msg('If You want again Type "1"\nThank you. You are in Queue for next message')
             time.sleep(0.5)
+            msg=None
+            username=None
+            msg_count=0
             read_unread_msgs()
-            username = None
             continue
         elif msg == '2':
             if username in time_slot_bookings:
                 send_msg("Don't worry...You Subscribed Already.")
-                read_unread_msgs()
                 username = None
                 msg = None
+                msg_count=0
+                read_unread_msgs()
                 continue
             else:
                 send_msg(
                     'Now you will get attendance twice a day automatically\n01:00 PM and 4:30 PM\nType "yes" to Confirm\nType "no" to cancel')
                 msg = readmsg(msg)
-                if msg == 'YES':
+                if msg==None:
+                    read_unread_msgs()
+                    continue
+                elif msg == 'YES':
                     send_msg('Thanks For Subscribe.')
                     time_slot_bookings.append(username)
                     booked_urls[ username ] = web.current_url
@@ -2684,34 +2692,40 @@ while (True):
                     att = provide_rollno(username)
                     send_msg(f'Attendance Till Now: {att}')
                     time.sleep(0.5)
-                    read_unread_msgs()
                     msg = None
                     username = None
+                    msg_count=0
+                    read_unread_msgs()
                     continue
                 elif msg == 'NO':
                     send_msg('Not a Problem\nThank you, You are in Queue for next message')
-                    read_unread_msgs()
                     username = None
                     msg = None
+                    msg_count=0
+                    read_unread_msgs()
                     continue
                 else:
                     send_msg("Sorry, I can't understand")
                     username = None
                     msg = None
+                    msg_count=0
                     read_unread_msgs()
                     continue
         elif msg == '3':
             send_msg('Enter Roll Number.')
             msg = readmsg(msg)
-            if msg in student_data:
+            if msg==None:
+                continue
+            elif msg in student_data:
                 register_id[ username ] = msg
                 send_msg('ROLL NO Changed Successfully.\nType "1" for attendance.')
                 continue
             else:
                 send_msg('Invalid ROLL NO\nTry Again.!')
-                read_unread_msgs()
                 msg = None
                 username = None
+                msg_count=0
+                read_unread_msgs()
                 continue
         elif username in register_id and msg and msg_count == 0:
             msg_count += 1
@@ -2723,10 +2737,10 @@ while (True):
 
         else:
             send_msg("Sorry, I can't understand")
-            read_unread_msgs()
             username = None
             msg = None
             msg_count = 0
+            read_unread_msgs()
             continue
     except Exception as error:
         print(error)
