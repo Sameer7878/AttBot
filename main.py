@@ -2344,12 +2344,42 @@ student_data = {'21KB1A0301': '3 1 1', '21KB1A0302': '3 1 1', '21KB1A0303': '3 1
                 '19KB5A0415': '8 3 4', '19KB5A0416': '8 3 4', '19KB5A0417': '8 3 4', '19KB5A0418': '8 3 4',
                 '19KB5A0419': '8 3 4', '19KB5A0420': '8 3 4', '17KB1A0460': '8 3 4'}
 
-booked_urls={'user_not_found_x20': 'https://www.instagram.com/direct/t/340282366841710300949128261639375730110', 'a__.r_.u_.n__': 'https://www.instagram.com/direct/t/340282366841710300949128112412132056751', 'vishnu_teja__reddy': 'https://www.instagram.com/direct/t/340282366841710300949128256992573720881', 'rithwick_reddy_143': 'https://www.instagram.com/direct/t/340282366841710300949128195749188449478', 'future_aviator_karthik': 'https://www.instagram.com/direct/t/340282366841710300949128178723993801833', 'tharun6744': 'https://www.instagram.com/direct/t/340282366841710300949128135465880988033', 'lalith_allias_karan_3': 'https://www.instagram.com/direct/t/340282366841710300949128184231858784637', 'j.a.y.a.n.t.h__': 'https://www.instagram.com/direct/t/340282366841710300949128183195682698363', 'challa_is__the_brand': 'https://www.instagram.com/direct/t/340282366841710300949128214134085321158', 'revanth____007': 'https://www.instagram.com/direct/t/340282366841710300949128254824785767860', 'srikanth_sree012': 'https://www.instagram.com/direct/t/340282366841710300949128450223581436620', '__lovable_i_d_i_o_t__': 'https://www.instagram.com/direct/t/340282366841710300949128255084240765846', 'reddy___gari___abbay___': 'https://www.instagram.com/direct/t/340282366841710300949128204668329490101', 'p_mahendra_143': 'https://www.instagram.com/direct/t/340282366841710300949128395567187548212', 'muni_volley_8': 'https://www.instagram.com/direct/t/340282366841710300949128224542111135117', 'v_e_n_k_y_1626': 'https://www.instagram.com/direct/t/340282366841710300949128205175059544790', 'khaliqss': 'https://www.instagram.com/direct/t/340282366841710300949128191828890684146', 'likith.45': 'https://www.instagram.com/direct/t/340282366841710300949128202526791508696', '5u34n_': 'https://www.instagram.com/direct/t/340282366841710300949128229515331035110', 'sweety__1229': 'https://www.instagram.com/direct/t/340282366841710300949128486803811439299'}
-register_id = {'rithwick_reddy_143': '21KB1A0327', 'user_not_found_x20': '19KB1A1244', 'a__.r_.u_.n__': '19KB1A1222', 'future_aviator_karthik': '21KB5A0342', 'vishnu_teja__reddy': '19KB1A1229', 'srikanth_sree012': '20KB1A0201', 'dheerajkrishna0492020': '19KB1A1223', 'revanth____007': '20KB1A0283', 'its_mehemuuu': '19KB1A04G3', '__lovable_i_d_i_o_t__': '20KB1A1204', 'jyothi886677': '20KB1A0205', 'reddy___gari___abbay___': '20KB5A0315', 'challa_is__the_brand': '21KB1A0424', 'p_mahendra_143': '21KB1A04A4', 'b_h_a_n_u_prakashreddy': '19KB1A04J1', 'muni_volley_8': '21KB1A04C0', 'inid2022': '21KB1A0460', 'v_e_n_k_y_1626': '19KB1A0558', 'jaswanth_sai30': '20KB5A0201', 'lalith_allias_karan_3': '21KB1A1212', 'khaliqss': '19KB1A1240', 'j.a.y.a.n.t.h__': '21KB1A0419', 'likith.45': '20KB1A03B9', 'dorababu_0831': '20KB5A0403', '5u34n_': '19KB1A0521', 'vishnuvardhanmalipati': '20KB1A0487', 'niharika_challa_niha': '20KB1A3008', 'sweety__1229': '21KB1A0513', 'sushwanth_k_u_m_a_r': '19KB1A05H3'}
-time_slot_bookings = ['user_not_found_x20', 'a__.r_.u_.n__', 'vishnu_teja__reddy', 'rithwick_reddy_143', 'future_aviator_karthik', 'tharun6744', 'lalith_allias_karan_3', 'j.a.y.a.n.t.h__', 'challa_is__the_brand', 'revanth____007', 'srikanth_sree012', '__lovable_i_d_i_o_t__', 'reddy___gari___abbay___', 'p_mahendra_143', 'muni_volley_8', 'v_e_n_k_y_1626', 'khaliqss', 'likith.45', '5u34n_', 'sweety__1229']
+booked_urls = {'user_not_found_x20': 'https://www.instagram.com/direct/t/340282366841710300949128261639375730110',
+               'a__.r_.u_.n__': 'https://www.instagram.com/direct/t/340282366841710300949128112412132056751',
+               'vishnu_teja__reddy': 'https://www.instagram.com/direct/t/340282366841710300949128256992573720881',
+               'rithwick_reddy_143': 'https://www.instagram.com/direct/t/340282366841710300949128195749188449478',
+               'future_aviator_karthik': 'https://www.instagram.com/direct/t/340282366841710300949128178723993801833',
+               'tharun6744': 'https://www.instagram.com/direct/t/340282366841710300949128135465880988033',
+               'lalith_allias_karan_3': 'https://www.instagram.com/direct/t/340282366841710300949128184231858784637',
+               'j.a.y.a.n.t.h__': 'https://www.instagram.com/direct/t/340282366841710300949128183195682698363',
+               'challa_is__the_brand': 'https://www.instagram.com/direct/t/340282366841710300949128214134085321158',
+               'revanth____007': 'https://www.instagram.com/direct/t/340282366841710300949128254824785767860',
+               'srikanth_sree012': 'https://www.instagram.com/direct/t/340282366841710300949128450223581436620',
+               '__lovable_i_d_i_o_t__': 'https://www.instagram.com/direct/t/340282366841710300949128255084240765846',
+               'reddy___gari___abbay___': 'https://www.instagram.com/direct/t/340282366841710300949128204668329490101',
+               'p_mahendra_143': 'https://www.instagram.com/direct/t/340282366841710300949128395567187548212',
+               'muni_volley_8': 'https://www.instagram.com/direct/t/340282366841710300949128224542111135117',
+               'v_e_n_k_y_1626': 'https://www.instagram.com/direct/t/340282366841710300949128205175059544790',
+               'khaliqss': 'https://www.instagram.com/direct/t/340282366841710300949128191828890684146',
+               'likith.45': 'https://www.instagram.com/direct/t/340282366841710300949128202526791508696',
+               '5u34n_': 'https://www.instagram.com/direct/t/340282366841710300949128229515331035110',
+               'sweety__1229': 'https://www.instagram.com/direct/t/340282366841710300949128486803811439299',
+               'ramprakashreddy45': 'https://www.instagram.com/direct/t/340282366841710300949128177954406828136'}
+register_id = {'rithwick_reddy_143': '21KB1A0327', 'user_not_found_x20': '19KB1A1244', 'a__.r_.u_.n__': '19KB1A1222',
+               'future_aviator_karthik': '21KB5A0342', 'vishnu_teja__reddy': '19KB1A1229',
+               'srikanth_sree012': '20KB1A0201', 'dheerajkrishna0492020': '19KB1A1223', 'revanth____007': '20KB1A0283',
+               'its_mehemuuu': '19KB1A04G3', '__lovable_i_d_i_o_t__': '20KB1A1204', 'jyothi886677': '20KB1A0205',
+               'reddy___gari___abbay___': '20KB5A0315', 'challa_is__the_brand': '21KB1A0424',
+               'p_mahendra_143': '21KB1A04A4', 'b_h_a_n_u_prakashreddy': '19KB1A04J1', 'muni_volley_8': '21KB1A04C0',
+               'inid2022': '21KB1A0460', 'v_e_n_k_y_1626': '19KB1A0558', 'jaswanth_sai30': '20KB5A0201',
+               'lalith_allias_karan_3': '21KB1A1212', 'khaliqss': '19KB1A1240', 'j.a.y.a.n.t.h__': '21KB1A0419',
+               'likith.45': '20KB1A03B9', 'dorababu_0831': '20KB5A0403', '5u34n_': '19KB1A0521',
+               'vishnuvardhanmalipati': '20KB1A0487', 'niharika_challa_niha': '20KB1A3008',
+               'sweety__1229': '21KB1A0513', 'sushwanth_k_u_m_a_r': '19KB1A05H3','tharun6744': '19KB1A1216', 'ramprakashreddy45': '19KB1A1230'}
+time_slot_bookings = ['user_not_found_x20', 'a__.r_.u_.n__', 'vishnu_teja__reddy', 'rithwick_reddy_143', 'future_aviator_karthik', 'tharun6744', 'lalith_allias_karan_3', 'j.a.y.a.n.t.h__', 'challa_is__the_brand', 'revanth____007', 'srikanth_sree012', '__lovable_i_d_i_o_t__', 'reddy___gari___abbay___', 'p_mahendra_143', 'muni_volley_8', 'v_e_n_k_y_1626', 'khaliqss', 'likith.45', '5u34n_', 'sweety__1229', 'ramprakashreddy45']
 count = 0
 temp_count = 0
-thank_you = [ 'THANK YOU', 'TQ', 'TQ U', 'THANKS', 'THANK','THANK U','THANKYOU' ]
+thank_you = [ 'THANK YOU', 'TQ', 'TQ U', 'THANKS', 'THANK', 'THANK U', 'THANKYOU' ]
 options = Options()
 path = '/Users/sameershaik/PycharmProjects/Checkme/static/chromedriver'
 options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
@@ -2374,24 +2404,28 @@ def send_att_time():
         except:
             continue
         try:
-            WebDriverWait(web,10).until(EC.presence_of_element_located((By.XPATH,"//div[@class='_aa4m _aa4p']/button"))).click()
+            WebDriverWait(web, 15).until(
+                EC.element_to_be_clickable((By.XPATH, "//div[@class='_aa4m _aa4p']/button"))).click()
         except:
             print('Not clickable')
-        WebDriverWait(web,10).until(EC.presence_of_element_located((By.XPATH,"//div[@class=' _aa2u']/input"))).send_keys(roll)
-        time.sleep(5)
-        usern=WebDriverWait(web,10).until(EC.presence_of_element_located((By.XPATH,"//div[@class='_ab8w  _ab94 _ab99 _ab9f _ab9m _ab9o  _ab9v']/div[1]//div[@class='_aacl _aaco _aacw _aacx _aad6']"))).text
-        i=1
+        WebDriverWait(web, 10).until(
+            EC.presence_of_element_located((By.XPATH, "//div[@class=' _aa2u']/input"))).send_keys(roll)
+        time.sleep(2)
+        usern = WebDriverWait(web, 10).until(EC.presence_of_element_located((By.XPATH,
+                                                                             "//div[@class='_ab8w  _ab94 _ab99 _ab9f _ab9m _ab9o  _ab9v']/div[1]//div[@class='_aacl _aaco _aacw _aacx _aad6']"))).text
+        i = 1
         while True:
-            if i==5:
+            if i == 5:
                 break
-            if roll==usern:
+            if roll == usern:
                 WebDriverWait(web, 10).until(
-                EC.presence_of_element_located((By.XPATH, f"//div[@class='_ab8w  _ab94 _ab99 _ab9f _ab9m _ab9o  _ab9v']/div[{i}]"))).click()
+                    EC.presence_of_element_located(
+                        (By.XPATH, f"//div[@class='_ab8w  _ab94 _ab99 _ab9f _ab9m _ab9o  _ab9v']/div[{i}]"))).click()
                 break
             else:
                 usern = WebDriverWait(web, 10).until(EC.presence_of_element_located((By.XPATH,
-                                                                                     f"//div[@class='_ab8w  _ab94 _ab99 _ab9f _ab9m _ab9o  _ab9v']/div[{i+1}]//div[@class='_aacl _aaco _aacw _aacx _aad6']"))).text
-                i+=1
+                                                                                     f"//div[@class='_ab8w  _ab94 _ab99 _ab9f _ab9m _ab9o  _ab9v']/div[{i + 1}]//div[@class='_aacl _aaco _aacw _aacx _aad6']"))).text
+                i += 1
                 continue
         try:
             time.sleep(2)
@@ -2399,7 +2433,7 @@ def send_att_time():
                 EC.presence_of_element_located(
                     (By.XPATH, "//button[@class='_acan _acao _acas _acav']"))).click()
             time.sleep(2)
-            send_msg(f'Attendance Till Now: {att}\n From AttBot')
+            send_msg(f'Hello, {student_names[register_id[roll]]}\nThis Is Your Attendance Till Now: {att}\n From AttBot Subscribed Data')
         except:
             pass
 
@@ -2536,7 +2570,8 @@ not_now()
 
 def read_unread_msgs():
     global temp_count
-    if ((datetime.datetime.now().hour == 12) or (datetime.datetime.now().hour == 16)):  # checks for booking slots reservation
+    if ((datetime.datetime.now().hour == 12) or (
+            datetime.datetime.now().hour == 16)):  # checks for booking slots reservation
         if count == temp_count:
             send_att_time()
             print('time_slots_send')
@@ -2558,21 +2593,23 @@ def read_unread_msgs():
 
 
 def send_msg(msg_data):
-    global username,msg,msg_count
+    global username, msg, msg_count
     try:
         msg_data = msg_data.replace("\n", (Keys.SHIFT + Keys.ENTER + Keys.ENTER + Keys.SHIFT))
         WebDriverWait(web, 15).until(EC.presence_of_element_located((By.XPATH,
                                                                      '/html/body/div[1]/div/div[1]/div/div[1]/div/div/div[1]/div[1]/div/section/div/div[2]/div/div/div[2]/div[2]/div/div[2]/div/div/div[2]/textarea'))).send_keys(
             msg_data)
         time.sleep(1)
-        WebDriverWait(web, 15).until(EC.presence_of_element_located((By.XPATH,'/html/body/div[1]/div/div[1]/div/div[1]/div/div/div[1]/div[1]/div/section/div/div[2]/div/div/div[2]/div[2]/div/div[2]/div/div/div[3]/button'))).click()
+        WebDriverWait(web, 15).until(EC.presence_of_element_located((By.XPATH,
+                                                                     '/html/body/div[1]/div/div[1]/div/div[1]/div/div/div[1]/div[1]/div/section/div/div[2]/div/div/div[2]/div[2]/div/div[2]/div/div/div[3]/button'))).click()
         print('msg sent')
     except:
-        username=None
-        msg=None
-        msg_count=0
+        username = None
+        msg = None
+        msg_count = 0
         pass
         print('msg send error')
+
 
 def get_username():
     WebDriverWait(web, 10).until(
@@ -2588,7 +2625,7 @@ temp = ''
 
 
 def readmsg(oldmsg):
-    global username , msg ,msg_count
+    global username, msg, msg_count
     count = 0
     while (True):
         time.sleep(1)
@@ -2604,9 +2641,9 @@ def readmsg(oldmsg):
             readmsg(msg)
         if count == 30:
             send_msg('Late respose Please try after some time')
-            username=None
-            msg=None
-            msg_count=0
+            username = None
+            msg = None
+            msg_count = 0
             return None
         if oldmsg == msg:
             count += 1
@@ -2626,12 +2663,12 @@ msg_count = 0
 while (True):
     try:
         msg = readmsg(msg)
-        if msg==None:
-          username=None
-          msg_count=0
-          read_unread_msgs()
-          continue
-          
+        if msg == None:
+            username = None
+            msg_count = 0
+            read_unread_msgs()
+            continue
+
         if not username:
             username = get_username()  # to get username
         try:
@@ -2641,17 +2678,17 @@ while (True):
             pass
         if msg in thank_you:
             send_msg('You are welcome')
-            username=None
-            msg=None
-            msg_count=None
+            username = None
+            msg = None
+            msg_count = None
             read_unread_msgs()
             continue
         if msg and (username not in register_id):
             send_msg('Hello, This is An Att | Bot \nPlease Enter your Roll No')
             msg = readmsg(msg)
-            if msg==None:
-              read_unread_msgs()
-              continue
+            if msg == None:
+                read_unread_msgs()
+                continue
             if msg in student_data:
                 register_id[ username ] = msg
                 send_msg('Roll No Registered Successfully\nType "Start"')
@@ -2661,8 +2698,8 @@ while (True):
             else:
                 send_msg('RollNo not available\nPlease try Again')
                 username = None
-                msg=None
-                msg_count=0
+                msg = None
+                msg_count = 0
                 read_unread_msgs()
                 continue
         '''else:
@@ -2672,31 +2709,31 @@ while (True):
             continue
         elif msg == '1':
             att = provide_rollno(username)
-            send_msg(f'Attendance Till Now: {att}.')
+            send_msg(f'Hi, {student_names[register_id[username]]}\nThis is Your Attendance Till Now: {att}.')
             send_msg('If You want again Type "1"\nThank you. You are in Queue for next message')
             time.sleep(0.5)
-            msg=None
-            username=None
-            msg_count=0
+            msg = None
+            username = None
+            msg_count = 0
             read_unread_msgs()
             continue
         elif msg == '2':
             if username in time_slot_bookings:
-                send_msg("Don't worry...You Subscribed Already.")
+                send_msg(f"Don't worry...\n{student_names[register_id[username]]}\nYou are Subscribed Already.")
                 username = None
                 msg = None
-                msg_count=0
+                msg_count = 0
                 read_unread_msgs()
                 continue
             else:
                 send_msg(
                     'Now you will get attendance twice a day automatically\n01:00 PM and 4:30 PM\nType "yes" to Confirm\nType "no" to cancel')
                 msg = readmsg(msg)
-                if msg==None:
+                if msg == None:
                     read_unread_msgs()
                     continue
                 elif msg == 'YES':
-                    send_msg('Thanks For Subscribe.')
+                    send_msg(f'Thanks {student_names[register_id[username]]} For Subscribe.')
                     time_slot_bookings.append(username)
                     booked_urls[ username ] = web.current_url
                     print(booked_urls)
@@ -2705,44 +2742,47 @@ while (True):
                     time.sleep(0.5)
                     msg = None
                     username = None
-                    msg_count=0
+                    msg_count = 0
                     read_unread_msgs()
                     continue
                 elif msg == 'NO':
                     send_msg('Not a Problem\nThank you, You are in Queue for next message')
                     username = None
                     msg = None
-                    msg_count=0
+                    msg_count = 0
                     read_unread_msgs()
                     continue
                 else:
                     send_msg("Sorry, I can't understand")
                     username = None
                     msg = None
-                    msg_count=0
+                    msg_count = 0
                     read_unread_msgs()
                     continue
         elif msg == '3':
             send_msg('Enter Roll Number.')
             msg = readmsg(msg)
-            if msg==None:
+            if msg == None:
+                username=None
+                msg_count=0
+                read_unread_msgs()
                 continue
             elif msg in student_data:
                 register_id[ username ] = msg
-                send_msg('ROLL NO Changed Successfully.\nType "1" for attendance.')
+                send_msg(f'ROLL NO Changed Successfully.\n{student_names[register_id[username]]}\nType "1" for attendance.')
                 continue
             else:
                 send_msg('Invalid ROLL NO\nTry Again.!')
                 msg = None
                 username = None
-                msg_count=0
+                msg_count = 0
                 read_unread_msgs()
                 continue
         elif username in register_id and msg and msg_count == 0:
             msg_count += 1
             send_msg(
                 'You registered already\nType "1" for Attendance\nType "2" to Book Requests By Time.\nType "3" to change RollNo.')
-            # msg = readmsg(msg)
+            msg=None
             continue
 
 
