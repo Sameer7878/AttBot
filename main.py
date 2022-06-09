@@ -2626,6 +2626,12 @@ msg_count = 0
 while (True):
     try:
         msg = readmsg(msg)
+        if msg==None:
+          username=None
+          msg_count=0
+          read_unread_msgs()
+          continue
+          
         if not username:
             username = get_username()  # to get username
         try:
@@ -2635,12 +2641,17 @@ while (True):
             pass
         if msg in thank_you:
             send_msg('You are welcome')
+            username=None
+            msg=None
+            msg_count=None
             read_unread_msgs()
-            username = None
             continue
         if msg and (username not in register_id):
             send_msg('Hello, This is An Att | Bot \nPlease Enter your Roll No')
             msg = readmsg(msg)
+            if msg==None:
+              read_unread_msgs()
+              continue
             if msg in student_data:
                 register_id[ username ] = msg
                 send_msg('Roll No Registered Successfully\nType "Start"')
@@ -2649,10 +2660,10 @@ while (True):
                 continue
             else:
                 send_msg('RollNo not available\nPlease try Again')
-                read_unread_msgs()
                 username = None
                 msg=None
                 msg_count=0
+                read_unread_msgs()
                 continue
         '''else:
              msg = readmsg('')'''
