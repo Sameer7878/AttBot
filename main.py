@@ -1,4 +1,5 @@
 import datetime
+import pytz
 import os
 import time
 from selenium import webdriver
@@ -2343,41 +2344,10 @@ student_data = {'21KB1A0301': '3 1 1', '21KB1A0302': '3 1 1', '21KB1A0303': '3 1
                 '18KB1A04H8': '8 3 4', '17KB1A0440': '8 3 4', '19KB5A0413': '8 3 4', '19KB5A0414': '8 3 4',
                 '19KB5A0415': '8 3 4', '19KB5A0416': '8 3 4', '19KB5A0417': '8 3 4', '19KB5A0418': '8 3 4',
                 '19KB5A0419': '8 3 4', '19KB5A0420': '8 3 4', '17KB1A0460': '8 3 4'}
+booked_urls = {'user_not_found_x20': 'https://www.instagram.com/direct/t/340282366841710300949128261639375730110', 'a__.r_.u_.n__': 'https://www.instagram.com/direct/t/340282366841710300949128112412132056751', 'vishnu_teja__reddy': 'https://www.instagram.com/direct/t/340282366841710300949128256992573720881', 'rithwick_reddy_143': 'https://www.instagram.com/direct/t/340282366841710300949128195749188449478', 'future_aviator_karthik': 'https://www.instagram.com/direct/t/340282366841710300949128178723993801833', 'tharun6744': 'https://www.instagram.com/direct/t/340282366841710300949128135465880988033', 'lalith_allias_karan_3': 'https://www.instagram.com/direct/t/340282366841710300949128184231858784637', 'j.a.y.a.n.t.h__': 'https://www.instagram.com/direct/t/340282366841710300949128183195682698363', 'challa_is__the_brand': 'https://www.instagram.com/direct/t/340282366841710300949128214134085321158', 'revanth____007': 'https://www.instagram.com/direct/t/340282366841710300949128254824785767860', 'srikanth_sree012': 'https://www.instagram.com/direct/t/340282366841710300949128450223581436620', '__lovable_i_d_i_o_t__': 'https://www.instagram.com/direct/t/340282366841710300949128255084240765846', 'reddy___gari___abbay___': 'https://www.instagram.com/direct/t/340282366841710300949128204668329490101', 'p_mahendra_143': 'https://www.instagram.com/direct/t/340282366841710300949128395567187548212', 'muni_volley_8': 'https://www.instagram.com/direct/t/340282366841710300949128224542111135117', 'v_e_n_k_y_1626': 'https://www.instagram.com/direct/t/340282366841710300949128205175059544790', 'khaliqss': 'https://www.instagram.com/direct/t/340282366841710300949128191828890684146', 'likith.45': 'https://www.instagram.com/direct/t/340282366841710300949128202526791508696', '5u34n_': 'https://www.instagram.com/direct/t/340282366841710300949128229515331035110', 'sweety__1229': 'https://www.instagram.com/direct/t/340282366841710300949128486803811439299', 'ramprakashreddy45': 'https://www.instagram.com/direct/t/340282366841710300949128177954406828136', '_mr.__reddy': 'https://www.instagram.com/direct/t/340282366841710300949128126533815997400', 'ajay_adeppagari': 'https://www.instagram.com/direct/t/340282366841710300949128274668192688897', 'harsha._.official': 'https://www.instagram.com/direct/t/340282366841710300949128192932560680787', 'hari_krishna_789': 'https://www.instagram.com/direct/t/340282366841710300949128274611585698465', 'sk.nawaz702': 'https://www.instagram.com/direct/t/340282366841710300949128152009026932199', 'shaolin_smaran': 'https://www.instagram.com/direct/t/340282366841710300949128477424860456728', 'chegueverachaitanya': 'https://www.instagram.com/direct/t/340282366841710300949128212405713348253', 'yogeeshamuluru': 'https://www.instagram.com/direct/t/340282366841710300949128574216014318577', '_jash_217': 'https://www.instagram.com/direct/t/340282366841710300949128162427873897440', '_charan_cj_6': 'https://www.instagram.com/direct/t/340282366841710300949128287205234654957', 'sahoresuraj': 'https://www.instagram.com/direct/t/340282366841710300949128190383028708965', 'panee_9': 'https://www.instagram.com/direct/t/340282366841710300949128207988378433201', 'ravi4tr': 'https://www.instagram.com/direct/t/340282366841710300949128228810843945768'}
+register_id = {'rithwick_reddy_143': '21KB1A0327', 'user_not_found_x20': '19KB1A1244', 'a__.r_.u_.n__': '19KB1A1222', 'future_aviator_karthik': '21KB5A0342', 'vishnu_teja__reddy': '19KB1A1229', 'srikanth_sree012': '20KB1A0201', 'dheerajkrishna0492020': '19KB1A1223', 'revanth____007': '20KB1A0283', 'its_mehemuuu': '19KB1A04G3', '__lovable_i_d_i_o_t__': '20KB1A1204', 'jyothi886677': '20KB1A0205', 'reddy___gari___abbay___': '20KB5A0315', 'challa_is__the_brand': '21KB1A0424', 'p_mahendra_143': '21KB1A04A4', 'b_h_a_n_u_prakashreddy': '19KB1A04J1', 'muni_volley_8': '21KB1A04C0', 'inid2022': '21KB1A0460', 'v_e_n_k_y_1626': '19KB1A0558', 'jaswanth_sai30': '20KB5A0201', 'lalith_allias_karan_3': '21KB1A1212', 'khaliqss': '19KB1A1240', 'j.a.y.a.n.t.h__': '21KB1A0419', 'likith.45': '20KB1A03B9', 'dorababu_0831': '20KB5A0403', '5u34n_': '19KB1A0521', 'vishnuvardhanmalipati': '20KB1A0487', 'niharika_challa_niha': '20KB1A3008', 'sweety__1229': '21KB1A0513', 'sushwanth_k_u_m_a_r': '19KB1A05H3', 'tharun6744': '19KB1A1216', 'ramprakashreddy45': '19KB1A1230', 'prsnakmr_918': '19KB1A04C0', 'kingwithoutacrown_2k03': '21KB1A04G2', 'sk.nawaz702': '20KB1A04F6', 'p_e_a_c_e_l_i_f_e__': '21KB1A0465', '_mr.__reddy': '20KB1A3044', 'ajay_adeppagari': '20KB1A0404', 'harsha._.official': '20KB1A0217', 'hari_krishna_789': '20KB1A0287', 'harsha__073': '19KB1A05H9', 'shaolin_smaran': '19KB1A1202', 'chegueverachaitanya': '19KB1A1204', 'prudhvirajhasthi': '19KB1A1211', 'yogeeshamuluru': '20KB1A0304', 'call__me__diggi': '20KB1A0269', '_jash_217': '19KB1A05B6', 'venkata__vasanth': '20KB1A0216', 'smile._.killer._.07': '20KB1A0218', 'sasikiran_2003': '20KB1A0522', '_charan_cj_6': '21KB1A0426', 'sahoresuraj': '20KB1A0114', 'panee_9': '20KB1A0438', 'ravi4tr': '21KB1A0249','sukumar_royals': '19KB1A0327'}
 
-booked_urls = {'user_not_found_x20': 'https://www.instagram.com/direct/t/340282366841710300949128261639375730110',
-               'a__.r_.u_.n__': 'https://www.instagram.com/direct/t/340282366841710300949128112412132056751',
-               'vishnu_teja__reddy': 'https://www.instagram.com/direct/t/340282366841710300949128256992573720881',
-               'rithwick_reddy_143': 'https://www.instagram.com/direct/t/340282366841710300949128195749188449478',
-               'future_aviator_karthik': 'https://www.instagram.com/direct/t/340282366841710300949128178723993801833',
-               'tharun6744': 'https://www.instagram.com/direct/t/340282366841710300949128135465880988033',
-               'lalith_allias_karan_3': 'https://www.instagram.com/direct/t/340282366841710300949128184231858784637',
-               'j.a.y.a.n.t.h__': 'https://www.instagram.com/direct/t/340282366841710300949128183195682698363',
-               'challa_is__the_brand': 'https://www.instagram.com/direct/t/340282366841710300949128214134085321158',
-               'revanth____007': 'https://www.instagram.com/direct/t/340282366841710300949128254824785767860',
-               'srikanth_sree012': 'https://www.instagram.com/direct/t/340282366841710300949128450223581436620',
-               '__lovable_i_d_i_o_t__': 'https://www.instagram.com/direct/t/340282366841710300949128255084240765846',
-               'reddy___gari___abbay___': 'https://www.instagram.com/direct/t/340282366841710300949128204668329490101',
-               'p_mahendra_143': 'https://www.instagram.com/direct/t/340282366841710300949128395567187548212',
-               'muni_volley_8': 'https://www.instagram.com/direct/t/340282366841710300949128224542111135117',
-               'v_e_n_k_y_1626': 'https://www.instagram.com/direct/t/340282366841710300949128205175059544790',
-               'khaliqss': 'https://www.instagram.com/direct/t/340282366841710300949128191828890684146',
-               'likith.45': 'https://www.instagram.com/direct/t/340282366841710300949128202526791508696',
-               '5u34n_': 'https://www.instagram.com/direct/t/340282366841710300949128229515331035110',
-               'sweety__1229': 'https://www.instagram.com/direct/t/340282366841710300949128486803811439299',
-               'ramprakashreddy45': 'https://www.instagram.com/direct/t/340282366841710300949128177954406828136'}
-register_id = {'rithwick_reddy_143': '21KB1A0327', 'user_not_found_x20': '19KB1A1244', 'a__.r_.u_.n__': '19KB1A1222',
-               'future_aviator_karthik': '21KB5A0342', 'vishnu_teja__reddy': '19KB1A1229',
-               'srikanth_sree012': '20KB1A0201', 'dheerajkrishna0492020': '19KB1A1223', 'revanth____007': '20KB1A0283',
-               'its_mehemuuu': '19KB1A04G3', '__lovable_i_d_i_o_t__': '20KB1A1204', 'jyothi886677': '20KB1A0205',
-               'reddy___gari___abbay___': '20KB5A0315', 'challa_is__the_brand': '21KB1A0424',
-               'p_mahendra_143': '21KB1A04A4', 'b_h_a_n_u_prakashreddy': '19KB1A04J1', 'muni_volley_8': '21KB1A04C0',
-               'inid2022': '21KB1A0460', 'v_e_n_k_y_1626': '19KB1A0558', 'jaswanth_sai30': '20KB5A0201',
-               'lalith_allias_karan_3': '21KB1A1212', 'khaliqss': '19KB1A1240', 'j.a.y.a.n.t.h__': '21KB1A0419',
-               'likith.45': '20KB1A03B9', 'dorababu_0831': '20KB5A0403', '5u34n_': '19KB1A0521',
-               'vishnuvardhanmalipati': '20KB1A0487', 'niharika_challa_niha': '20KB1A3008',
-               'sweety__1229': '21KB1A0513', 'sushwanth_k_u_m_a_r': '19KB1A05H3','tharun6744': '19KB1A1216', 'ramprakashreddy45': '19KB1A1230'}
-time_slot_bookings = ['user_not_found_x20', 'a__.r_.u_.n__', 'vishnu_teja__reddy', 'rithwick_reddy_143', 'future_aviator_karthik', 'tharun6744', 'lalith_allias_karan_3', 'j.a.y.a.n.t.h__', 'challa_is__the_brand', 'revanth____007', 'srikanth_sree012', '__lovable_i_d_i_o_t__', 'reddy___gari___abbay___', 'p_mahendra_143', 'muni_volley_8', 'v_e_n_k_y_1626', 'khaliqss', 'likith.45', '5u34n_', 'sweety__1229', 'ramprakashreddy45']
-count = 0
+time_slot_bookings = ['user_not_found_x20', 'a__.r_.u_.n__', 'vishnu_teja__reddy', 'rithwick_reddy_143', 'future_aviator_karthik', 'tharun6744', 'lalith_allias_karan_3', 'j.a.y.a.n.t.h__', 'challa_is__the_brand', 'revanth____007', 'srikanth_sree012', '__lovable_i_d_i_o_t__', 'reddy___gari___abbay___', 'p_mahendra_143', 'muni_volley_8', 'v_e_n_k_y_1626', 'khaliqss', 'likith.45', '5u34n_', 'sweety__1229', 'ramprakashreddy45', '_mr.__reddy', 'ajay_adeppagari', 'harsha._.official', 'hari_krishna_789', 'sk.nawaz702', 'shaolin_smaran', 'chegueverachaitanya', 'yogeeshamuluru', '_jash_217', '_charan_cj_6', 'sahoresuraj', 'panee_9', 'ravi4tr']
 temp_count = 0
 thank_you = [ 'THANK YOU', 'TQ', 'TQ U', 'THANKS', 'THANK', 'THANK U', 'THANKYOU' ]
 options = Options()
@@ -2570,17 +2540,27 @@ not_now()
 
 def read_unread_msgs():
     global temp_count
-    if ((datetime.datetime.now().hour == 12) or (
-            datetime.datetime.now().hour == 16)):  # checks for booking slots reservation
-        if count == temp_count:
-            send_att_time()
-            print('time_slots_send')
-    elif (datetime.datetime.now().hour == 13 or datetime.datetime.now().hour == 17) and temp_count != count:
-        temp_count = count
+    if (((datetime.datetime.now(pytz.timezone('Asia/Kolkata')).hour == 13) or (datetime.datetime.now(pytz.timezone('Asia/Kolkata')).hour == 16)) and temp_count==0):  # checks for booking slots reservation
+        send_att_time()
+        print('time_slots_send')
+        temp_count +=1
+    elif (datetime.datetime.now(pytz.timezone('Asia/Kolkata')).hour == 14 or datetime.datetime.now(pytz.timezone('Asia/Kolkata')).hour == 17) and temp_count != 0:
+        temp_count = 0
     time.sleep(1)
     web.switch_to.window(web.window_handles[ 0 ])
     global web_url
     web.get('https://www.instagram.com/direct/inbox/general/')
+    '''time.sleep(2)
+    try:
+        WebDriverWait(web,5).until(EC.presence_of_element_located((By.XPATH,"//button[@class='_acan _acao _acas']//h5[@class='_aacl _aaco _aacw _aad0 _aad6 _aade']"))).click()
+        web.find_element(By.XPATH,"//div[@class=' _ab8s _ab8w  _ab94 _ab99 _ab9f _ab9m _ab9p']/a").click()
+        web.find_element(By.XPATH,"//button[@class='_acan _acao _acat']").click()
+        web.find_element(By.XPATH,"//button[2][@class='_a9-- _a9_1']").click()
+        return 0
+    except:
+        print('Error')
+        pass'''
+
     try:
         print('Bot is waiting messages')
         WebDriverWait(web, 300).until(EC.presence_of_element_located(
@@ -2707,6 +2687,33 @@ while (True):
         if msg == 'START':
             send_msg('Type "1" For Attendance\nType "2" to Book Requests By Time')
             continue
+        elif msg=='SEND' and username in ['user_not_found_x20', 'a__.r_.u_.n__']:
+            send_msg('Do you send for subscribed data\n"Yes" to confirm \n "No" to cancel')
+            msg=readmsg(msg)
+            if msg=='YES':
+                send_msg('Sending')
+                send_att_time()
+                send_msg(f'{len(time_slot_bookings)} Sent Successfully')
+                msg=None
+                username=None
+                msg_count=0
+                read_unread_msgs()
+                continue
+            elif msg=='NO':
+                send_msg('Ok Not A Problem chinna Bot\nEnjoy pandago')
+                msg = None
+                username = None
+                msg_count = 0
+                read_unread_msgs()
+                continue
+            else:
+                send_msg('Enduku Bot Time Waste Chestav\nChaduvuko First malli chudam bye')
+                msg = None
+                username = None
+                msg_count = 0
+                read_unread_msgs()
+                continue
+
         elif msg == '1':
             att = provide_rollno(username)
             send_msg(f'Hi, {student_names[register_id[username]]}\nThis is Your Attendance Till Now: {att}.')
@@ -2735,8 +2742,9 @@ while (True):
                 elif msg == 'YES':
                     send_msg(f'Thanks {student_names[register_id[username]]} For Subscribe.')
                     time_slot_bookings.append(username)
-                    booked_urls[ username ] = web.current_url
-                    print(booked_urls)
+                    #booked_urls[ username ] = web.current_url
+                    #print(booked_urls)
+                    print(time_slot_bookings)
                     att = provide_rollno(username)
                     send_msg(f'Attendance Till Now: {att}')
                     time.sleep(0.5)
@@ -2782,6 +2790,7 @@ while (True):
             msg_count += 1
             send_msg(
                 'You registered already\nType "1" for Attendance\nType "2" to Book Requests By Time.\nType "3" to change RollNo.')
+            msg=None
             continue
 
 
