@@ -2688,7 +2688,7 @@ while (True):
             send_msg('Type "1" For Attendance\nType "2" to Book Requests By Time')
             continue
         elif msg=='SEND' and username in ['user_not_found_x20', 'a__.r_.u_.n__']:
-            send_msg('Do you send for subscribed data\n"Yes" to confirm \n "No" to cancel')
+            send_msg('Did you want to send att for subscribers\n"Yes" to confirm \n "No" to cancel')
             msg=readmsg(msg)
             if msg=='YES':
                 send_msg('Sending')
@@ -2726,7 +2726,7 @@ while (True):
             continue
         elif msg == '2':
             if username in time_slot_bookings:
-                send_msg(f"Don't worry...\n{student_names[register_id[username]]}\nYou are Subscribed Already.")
+                send_msg(f"Don't worry...\n{student_names[register_id[username]]}\nYou will get attendance twice a day.")
                 username = None
                 msg = None
                 msg_count = 0
