@@ -2380,7 +2380,7 @@ def send_att_time():
             continue
         WebDriverWait(web, 10).until(
             EC.presence_of_element_located((By.XPATH, "//div[@class=' _aa2u']/input"))).send_keys(roll)
-        time.sleep(2)
+        time.sleep(1)
         try:
             usern = WebDriverWait(web, 10).until(EC.presence_of_element_located((By.XPATH,"//div[@class='_ab8w  _ab94 _ab99 _ab9f _ab9m _ab9o  _ab9v']/div[1]//div[@class='_aacl _aaco _aacw _aacx _aad6']"))).text
             i = 1
@@ -2400,11 +2400,11 @@ def send_att_time():
             web.get('https://www.instagram.com/direct/inbox/general/')
             continue
         try:
-            time.sleep(2)
+            time.sleep(1)
             WebDriverWait(web, 10).until(
                 EC.presence_of_element_located(
                     (By.XPATH, "//button[@class='_acan _acao _acas _acav']"))).click()
-            time.sleep(2)
+            time.sleep(1)
             send_msg(f'Hello, {student_names[register_id[roll]]}\nThis Is Your Attendance Till Now: {att}\n From AttBot Subscribed Data')
         except:
             web.get('https://www.instagram.com/direct/inbox/general/')
