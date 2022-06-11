@@ -2780,7 +2780,7 @@ while (True):
                 send_msg(f'ROLL NO Changed Successfully.\n{student_names[register_id[username]]}\nType "1" for attendance.')
                 continue
             else:
-                send_msg('Invalid ROLL NO\nTry Again.!')
+                send_msg('Invalid ROLL NO\nTry Again!')
                 msg = None
                 username = None
                 msg_count = 0
