@@ -2379,22 +2379,23 @@ def send_att_time():
         WebDriverWait(web, 10).until(
             EC.presence_of_element_located((By.XPATH, "//div[@class=' _aa2u']/input"))).send_keys(roll)
         time.sleep(2)
-        usern = WebDriverWait(web, 10).until(EC.presence_of_element_located((By.XPATH,
-                                                                             "//div[@class='_ab8w  _ab94 _ab99 _ab9f _ab9m _ab9o  _ab9v']/div[1]//div[@class='_aacl _aaco _aacw _aacx _aad6']"))).text
-        i = 1
-        while True:
-            if i == 5:
-                break
-            if roll == usern:
-                WebDriverWait(web, 10).until(
-                    EC.presence_of_element_located(
-                        (By.XPATH, f"//div[@class='_ab8w  _ab94 _ab99 _ab9f _ab9m _ab9o  _ab9v']/div[{i}]"))).click()
-                break
-            else:
-                usern = WebDriverWait(web, 10).until(EC.presence_of_element_located((By.XPATH,
-                                                                                     f"//div[@class='_ab8w  _ab94 _ab99 _ab9f _ab9m _ab9o  _ab9v']/div[{i + 1}]//div[@class='_aacl _aaco _aacw _aacx _aad6']"))).text
-                i += 1
-                continue
+        try:
+            usern = WebDriverWait(web, 10).until(EC.presence_of_element_located((By.XPATH,"//div[@class='_ab8w  _ab94 _ab99 _ab9f _ab9m _ab9o  _ab9v']/div[1]//div[@class='_aacl _aaco _aacw _aacx _aad6']"))).text
+            i = 1
+            while True:
+                if i == 5:
+                    break
+                if roll == usern:
+                    WebDriverWait(web, 10).until(
+                        EC.presence_of_element_located(
+                            (By.XPATH, f"//div[@class='_ab8w  _ab94 _ab99 _ab9f _ab9m _ab9o  _ab9v']/div[{i}]"))).click()
+                    break
+                else:
+                    usern = WebDriverWait(web, 10).until(EC.presence_of_element_located((By.XPATH,f"//div[@class='_ab8w  _ab94 _ab99 _ab9f _ab9m _ab9o  _ab9v']/div[{i + 1}]//div[@class='_aacl _aaco _aacw _aacx _aad6']"))).text
+                    i += 1
+                    continue
+        except:
+            continue
         try:
             time.sleep(2)
             WebDriverWait(web, 10).until(
