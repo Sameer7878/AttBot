@@ -2366,8 +2366,6 @@ web_url = ''
 
 
 def send_att_time():
-    global count
-    count = count + 1
     for roll in time_slot_bookings:
         try:
             att = provide_rollno(roll)
