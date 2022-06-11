@@ -2376,6 +2376,8 @@ def send_att_time():
                 EC.element_to_be_clickable((By.XPATH, "//div[@class='_aa4m _aa4p']/button"))).click()
         except:
             print('Not clickable')
+            web.get('https://www.instagram.com/direct/inbox/general/')
+            continue
         WebDriverWait(web, 10).until(
             EC.presence_of_element_located((By.XPATH, "//div[@class=' _aa2u']/input"))).send_keys(roll)
         time.sleep(2)
@@ -2395,6 +2397,7 @@ def send_att_time():
                     i += 1
                     continue
         except:
+            web.get('https://www.instagram.com/direct/inbox/general/')
             continue
         try:
             time.sleep(2)
@@ -2404,7 +2407,8 @@ def send_att_time():
             time.sleep(2)
             send_msg(f'Hello, {student_names[register_id[roll]]}\nThis Is Your Attendance Till Now: {att}\n From AttBot Subscribed Data')
         except:
-            pass
+            web.get('https://www.instagram.com/direct/inbox/general/')
+            continue
 
 
 def login(web):
