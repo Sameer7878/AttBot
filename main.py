@@ -2538,11 +2538,11 @@ not_now()
 
 def read_unread_msgs():
     global temp_count
-    if (((datetime.datetime.now(pytz.timezone('Asia/Kolkata')).hour == 13) or (datetime.datetime.now(pytz.timezone('Asia/Kolkata')).hour == 16)) and temp_count==0):  # checks for booking slots reservation
+    if (((datetime.datetime.now(pytz.timezone('Asia/Kolkata')).hour == 12) or (datetime.datetime.now(pytz.timezone('Asia/Kolkata')).hour == 16)) and temp_count==0):  # checks for booking slots reservation
         send_att_time()
         print('time_slots_send')
         temp_count +=1
-    elif (datetime.datetime.now(pytz.timezone('Asia/Kolkata')).hour == 14 or datetime.datetime.now(pytz.timezone('Asia/Kolkata')).hour == 17) and temp_count != 0:
+    elif (datetime.datetime.now(pytz.timezone('Asia/Kolkata')).hour == 13 or datetime.datetime.now(pytz.timezone('Asia/Kolkata')).hour == 17) and temp_count != 0:
         temp_count = 0
     time.sleep(1)
     web.switch_to.window(web.window_handles[ 0 ])
