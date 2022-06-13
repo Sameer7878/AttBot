@@ -2584,7 +2584,7 @@ def send_msg(msg_data):
         time.sleep(1)
         WebDriverWait(web, 15).until(EC.presence_of_element_located((By.XPATH,
                                                                      '/html/body/div[1]/div/div[1]/div/div[1]/div/div/div[1]/div[1]/div/section/div/div[2]/div/div/div[2]/div[2]/div/div[2]/div/div/div[3]/button'))).click()
-        print('msg sent',username)
+        print(f'msg sent {username}')
     except:
         username = None
         msg = None
@@ -2597,7 +2597,7 @@ def get_username():
     WebDriverWait(web, 10).until(
         EC.element_to_be_clickable((By.XPATH, "//button[@class='_acan _acao _acaq _acat']"))).click()
     username = web.find_element(By.XPATH, "//h2[@class='_aacl _aacs _aact _aacx _aada']").text
-    print('get Username')
+    print(f'get Username {username}')
     time.sleep(0.3)
     web.back()
     return username
@@ -2632,7 +2632,7 @@ def readmsg(oldmsg):
             continue
         else:
             break
-    print('New msg read')
+    print(f'New msg read {username}')
     return msg
 
 
