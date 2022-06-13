@@ -2584,7 +2584,7 @@ def send_msg(msg_data):
         time.sleep(1)
         WebDriverWait(web, 15).until(EC.presence_of_element_located((By.XPATH,
                                                                      '/html/body/div[1]/div/div[1]/div/div[1]/div/div/div[1]/div[1]/div/section/div/div[2]/div/div/div[2]/div[2]/div/div[2]/div/div/div[3]/button'))).click()
-        print('msg sent')
+        print('msg sent',username)
     except:
         username = None
         msg = None
