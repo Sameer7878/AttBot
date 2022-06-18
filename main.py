@@ -2352,14 +2352,14 @@ temp_count = 0
 thank_you = [ 'THANK YOU', 'TQ', 'TQ U', 'THANKS', 'THANK', 'THANK U', 'THANKYOU' ]
 options = Options()
 path = '/Users/sameershaik/PycharmProjects/Checkme/static/chromedriver'
-options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+#options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
 options.add_argument("--headless")
 options.add_argument("--disable-gpu")
 options.add_argument("--no-sandbox")
 options.add_argument("enable-automation")
 options.add_argument("--disable-infobars")
 options.add_argument("--disable-dev-shm-usage")
-web = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=options)
+web = webdriver.Chrome(executable_path='./chromedriver.exe')
 web.implicitly_wait(5)
 
 web_url = ''
