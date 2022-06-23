@@ -21,3 +21,4 @@ urllib3==1.26.9
 webdriver-manager==3.7.0
 wsproto==1.1.0
 pytz==2022.1
+chromedriver==102.0.5005.61
