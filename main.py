@@ -2722,7 +2722,7 @@ while (True):
                 read_unread_msgs()
                 continue
         elif msg == 'C' and username in ['user_not_found_x20', 'a__.r_.u_.n__']:
-            if username is 'user_not_found_x20':
+            if username == 'user_not_found_x20':
                 send_msg(f"Hats off!\n Mr Sameer you got {len(register_id)} Registered users \n  {len(time_slot_bookings)} subscribers")
                 msg = None
                 username = None
