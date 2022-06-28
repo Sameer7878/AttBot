@@ -2723,14 +2723,14 @@ while (True):
                 continue
         elif msg == 'C' and username in ['user_not_found_x20', 'a__.r_.u_.n__']:
             if username == 'user_not_found_x20':
-                send_msg(f"Hats off!\n Mr Sameer you got {len(register_id)} Registered users \n  {len(time_slot_bookings)} subscribers")
+                send_msg(f"Hats off! Mr Sameer\n you got {len(register_id)} Registered users \n  {len(time_slot_bookings)} subscribers")
                 msg = None
                 username = None
                 msg_count = 0
                 read_unread_msgs()
                 continue
             else:
-                send_msg(f"Hats off!\n Mr Arun you got {len(register_id)} Registered users \n  {len(time_slot_bookings)} subscribers")
+                send_msg(f"Hats off! Mr Arun \n you got {len(register_id)} Registered users \n  {len(time_slot_bookings)} subscribers")
                 msg = None
                 username = None
                 msg_count = 0
