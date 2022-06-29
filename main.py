@@ -2737,7 +2737,7 @@ while (True):
                 read_unread_msgs()
                 continue
         elif msg == 'LOGS' and username in ['user_not_found_x20', 'a__.r_.u_.n__']:
-            send_msg(f'{sorted(register_id)}')
+            send_msg(f'{register_id}')
             send_msg(f'{sorted(time_slot_bookings)}')
             msg = None
             username = None
