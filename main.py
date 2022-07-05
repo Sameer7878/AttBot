@@ -2684,7 +2684,7 @@ while (True):
                 send_msg('Enter username:')
                 usern=readmsg(msg)
 								if usern==None:
-										msg = None
+                    msg = None
                 		username = None
                 		msg_count = 0
                 		read_unread_msgs()
