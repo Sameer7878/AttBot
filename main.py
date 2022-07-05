@@ -2683,21 +2683,20 @@ while (True):
         elif msg == 'P' and username in ['user_not_found_x20', 'a__.r_.u_.n__']:
                 send_msg('Enter username:')
                 usern=readmsg(msg)
-								if usern==None:
+		if usern==None:
                     msg = None
-                		username = None
-                		msg_count = 0
-                		read_unread_msgs()
-               			continue 
-								
+             	    username = None
+                    msg_count = 0
+                    read_unread_msgs()
+               	    continue 					
                 send_msg('Enter your msg:')
                 msg=readmsg(usern)
-								if msg==None:
-										msg = None
-                		username = None
-                		msg_count = 0
-                		read_unread_msgs()
-               			continue 
+		if msg==None:
+		    msg = None
+                    username = None
+                    msg_count = 0
+                    read_unread_msgs()
+               	    continue 
                 status=find_send_msg(usern,msg)
                 find_send_msg(username,status)
                 msg = None
