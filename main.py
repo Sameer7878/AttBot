@@ -2364,53 +2364,61 @@ web.implicitly_wait(5)
 
 web_url = ''
 
-
-def send_att_time():
-    for roll in time_slot_bookings:
-        try:
-            att = provide_rollno(roll)
-        except:
-            continue
+def find_send_msg(username,msg):
         try:
             WebDriverWait(web, 15).until(
                 EC.element_to_be_clickable((By.XPATH, "//div[@class='_aa4m _aa4p']/button"))).click()
         except:
             print('Not clickable')
             web.get('https://www.instagram.com/direct/inbox/general/')
-            continue
+            return 'not clickable error'
         WebDriverWait(web, 10).until(
-            EC.presence_of_element_located((By.XPATH, "//div[@class=' _aa2u']/input"))).send_keys(roll)
+            EC.presence_of_element_located((By.XPATH, "//div[@class=' _aa2u']/input"))).send_keys(username)
         time.sleep(1)
         try:
-            usern = WebDriverWait(web, 10).until(EC.presence_of_element_located((By.XPATH,"//div[@class='_ab8w  _ab94 _ab99 _ab9f _ab9m _ab9o  _ab9v']/div[1]//div[@class='_aacl _aaco _aacw _aacx _aad6']"))).text
+            search_username = WebDriverWait(web, 10).until(EC.presence_of_element_located((By.XPATH,"//div[@class='_ab8w  _ab94 _ab99 _ab9f _ab9m _ab9o  _ab9v']/div[1]//div[@class='_aacl _aaco _aacw _aacx _aad6']"))).text
             i = 1
             while True:
                 if i == 5:
                     break
-                if roll == usern:
+                if search_username == username:
                     WebDriverWait(web, 10).until(
                         EC.presence_of_element_located(
                             (By.XPATH, f"//div[@class='_ab8w  _ab94 _ab99 _ab9f _ab9m _ab9o  _ab9v']/div[{i}]"))).click()
                     break
                 else:
-                    usern = WebDriverWait(web, 10).until(EC.presence_of_element_located((By.XPATH,f"//div[@class='_ab8w  _ab94 _ab99 _ab9f _ab9m _ab9o  _ab9v']/div[{i + 1}]//div[@class='_aacl _aaco _aacw _aacx _aad6']"))).text
+                    username = WebDriverWait(web, 10).until(EC.presence_of_element_located((By.XPATH,f"//div[@class='_ab8w  _ab94 _ab99 _ab9f _ab9m _ab9o  _ab9v']/div[{i + 1}]//div[@class='_aacl _aaco _aacw _aacx _aad6']"))).text
                     i += 1
                     continue
         except:
             web.get('https://www.instagram.com/direct/inbox/general/')
-            continue
+            return 'username not found'
         try:
             time.sleep(1)
             WebDriverWait(web, 10).until(
                 EC.presence_of_element_located(
                     (By.XPATH, "//button[@class='_acan _acao _acas _acav']"))).click()
             time.sleep(1)
-            send_msg(f'Hello, {student_names[register_id[roll]]}\nThis Is Your Attendance Till Now: {att}\n From AttBot Subscribed Data')
+            send_msg(msg)
+            return 'success'
         except:
             web.get('https://www.instagram.com/direct/inbox/general/')
+            return 'error'
+def send_att_time():
+    unsuc=[]
+    for usern in time_slot_bookings:
+        try:
+            att = provide_rollno(usern)
+            status=find_send_msg(usern,f'Hello, {student_names[register_id[usern]]}\nThis Is Your Attendance Till Now: {att}\n From AttBot Subscribed Data')
+            if status=='success':
+                continue
+            else:
+                unsuc.append(usern)
+                continue
+        except:
+            unsuc.append(usern)
             continue
-
-
+    find_send_msg('a__.r_.u_.n__',unsuc)
 def login(web):
     try:
         user = web.find_element(By.XPATH, '//*[@id="username"]')
@@ -2672,7 +2680,19 @@ while (True):
                 msg_count = 0
                 read_unread_msgs()
                 continue
-        elif msg == 'OK':
+        elif msg == 'P' and username in ['user_not_found_x20', 'a__.r_.u_.n__']:
+                send_msg('Enter username:')
+                usern=readmsg(msg)
+                send_msg('Enter your msg:')
+                msg=readmsg(usern)
+                status=find_send_msg(usern,msg)
+                find_send_msg(username,status)
+                msg = None
+                username = None
+                msg_count = 0
+                read_unread_msgs()
+                continue    
+        elif msg == 'OK' or msg=='KK':
             send_msg('Fine')
             msg = None
             username = None
