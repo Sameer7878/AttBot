@@ -2466,7 +2466,7 @@ def not_now():
         print('Not Found And passed')
         pass
     except Exception as error:
-
+        pass
 
 web.get('https://www.instagram.com/direct/inbox/general/')
 print('Login initiated')
