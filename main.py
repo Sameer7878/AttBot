@@ -2472,7 +2472,7 @@ def not_now():
 
 web.get('https://www.instagram.com/direct/inbox/general/')
 print('Login initiated')
-login_insta('attnbkrist@gmail.com', 'Nbkr@1234')
+login_insta('attnbkrist@gmail.com', 'Nbkrist@7878')
 not_now()
 
 
