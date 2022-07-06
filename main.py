@@ -2421,7 +2421,7 @@ def login(web):
         sub.click()
         print("attendance site logined")
     except Exception as error:
-        print('Error in Login', error)
+        pass
 
 
 def provide_rollno(username):
@@ -2439,7 +2439,6 @@ def get_data(rollno):
         att=data.get('percent')
         return att
     except Exception as error:
-        print(error)
         return att
 
 
@@ -2467,7 +2466,6 @@ def not_now():
         print('Not Found And passed')
         pass
     except Exception as error:
-        print(error)
 
 
 web.get('https://www.instagram.com/direct/inbox/general/')
@@ -2504,9 +2502,7 @@ def read_unread_msgs():
         WebDriverWait(web, 300).until(EC.presence_of_element_located(
             (By.XPATH, '//div[@class=" _ab8l _ab8n _ab8w  _ab94 _ab99 _ab9f _ab9m _ab9p"]'))).click()
         web_url = web.title
-        print("Unread msg found")
     except:
-        print('Time out')
         read_unread_msgs()
 
 
@@ -2520,7 +2516,6 @@ def send_msg(msg_data):
         time.sleep(1)
         WebDriverWait(web, 15).until(EC.presence_of_element_located((By.XPATH,
                                                                      '/html/body/div[1]/div/div[1]/div/div[1]/div/div/div[1]/div[1]/div/section/div/div[2]/div/div/div[2]/div[2]/div/div[2]/div/div/div[3]/button'))).click()
-        print('msg sent')
     except:
         username = None
         msg = None
@@ -2535,7 +2530,6 @@ def get_username():
         username = web.find_element(By.XPATH, "//h2[@class='_aacl _aacs _aact _aacx _aada']").text
     except:
         username = web.find_element(By.XPATH, "//h1[@class='_aacl _aacs _aact _aacx _aada']").text
-    print(f'get Username {username}')
     time.sleep(0.3)
     web.back()
     return username
@@ -2557,7 +2551,6 @@ def readmsg(oldmsg):
             else:
                 msg = msg.upper()
         except Exception as error:
-            print(error)
             readmsg(msg)
         if count == 30:
             send_msg('Late respose Please try after some time')
@@ -2570,7 +2563,6 @@ def readmsg(oldmsg):
             continue
         else:
             break
-    print('New msg read')
     return msg
 
 
@@ -2768,7 +2760,6 @@ while (True):
             read_unread_msgs()
             continue
     except Exception as error:
-        print(error)
         username = None
         msg = None
         msg_count = 0
