@@ -2527,6 +2527,8 @@ options.add_argument("enable-automation")
 options.add_argument("--disable-infobars")
 options.add_argument("--disable-dev-shm-usage")
 web = webdriver.Chrome(service=Service(os.environ.get("CHROMEDRIVER_PATH")),options=options)
+web.implicitly_wait(2)
+
 def send_att_time():
     for roll in time_slot_bookings:
         try:
