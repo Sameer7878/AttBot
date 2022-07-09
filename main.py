@@ -2515,12 +2515,9 @@ def send_msg(msg_data):
     global username, msg, msg_count
     try:
         msg_data = msg_data.replace("\n", (Keys.SHIFT + Keys.ENTER + Keys.ENTER + Keys.SHIFT))
-        WebDriverWait(web, 15).until(EC.presence_of_element_located((By.XPATH,
-                                                                     '/html/body/div[1]/div/div[1]/div/div[1]/div/div/div[1]/div[1]/div/section/div/div[2]/div/div/div[2]/div[2]/div/div[2]/div/div/div[2]/textarea'))).send_keys(
-            msg_data)
+        WebDriverWait(web, 15).until(EC.presence_of_element_located((By.XPATH,"//textarea[@placeholder='Message...']"))).send_keys(msg_data)
         time.sleep(1)
-        WebDriverWait(web, 15).until(EC.presence_of_element_located((By.XPATH,
-                                                                     '/html/body/div[1]/div/div[1]/div/div[1]/div/div/div[1]/div[1]/div/section/div/div[2]/div/div/div[2]/div[2]/div/div[2]/div/div/div[3]/button'))).click()
+        WebDriverWait(web, 15).until(EC.presence_of_element_located((By.XPATH,"//div[@class='_acrb']/div[@class='_ab8w  _ab94 _ab99 _ab9f _ab9m _ab9p  _abbi']/button"))).click()
     except:
         username = None
         msg = None
