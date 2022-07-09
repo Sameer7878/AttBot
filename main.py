@@ -2488,28 +2488,34 @@ def read_unread_msgs():
     elif (datetime.datetime.now(pytz.timezone('Asia/Kolkata')).hour == 13 or datetime.datetime.now(pytz.timezone('Asia/Kolkata')).hour == 17) and temp_count != 0:
         temp_count = 0
     time.sleep(1)
-    web.switch_to.window(web.window_handles[ 0 ])
-    global web_url
-    web.get('https://www.instagram.com/direct/inbox/general/')
-    '''time.sleep(2)
     try:
-        WebDriverWait(web,5).until(EC.presence_of_element_located((By.XPATH,"//button[@class='_acan _acao _acas']//h5[@class='_aacl _aaco _aacw _aad0 _aad6 _aade']"))).click()
-        web.find_element(By.XPATH,"//div[@class=' _ab8s _ab8w  _ab94 _ab99 _ab9f _ab9m _ab9p']/a").click()
-        web.find_element(By.XPATH,"//button[@class='_acan _acao _acat']").click()
-        web.find_element(By.XPATH,"//button[2][@class='_a9-- _a9_1']").click()
-        return 0
-    except:
-        print('Error')
-        pass'''
+        web.get('https://www.instagram.com/direct/requests/')
+        WebDriverWait(web, 1).until(EC.presence_of_element_located((By.XPATH, "//div[@class=' _ab8s _ab8w  _ab94 _ab99 _ab9f _ab9m _ab9p']/a"))).click()
+        WebDriverWait(web, 2).until(EC.presence_of_element_located((By.XPATH, "//*[contains(text(),'Accept')]"))).click()
+        WebDriverWait(web, 2).until(EC.presence_of_element_located((By.XPATH, "//div[@class='_a9-z']/*[contains(text(),'General')]"))).click()
+    except NoSuchElementException:
+        global web_url
+        web.get('https://www.instagram.com/direct/inbox/general/')
+        '''time.sleep(2)
+        try:
+            WebDriverWait(web,5).until(EC.presence_of_element_located((By.XPATH,"//button[@class='_acan _acao _acas']//h5[@class='_aacl _aaco _aacw _aad0 _aad6 _aade']"))).click()
+            web.find_element(By.XPATH,"//div[@class=' _ab8s _ab8w  _ab94 _ab99 _ab9f _ab9m _ab9p']/a").click()
+            web.find_element(By.XPATH,"//button[@class='_acan _acao _acat']").click()
+            web.find_element(By.XPATH,"//button[2][@class='_a9-- _a9_1']").click()
+            return 0
+        except:
+            print('Error')
+            pass'''
 
-    try:
-        print('Bot is waiting messages')
-        WebDriverWait(web, 300).until(EC.presence_of_element_located(
-            (By.XPATH, '//div[@class=" _ab8l _ab8n _ab8w  _ab94 _ab99 _ab9f _ab9m _ab9p"]'))).click()
-        web_url = web.title
+        try:
+            print('Bot is waiting messages')
+            WebDriverWait(web, 300).until(EC.presence_of_element_located(
+                (By.XPATH, '//div[@class=" _ab8l _ab8n _ab8w  _ab94 _ab99 _ab9f _ab9m _ab9p"]'))).click()
+            web_url = web.title
+        except:
+            read_unread_msgs()
     except:
         read_unread_msgs()
-
 
 def send_msg(msg_data):
     global username, msg, msg_count
