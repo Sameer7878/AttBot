@@ -2,45 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b5b93eac-95b0-447c-b828-a68befabd7eb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../.idea/PycharmProjects.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Canteen(new)/.idea/Canteen(new).iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Canteen(new)/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Checkme/Procfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../djangoProject/.idea/djangoProject.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../flaskProject/.idea/.name" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../flaskProject/.idea/SCn.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../flaskProject/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../flaskProject/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../flaskProject/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../flaskProject/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../flaskProject/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../flaskProject/SCN_DATA.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../flaskProject/app.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../flaskProject/demo.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../flaskProject/templates/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../flaskProject/templates/payments.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../flaskProject1/.idea/Canteen.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../idea/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../idea/.idea/canteen.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../idea/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../idea/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../idea/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../idea/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../idea/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../idea/Procfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../idea/requirements.txtcat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../pythonProject4/.idea/pythonProject4.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../pythonProject4/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Checkme/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Checkme/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Checkme/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Checkme/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Checkme/static/chromedriver" beforeDir="false" afterPath="$PROJECT_DIR$/../flaskProject/static/chromedriver" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Checkme/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Checkme/templates/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Checkme/testing.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FeePayment/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/../FeePayment/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FeePayment/static/styles/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/../FeePayment/static/styles/home.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FeePayment/templates/PayFee.html" beforeDir="false" afterPath="$PROJECT_DIR$/../FeePayment/templates/PayFee.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FeePayment/templates/busfee.html" beforeDir="false" afterPath="$PROJECT_DIR$/../FeePayment/templates/busfee.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FeePayment/templates/status.html" beforeDir="false" afterPath="$PROJECT_DIR$/../FeePayment/templates/status.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
@@ -58,6 +22,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
@@ -89,7 +54,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.demo">
+  <component name="RunManager" selected="Python.main">
     <configuration name="demo" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="InstaBot" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -154,7 +119,21 @@
       <workItem from="1654524401193" duration="12869000" />
       <workItem from="1654565339843" duration="4900000" />
       <workItem from="1654619253684" duration="3914000" />
-      <workItem from="1654753747050" duration="5769000" />
+      <workItem from="1654753747050" duration="6708000" />
+      <workItem from="1654770280847" duration="1953000" />
+      <workItem from="1654779619953" duration="3964000" />
+      <workItem from="1654875118057" duration="7252000" />
+      <workItem from="1655049383541" duration="1582000" />
+      <workItem from="1655139517870" duration="2309000" />
+      <workItem from="1655174529334" duration="1958000" />
+      <workItem from="1655194014493" duration="1982000" />
+      <workItem from="1655316765935" duration="1477000" />
+      <workItem from="1655485493341" duration="1020000" />
+      <workItem from="1655558649470" duration="1254000" />
+      <workItem from="1655956761220" duration="5000" />
+      <workItem from="1656483903130" duration="361000" />
+      <workItem from="1657036331387" duration="853000" />
+      <workItem from="1657635494221" duration="4977000" />
     </task>
     <servers />
   </component>
@@ -173,7 +152,7 @@
     </option>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/InstaBot$main.coverage" NAME="main Coverage Results" MODIFIED="1654622179257" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/InstaBot$demo.coverage" NAME="demo Coverage Results" MODIFIED="1654759526577" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/InstaBot$main.coverage" NAME="main Coverage Results" MODIFIED="1657637961360" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/InstaBot$demo.coverage" NAME="demo Coverage Results" MODIFIED="1654781503597" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
