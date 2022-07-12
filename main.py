@@ -2751,6 +2751,7 @@ while (True):
         if msg == '1':
             att = provide_rollno(username)
             send_msg(f'Hi, {student_names[ register_id[ username ] ]}\nThis is Your Attendance Till Now: {att}.')
+            time.sleep(0.5)
             if username not in time_slot_bookings:
                 send_msg('Type "1" If you want Again\nType "2" to Book Requests By Time')
                 msg = None
