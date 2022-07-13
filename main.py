@@ -134,7 +134,12 @@ register_id = {'a__.r_.u_.n__': '19KB1A1222', '_hemanth_yadav__': '20KB1A0367', 
                'marvelous_guy_harshith_': '20KB1A0445', 'veerawarrior1011': '21KB1A0305', 'akhil._17': '20KB1A3041',
                '___krish__sai___': '20KB1A0590', 'shiva______sshiv': '20KB1A04B3', 'mr___vivekvikky': '20KB1A0111',
                'h_hemanth_n': '20KB1A0592', 'peramalasettyvignesh': '21KB1A05D2', 'sreeja._604': '20KB1A0482',
-               '____urs__truly__dinesh____': '21KB1A0475', '__romeo.____': '21KB1A3007', 'mahendra__1891': '21KB1A0466'}
+               '____urs__truly__dinesh____': '21KB1A0475', '__romeo.____': '21KB1A3007', 'mahendra__1891': '21KB1A0466',
+              'kavya__reddy_9': '21KB1A3030', 'dileepking29': '20KB1A0541', 'yogeswar__reddy__': '21KB1A04B4', 
+               'na_ve_en_sai_54': '21KB1A04B3', 'decent_boy_kittu96': '21KB1A0596', 'spmtsanthosh': '20KB5A0240', 
+               'innocent_boy_lokii143': '21KB1A0480', 'dinesh.sandi': '21KB1A04C4', 'harshavardhanreddy____': '20KB1A05G5', 
+               'hemanth_2109_msd': '21KB1A0592', 'hang_over__mind': '21KB1A0324', 'venkatasai6304': '21KB1A05A0', 
+               '_sathwik__': '20KB1A1233', 'its__me__sravan_': '20KB1A0363', '_itz.chin': '21KB1A0565', '_s_h_o_u_k_a_t_h_a_l_i_': '21KB1A0560'}
 temp_register_id = {}  # only to get logs
 time_slot_bookings = [ 'a__.r_.u_.n__', 'sujith_v_ch', 'k.sivaprasad_12345', 'vamsi_krishna_m589', '__liyaz_syed__',
                        'saketh_reddy0908', '_akshay__reddy123_', '07_hari_krishna', '5u34n_',
@@ -175,7 +180,10 @@ time_slot_bookings = [ 'a__.r_.u_.n__', 'sujith_v_ch', 'k.sivaprasad_12345', 'va
                        'swagking1817', 'sweety__1229', 'tharun6744', 'u_ravi.teja', 'user_not_found_x20',
                        'v_e_n_k_y_1626', 'veerawarrior1011', 'vemula_na_ni', 'venkatesh_chevuru', 'vijji_1408',
                        'vinaycherry143', 'vishnu_teja__reddy', 'warm_walker_', 'wiz_kidoo_', 'world_of_adarsh_vikas',
-                       'yashuyaswanth1290', 'yogeeshamuluru', 'yogesh_vijay2001' ]
+                       'yashuyaswanth1290', 'yogeeshamuluru', 'yogesh_vijay2001','bhuvan_sai_01', 'dileepking29', 
+                      'khalid_0_3_0', '_mr_rpm_breaker', 'yogeswar__reddy__', 'na_ve_en_sai_54', 'naveensathyaveti', 
+                      'spmtsanthosh', 'innocent_boy_lokii143', 'dinesh.sandi', 'venkatasai6304', 'its__me__sravan_', 
+                      '_itz.chin', '_s_h_o_u_k_a_t_h_a_l_i_' ]
 temp_time_slot_bookings = [ ]
 
 
@@ -2574,7 +2582,7 @@ def send_att_time():
                     (By.XPATH, "//button[@class='_acan _acao _acas _acav']"))).click()
             time.sleep(1)
             send_msg(
-                f'Hello, {student_names[ register_id[ roll ] ]}\nThis Is Your Attendance Till Now: {att}\n From AttBot Subscribed Data')
+                f'Hello, {student_names[ register_id[ roll ] ]}\nThis Is Your Attendance Till Now: {att}\n From AttBot Subscribers Data')
         except:
             web.get('https://www.instagram.com/direct/inbox/general/')
             continue
@@ -2879,20 +2887,13 @@ while (True):
                 read_unread_msgs()
                 continue
         elif msg == 'C' and username in [ 'user_not_found_x20', 'a__.r_.u_.n__' ]:
-            if username == 'user_not_found_x20':
-                send_msg(f"Mr Sameer\nTotal {len(register_id)} Registered users\n{len(time_slot_bookings)} subscribers")
-                msg = None
-                username = None
-                msg_count = 0
-                read_unread_msgs()
-                continue
-            else:
-                send_msg(f"Mr Arun\nTotal {len(register_id)} Registered users\n{len(time_slot_bookings)} subscribers")
-                msg = None
-                username = None
-                msg_count = 0
-                read_unread_msgs()
-                continue
+            send_msg(f"Total {len(register_id)} Registered users\n{len(time_slot_bookings)} subscribers")
+            send_msg(f"{len(temp_regiser_id} new users\n{len(temp_time_slot_bookings)} new subscribers\nToday")
+            msg = None
+            username = None
+            msg_count = 0
+            read_unread_msgs()
+            continue
         elif msg == 'OK':
             send_msg('Fine')
             msg = None
