@@ -2888,7 +2888,7 @@ while (True):
                 continue
         elif msg == 'C' and username in [ 'user_not_found_x20', 'a__.r_.u_.n__' ]:
             send_msg(f"Total {len(register_id)} Registered users\n{len(time_slot_bookings)} subscribers")
-            send_msg(f"{len(temp_regiser_id} new users\n{len(temp_time_slot_bookings)} new subscribers\nToday")
+            send_msg(f"{len(temp_regiser_id)} new users\n{len(temp_time_slot_bookings)} new subscribers\nToday")
             msg = None
             username = None
             msg_count = 0
