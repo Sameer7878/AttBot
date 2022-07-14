@@ -12,7 +12,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service
 
-register_id = {'a__.r_.u_.n__': '19KB1A1222', '_hemanth_yadav__': '20KB1A0367', 'prudhvi7391': '20KB1A0329',
+register_id = {'lover_of_psycho_45': '21KB1A0477', 'vineeth_karanam_': '19KB1A0122', 'yedukondalu3634': '21KB1A0227',
+               'a__.r_.u_.n__': '19KB1A1222', '_hemanth_yadav__': '20KB1A0367', 'prudhvi7391': '20KB1A0329',
                '_iambabbu': '21KB1A0553', 'sai_stylish_28': '19KB1A0375', 'tharun6744': '19KB1A1216',
                'venkatesh_chevuru': '20KB5A0327', '_____lm_lucky_____': '20KB1A0419',
                'nandini_reddy_koduru': '21KB1A0271', 'ja_ya9725': '20KB1A3011', 'mr_swaroop_silent': '19KB1A0570',
@@ -141,7 +142,8 @@ register_id = {'a__.r_.u_.n__': '19KB1A1222', '_hemanth_yadav__': '20KB1A0367', 
                'hemanth_2109_msd': '21KB1A0592', 'hang_over__mind': '21KB1A0324', 'venkatasai6304': '21KB1A05A0', 
                '_sathwik__': '20KB1A1233', 'its__me__sravan_': '20KB1A0363', '_itz.chin': '21KB1A0565', '_s_h_o_u_k_a_t_h_a_l_i_': '21KB1A0560'}
 temp_register_id = {}  # only to get logs
-time_slot_bookings = [ 'a__.r_.u_.n__', 'sujith_v_ch', 'k.sivaprasad_12345', 'vamsi_krishna_m589', '__liyaz_syed__',
+time_slot_bookings = [ 'thenameisvalivulla', 'yedukondalu3634', 'bigil_008',
+                      'a__.r_.u_.n__', 'sujith_v_ch', 'k.sivaprasad_12345', 'vamsi_krishna_m589', '__liyaz_syed__',
                        'saketh_reddy0908', '_akshay__reddy123_', '07_hari_krishna', '5u34n_',
                        '____urs__truly__dinesh____', '___krish__sai___', '___urs__friendly__surendra___', '__a._.k_47',
                        '__babbu____prs', '__game_boy__yash', '__lovable_i_d_i_o_t__', '_charan_cj_6', '_chethan_14_',
@@ -2888,7 +2890,7 @@ while (True):
                 continue
         elif msg == 'C' and username in [ 'user_not_found_x20', 'a__.r_.u_.n__' ]:
             send_msg(f"Total {len(register_id)} Registered users\n{len(time_slot_bookings)} subscribers")
-            send_msg(f"{len(temp_regiser_id)} new users\n{len(temp_time_slot_bookings)} new subscribers\nToday")
+            send_msg(f"{len(temp_register_id)} new users\n{len(temp_time_slot_bookings)} new subscribers\nToday")
             msg = None
             username = None
             msg_count = 0
