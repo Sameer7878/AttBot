@@ -2614,9 +2614,9 @@ def provide_rollno(username):
 def get_data(rollno):
     att = None
     try:
-        data = requests.get(f'http://202.91.76.90:94/attendance/Apps_ren/getSubwiseAttAsJSONGivenRollNo.php?q={rollno}')
+        data = requests.get(f'https://attnbkrist1.herokuapp.com/attapi/?roll={rollno}')
         data = data.json()
-        att = data.get('percent')
+        att = data.get('attendance')
         return att
     except Exception as error:
         return att
