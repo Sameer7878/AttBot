@@ -143,7 +143,8 @@ register_id = {'upendra_____2': '19KB1A04E3', 'urs_truly_himakumar': '21KB1A04B2
                'hemanth_2109_msd': '21KB1A0592', 'hang_over__mind': '21KB1A0324', 'venkatasai6304': '21KB1A05A0', 
                '_sathwik__': '20KB1A1233', 'its__me__sravan_': '20KB1A0363', '_itz.chin': '21KB1A0565', '_s_h_o_u_k_a_t_h_a_l_i_': '21KB1A0560',
               '_ray_shiki': '20KB1A0210', 'batta_yadav': '21KB1A0415', 'harsha_vardhan_korapati': '21KB1A0580', 'praveen_1289': '21KB1A0412',
-               'ig_rithwik': '19KB1A05J3', 'poorna_navanari': '21KB1A0321', 'chanduyadav5619': '20KB5A0227', 'raju3869yadav': '20KB1A0301', 'gova__3': '20KB1A0250'}
+               'ig_rithwik': '19KB1A05J3', 'poorna_navanari': '21KB1A0321', 'chanduyadav5619': '20KB5A0227', 'raju3869yadav': '20KB1A0301', 'gova__3': '20KB1A0250',
+               'vegurusukumar': '21KB1A05I8', 'vinay_chepuru': '20KB5A0327', 'happiest_balu': '20KB1A0166', 'sameer_shaik__12': '21KB1A04E0', 'bunny_quien': '21KB1A0571'}
 temp_register_id = {}  # only to get logs
 time_slot_bookings = ['07_hari_krishna', '5u34n_', '____urs__truly__dinesh____', '___krish__sai___', '___urs__friendly__surendra___',
                       '__a._.k_47', '__babbu____prs', '__game_boy__yash', '__liyaz_syed__', '__lovable_i_d_i_o_t__', '__romeo.____',
