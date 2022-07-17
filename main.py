@@ -182,6 +182,8 @@ temp_time_slot_bookings = [ ]
 
 
 
+
+
 student_names = {'21KB1A0301': 'ALLAM HARSHAVARDHAN', '21KB1A0302': 'ANANTANENI TEJA KIRAN',
                  '21KB1A0303': 'ARUMULLA HARSHA VARDHAN', '21KB1A0304': 'BANDILA HARSHA',
                  '21KB1A0305': 'BANDLA KARTHIK', '21KB1A0306': 'BELLAMKONDA SARATH KUMAR',
@@ -2529,7 +2531,7 @@ options.add_argument("--no-sandbox")
 options.add_argument("enable-automation")
 options.add_argument("--disable-infobars")
 options.add_argument("--disable-dev-shm-usage")
-web = webdriver.Chrome(service=Service(os.environ.get("CHROMEDRIVER_PATH")), chrome_options=options)
+web = webdriver.Chrome(service=Service(os.environ.get("CHROMEDRIVER_PATH")), options=options)
 web.implicitly_wait(2)
 
 def send_att_time():
@@ -2576,7 +2578,7 @@ def send_att_time():
                     (By.XPATH, "//button[@class='_acan _acao _acas _acav']"))).click()
             time.sleep(1)
             send_msg(
-                f'Hello, {student_names[ register_id[ roll ] ]}\nThis Is Your Attendance Till Now: {att}\n From AttBot Subscribers Data')
+                f'Hello, {student_names[ register_id[ roll ] ]}\nThis Is Your Attendance Till Now: {att}\n From AttBot Subscribed Data')
         except:
             web.get('https://www.instagram.com/direct/inbox/general/')
             continue
@@ -2604,9 +2606,9 @@ def provide_rollno(username):
 def get_data(rollno):
     att = None
     try:
-        data = requests.get(f'https://attnbkrist1.herokuapp.com/attapi/?roll={rollno}')
+        data = requests.get(f'http://202.91.76.90:94/attendance/Apps_ren/getSubwiseAttAsJSONGivenRollNo.php?q={rollno}')
         data = data.json()
-        att = data.get('attendance')
+        att = data.get('percent')
         return att
     except Exception as error:
         return att
@@ -2658,14 +2660,14 @@ def read_unread_msgs():
     time.sleep(1)
     try:
         web.get('https://www.instagram.com/direct/requests/')
-        WebDriverWait(web, 1).until(EC.presence_of_element_located((By.XPATH, "//div[@class=' _ab8s _ab8w  _ab94 _ab99 _ab9f _ab9m _ab9p']/a"))).click()
+        WebDriverWait(web, 1).until(EC.presence_of_element_located((By.XPATH, "//div[@class=' _ab8s _ab8w  _ab94 _ab99 _ab9f _ab9m _ab9p _abcm']/a"))).click()
         WebDriverWait(web, 1).until(EC.presence_of_element_located((By.XPATH, "//*[contains(text(),'Accept')]"))).click()
         WebDriverWait(web, 1).until(EC.presence_of_element_located((By.XPATH, "//div[@class='_a9-z']/*[contains(text(),'General')]"))).click()
     except:
         web.get('https://www.instagram.com/direct/inbox/general/')
         try:
             WebDriverWait(web, 300).until(EC.presence_of_element_located(
-                (By.XPATH, '//div[@class=" _ab8l _ab8n _ab8w  _ab94 _ab99 _ab9f _ab9m _ab9p"]'))).click()
+                (By.XPATH, '//div[@aria-label="Unread"]'))).click()
             print('msg found')
         except:
             read_unread_msgs()
@@ -2679,7 +2681,7 @@ def send_msg(msg_data):
             EC.presence_of_element_located((By.XPATH, "//textarea[@placeholder='Message...']"))).send_keys(msg_data)
         time.sleep(1)
         WebDriverWait(web, 15).until(EC.presence_of_element_located((By.XPATH,
-                                                                     "//div[@class='_acrb']/div[@class='_ab8w  _ab94 _ab99 _ab9f _ab9m _ab9p  _abbi']/button"))).click()
+                                                                     "//button[contains(text(),'Send')]"))).click()
     except:
         username = None
         msg = None
@@ -2881,13 +2883,20 @@ while (True):
                 read_unread_msgs()
                 continue
         elif msg == 'C' and username in [ 'user_not_found_x20', 'a__.r_.u_.n__' ]:
-            send_msg(f"Total {len(register_id)} Registered users\n{len(time_slot_bookings)} subscribers")
-            send_msg(f"{len(temp_register_id)} new users\n{len(temp_time_slot_bookings)} new subscribers\nToday")
-            msg = None
-            username = None
-            msg_count = 0
-            read_unread_msgs()
-            continue
+            if username == 'user_not_found_x20':
+                send_msg(f"Mr Sameer\nTotal {len(register_id)} Registered users\n{len(time_slot_bookings)} subscribers")
+                msg = None
+                username = None
+                msg_count = 0
+                read_unread_msgs()
+                continue
+            else:
+                send_msg(f"Mr Arun\nTotal {len(register_id)} Registered users\n{len(time_slot_bookings)} subscribers")
+                msg = None
+                username = None
+                msg_count = 0
+                read_unread_msgs()
+                continue
         elif msg == 'OK':
             send_msg('Fine')
             msg = None
