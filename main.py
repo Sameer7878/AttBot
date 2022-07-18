@@ -12,11 +12,13 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service
 
-register_id = {'upendra_____2': '19KB1A04E3', 'urs_truly_himakumar': '21KB1A04B2', 'balu_bellamkonda': '19KB1A0308', 'ajmad7268': '21KB5A3004',
+register_id = {'mr.photoholic_ajay_': '20KB1A0339', 'bhanu_bunny_17': '21KB1A0567', 'madeshnelavala': '19KB1A1231', 'saketh169': '21KB1A0319',
+               'abhi_karate03': '20KB1A1210', '_mr_m_o_n_k_21_': '19KB1A05B6','upendra_____2': '19KB1A04E3',
+               'urs_truly_himakumar': '21KB1A04B2','balu_bellamkonda': '19KB1A0308', 'ajmad7268': '21KB5A3004',
                'lover_of_psycho_45': '21KB1A0477', 'vineeth_karanam_': '19KB1A0122', 'yedukondalu3634': '21KB1A0227',
                'a__.r_.u_.n__': '19KB1A1222', '_hemanth_yadav__': '20KB1A0367', 'prudhvi7391': '20KB1A0329',
-               '_iambabbu': '21KB1A0553', 'sai_stylish_28': '19KB1A0375', 'tharun6744': '19KB1A1216',
-               'venkatesh_chevuru': '20KB5A0327', '_____lm_lucky_____': '20KB1A0419',
+               '_iambabbu': '21KB1A0553', 'sai_stylish_28': '19KB1A0375','dr_comrade__loki_106': '20KB1A0106',
+               'tharun6744': '19KB1A1216','venkatesh_chevuru': '20KB5A0327', '_____lm_lucky_____': '20KB1A0419',
                'nandini_reddy_koduru': '21KB1A0271', 'ja_ya9725': '20KB1A3011', 'mr_swaroop_silent': '19KB1A0570',
                '_soul_hacker_giri_': '20KB1A0351', 'honeyrdx7': '20KB1A0305', 'haripulluru': '21KB1A0263',
                'k.sivaprasad_12345': '21KB1A0464', 'vamsi_krishna_m589': '21KB1A0589', 'saketh_reddy0908': '20KB1A3012',
@@ -175,9 +177,10 @@ time_slot_bookings = ['07_hari_krishna', '5u34n_', '____urs__truly__dinesh____',
                       'shaik_yakhoob___', 'shamsheer_shaik_07', 'shaolin_smaran', 'she_call_me_hari546', 'si.nce_2001', 'siddu_sreedhar_reddy', 'sk.nawaz702',
                       'sole_soul__3', 'sowmya_kurucheti', 'spmtsanthosh', 'sreeja._604', 'sreekanth_leburu', 'srikanth_sree012', 'sripathi_vamsi', 'stark_mark_4',
                       'sujana__sujju_', 'sujith__duvvuru', 'sujith_v_ch', 'sumanthsahho', 'surekha_0220', 'sushma_muppala', 'sushwanth_k_u_m_a_r', 'sw_eety1836',
-                      'swagking1817', 'sweety__1229', 'tharun6744', 'u_ravi.teja', 'user_not_found_x20', 'v_e_n_k_y_1626', 'vamsi_krishna_m589', 'veerawarrior1011',
+                      'swagking1817', 'sweety__1229', 'tharun6744', 'u_ravi.teja','_mr_m_o_n_k_21_', 'user_not_found_x20', 'v_e_n_k_y_1626', 'vamsi_krishna_m589', 'veerawarrior1011',
                       'vemula_na_ni', 'venkatasai6304', 'venkatesh_chevuru', 'vijji_1408', 'vinay_chepuru', 'vinaycherry143', 'vishnu_teja__reddy', 'warm_walker_',
-                      'wiz_kidoo_', 'world_of_adarsh_vikas', 'yashuyaswanth1290', 'yedukondalu3634', 'yogeeshamuluru', 'yogesh_vijay2001', 'yogeswar__reddy__']
+                      'wiz_kidoo_', 'world_of_adarsh_vikas', 'yashuyaswanth1290', 'yedukondalu3634', 'yogeeshamuluru', 'yogesh_vijay2001', 'yogeswar__reddy__',
+                     'mr.photoholic_ajay_', 'bhanu_bunny_17', 'thenameisvalivulla', 'madeshnelavala', 'dr_comrade__loki_106', 'oye__its__me__akhil']
 temp_time_slot_bookings = [ ]
 
 
