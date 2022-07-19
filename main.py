@@ -12,178 +12,10 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service
 
-register_id = {'mr.photoholic_ajay_': '20KB1A0339', 'bhanu_bunny_17': '21KB1A0567', 'madeshnelavala': '19KB1A1231', 'saketh169': '21KB1A0319',
-               'abhi_karate03': '20KB1A1210', '_mr_m_o_n_k_21_': '19KB1A05B6','upendra_____2': '19KB1A04E3',
-               'urs_truly_himakumar': '21KB1A04B2','balu_bellamkonda': '19KB1A0308', 'ajmad7268': '21KB5A3004',
-               'lover_of_psycho_45': '21KB1A0477', 'vineeth_karanam_': '19KB1A0122', 'yedukondalu3634': '21KB1A0227',
-               'a__.r_.u_.n__': '19KB1A1222', '_hemanth_yadav__': '20KB1A0367', 'prudhvi7391': '20KB1A0329',
-               '_iambabbu': '21KB1A0553', 'sai_stylish_28': '19KB1A0375','dr_comrade__loki_106': '20KB1A0106',
-               'tharun6744': '19KB1A1216','venkatesh_chevuru': '20KB5A0327', '_____lm_lucky_____': '20KB1A0419',
-               'nandini_reddy_koduru': '21KB1A0271', 'ja_ya9725': '20KB1A3011', 'mr_swaroop_silent': '19KB1A0570',
-               '_soul_hacker_giri_': '20KB1A0351', 'honeyrdx7': '20KB1A0305', 'haripulluru': '21KB1A0263',
-               'k.sivaprasad_12345': '21KB1A0464', 'vamsi_krishna_m589': '21KB1A0589', 'saketh_reddy0908': '20KB1A3012',
-               '_akshay__reddy123_': '21KB1A0474', 'mr_queen_less_bhanu': '19KB1A0493', 'wiz_kidoo_': '20KB1A03B5',
-               '_the_raptor._': '20KB5A0218', 'rebelstarsunny': '21KB1A0333', '_umamahesh___': '20KB1A0548',
-               'sam_.r._13': '21KB5A0325', 'k.asrithareddy': '21KB1A0563', 'shaik_yakhoob___': '19KB1A05F6',
-               'precious__sai__05': '20KB1A3060', '__tharun_kumar_b': '19KB1A0415', 'mr.enfielder_6225': '19KB1A1254',
-               'gnana_prasunambika.dupati': '21KB1A0539', 'sujana__sujju_': '20KB1A3023',
-               'naveensathyaveti': '21KB5A0321', 'gani.ramireddy': '19KB1A05D3', 'mr_lucky_davood__': '19KB1A0154',
-               'journey__lover__reddy': '19KB1A0165', 'sameeulla76': '19KB1A0157', 'surekha_0220': '20KB1A3052',
-               '_eyes_roller': '19KB1A0332', 'natural_rock_star_chintu': '19KB1A0307', 'am_harsha_09': '19KB1A0373',
-               '_raja__reddy_': '19KB1A0301', '_harsha_chowdhary_': '21KB1A0285', 'balu.97197': '19KB1A0344',
-               'prakashyadav_6303': '20KB5A0337', 'swagking1817': '21KB1A0584', 'pranathibathala': '21KB1A0207',
-               'chinthaneerajaa': '20KB1A0524', '___urs__friendly__surendra___': '21KB1A0493',
-               'akhil_sanni': '20KB1A3046', '_j__2002._': '20KB1A0425', 'dinesh_ravilla_99': '21KB5A0339',
-               'rithwick_reddy_143': '21KB1A0327', 'user_not_found_x20': '19KB1A1244',
-               'future_aviator_karthik': '21KB5A0342', 'vishnu_teja__reddy': '19KB1A1229',
-               'srikanth_sree012': '20KB1A0201', 'dheerajkrishna0492020': '19KB1A1223', 'revanth____007': '20KB1A0283',
-               'its_mehemuuu': '19KB1A04G3', '__lovable_i_d_i_o_t__': '20KB1A1204', 'jyothi886677': '20KB1A0205',
-               'reddy___gari___abbay___': '20KB5A0315', 'challa_is__the_brand': '21KB1A0424',
-               'p_mahendra_143': '21KB1A04A4', 'b_h_a_n_u_prakashreddy': '19KB1A04J1', 'muni_volley_8': '21KB1A04C0',
-               'inid2022': '21KB1A0460', 'v_e_n_k_y_1626': '19KB1A0558', 'jaswanth_sai30': '20KB5A0201',
-               'lalith_allias_karan_3': '21KB1A1212', 'khaliqss': '19KB1A1240', 'j.a.y.a.n.t.h__': '21KB1A0419',
-               'likith.45': '20KB1A03B9', 'dorababu_0831': '20KB5A0403', '5u34n_': '19KB1A0521',
-               'vishnuvardhanmalipati': '20KB1A0487', 'niharika_challa_niha': '20KB1A3008',
-               'sweety__1229': '21KB1A0513', 'sushwanth_k_u_m_a_r': '19KB1A05H3', 'ramprakashreddy45': '19KB1A1230',
-               'prsnakmr_918': '19KB1A04C0', 'kingwithoutacrown_2k03': '21KB1A04G2', 'sk.nawaz702': '20KB1A04F6',
-               'p_e_a_c_e_l_i_f_e__': '21KB1A0465', '_mr.__reddy': '20KB1A3044', 'ajay_adeppagari': '20KB1A0404',
-               'harsha._.official': '20KB1A0217', 'hari_krishna_789': '20KB1A0287', 'harsha__073': '21KB1A30A0',
-               'shaolin_smaran': '19KB1A1202', 'chegueverachaitanya': '19KB1A1204', 'prudhvirajhasthi': '19KB1A1211',
-               'yogeeshamuluru': '20KB1A0304', 'call__me__diggi': '20KB1A0269', '_jash_217': '19KB1A05B6',
-               'venkata__vasanth': '20KB1A0216', 'smile._.killer._.07': '20KB1A0217', 'sasikiran_2003': '20KB1A0522',
-               '_charan_cj_6': '21KB1A0426', 'sahoresuraj': '20KB1A0114', 'panee_9': '20KB1A0438',
-               'ravi4tr': '21KB1A0249', 'sukumar_royals': '19KB1A0327', '__dynamic_killer__': '21KB1A0330',
-               'saketh_papareddy': '19KB1A1233', '_surya_suri_789': '20KB1A3051', '_lalith_kumar_reddy_': '21KB1A1212',
-               'dhinakar__sai': '20KB1A0423', 'heart.hacker_008': '20KB5A0329', 'u_ravi.teja': '20KB5A0140',
-               'rameez.shaik_': '20KB1A05F4', 'muralikataru': '21KB1A1225', 'pavan_tony_123': '21KB1A1243',
-               'call_me_poriki___420': '21KB1A04C0', 'my_life_my_rules_46_': '21KB1A0344',
-               'i_am.nadendla': '20KB1A04A9', 'alwaysjyothish': '21KB1A05I1', 'rahulsurya121': '21KB1A05B4',
-               'rajeev_92223': '21KB1A0599', 'dad_calls_me_chotu': '21KB1A05F2', 'sumanth5723': '21KB1A0459',
-               'crazy_boy_jashu': '21KB1A0444', 'sreekanth_leburu': '20KB5A0354', 'sole_soul__3': '21KB1A0481',
-               'yashuyaswanth1290': '20KB1A0429', '__liyaz_syed__': '20KB1A3055', 'lucky.charm827': '20KB1A04A3',
-               'revanth.reddy_2405': '19KB1A0513', '_sathvik_777_': '21KB1A1238', 'rock_star_1433_': '21KB1A0238',
-               'saradhi__v': '19KB1A04I4', 'alone__heart_kishore': '21KB1A1207', 'ch.badri.338': '21KB1A0434',
-               'sumanthsahho': '21KB1A0584', 'sasi_lxn_455_': '20KB1A0455', 'rockybhai.chandu.52': '21KB1A0293',
-               'u_rs_lovingly_tharun': '21KB1A1248', 'deepamdeepthi_': '21KB1A3001', 'pradeep_0321': '19KB1A04E6',
-               'harsha_lebur': '21KB1A0585', 'p.jagadeesh_naidu': '21KB1A1241', 'bigil_008': '21KB1A0476',
-               'itsme_nawaz53': '20KB1A04F5', 'dreamer_.o4': '20KB1A0502', '_mr_rpm_breaker': '20KB1A03B7',
-               '_chethan_14_': '20KB1A0592', 'loyal__guy_': '20KB1A0427', 'mr.bob_0051': '21KB1A0351',
-               'loyal_one_praveen': '21KB1A0241', '__babbu____prs': '21KB1A0518', 'akashakash193119': '21KB1A0240',
-               'happysoul2801': '20KB1A05E3', 'saad_ahamed_syed': '21KB1A0339', 'priyatham_2002': '20KB1A0515',
-               'im_loki_08': '21KB1A1204', 'a_r_s_h_a_d_s_h_a_i_k': '21KB1A0269', 'bhanuchand.23132': '20KB1A0356',
-               'sajid_hussain_08': '20KB1A0370', 'parvaz_shaik': '20KB1A04F8', 'kvinayrajj': '20KB1A0464',
-               'its_me_ss_rowdy': '19KB1A1244', 'suchakridharreddykonduru': '20KB1A0240',
-               'darling_aniish': '20KB1A1222', 'prem.kumar7830': '21KB1A0449', 'attiutude_king_sai': '21KB1A0403',
-               'crazy_nick990': '21KB1A0456', 'always_yagna': '19KB1A05I8', 'swe.ety9735': '21KB1A05H0',
-               'saijaguar.135': '19KB1A1218', 'suresh_reddy_guvvala_': '20KB1A0347', 'vinaycherry143': '21KB5A0332',
-               'dha1528': '21KB5A0304', 'khushi_sharma2409': '21KB1A0569', 'sujith_v_ch': '21KB1A0430',
-               'mr.dead_rine_007': '19KB1A0498', 'vemula_na_ni': '19KB1A1252', 'k_rant_hi': '21KB1A1245',
-               'bindu_madhav_raju': '21KB1A1203', 'ha__rs__hi__tha__37': '21KB1A0571',
-               'attitude_queen__2503': '21KB1A05C6', 'rishi_kumar_c_e_o': '21KB1A0217', 'yamunaarava6': '19KB1A0322',
-               'parrot__kt': '20KB1A05C4', 'anon_dhanush__': '20KB1A3019', 'dhaksha_09': '20KB1A1218',
-               'akhila_neeluru': '20KB1A0599', 'rajuyatham8': '21KB1A04H0', 'jayakrishna.jai.79': '21KB5A0102',
-               'loveshot7_': '21KB1A0342', 'rajeev_nine9': '21KB1A0599', 'duddu_madhavi': '21KB1A0536',
-               'chamarthi_yashu': '20KB1A0518', 'deepthireddy_atla': '20KB1A0410', 'shaik_hussain__143': '21KB1A3066',
-               'n._.identity': '19KB1A0114', 'hemanthbdvm': '20KB1A0596', 'inside_lover999': '21KB1A0467',
-               '_crazy.vinay_': '21KB1A0348', 'jeevith_rebel': '21KB1A0332', 'h_emanth_n': '20KB1A05C4',
-               'pradeepnaidu1432': '21KB1A0132', 'yogesh_vijay2001': '19KB1A0348', 'delphi_gracy': '21KB1A0226',
-               'priya_______1188': '21KB1A0206', 'hemu.msd': '21KB1A3044', '__ganesh.03__': '20KB1A04I2',
-               '_yaswanth__reddy__': '19KB1A1250', 'jagadeesh4835': '20KB5A0336', 'balaramreddy__._._': '19KB1A1232',
-               'jagadeesh_.naidu': '21KB1A1241', '__a._.k_47': '19KB1A0576', 'khalid_0_3_0': '20KB1A03A1',
-               'thenameisvalivulla': '20KB1A03A6', 'mr.bhargava__2004': '21KB1A3047',
-               'sr_sarvotham_reddy': '19KB1A04C8', 'chennaiah21': '19KB1A04E1', 'kole_rajasekhar_19': '19KB1A0349',
-               'dynamo_sasi': '19KB1A0554', 'm.r_idiot_143': '21KB1A05I3', 'saisankarvayugundla': '20KB5A0316',
-               'devaki_thumati': '21KB1A3041', 'keerthi__reddyyy': '19KB1A1220', 'mr.black_611': '21KB1A0270',
-               'decoit_one': '21KB1A0217', 'girish_reddy_gangavaram_321': '20KB5A0350', 'prbindu5': '21KB1A0204',
-               'si.nce_2001': '19KB1A0385', 'truegirl398': '21KB1A0445', 'krishna_makani98': '19KB1A0585',
-               'mr_frustrated_soul._': '20KB1A0402', 'saikummar05': '20KB5A0325', 'itsmekeertan': '21KB1A0549',
-               'chaitu_royal_14439': '21KB1A0341', 'ram1091charan': '20KB1A05A5', 'krishaveni55': '20KB1A05A4',
-               'king_shaik_777': '21KB1A1247', 'nithish.raju.2003': '21KB1A0521',
-               'i_am_udaykumar_chowdary': '21KB5A0331', 'its_mee_sekhar': '20KB1A1246',
-               '___p.a.n.d.u_loves___': '19KB1A05G9', 'rohi_preethi_2504': '21KB1A05C6',
-               'jyothiathmakuru': '20KB1A0205', 'jannath_hussen': '21KB5A0336', '__.__jasmine_.__': '19KB1A05F0',
-               'tinygirlstyle': '19KB1A1214', '_h.o.n.e.y_l.o.v.e.s_': '19KB1A0261',
-               'oye__its__me__akhil': '20KB1A0130', 'akhila_oo1': '19KB1A1215', 'cool________angel': '19KB1A0146',
-               'rakshana__chowdary_': '19KB1A0439', 'vamsi_yadav_ulsa_049': '21KB5A0311',
-               '_s_i_s_i_n_d_r_i___009': '21KB1A1202', 'hari_9400': '21KB1A1236', 'naveen__yenuganti': '19KB1A1255',
-               '__r_o_c_k_y______': '19KB1A05E3', 'hemanth_chandra_00': '21KB1A1210',
-               'volley_lover_uday._ud': '21KB1A1211', 'prasanthchalla143': '21KB1A1215', 'warm_walker_': '20KB5A0366',
-               '__game_boy__yash': '21KB5A0324', 'ganeshannabathina': '21KB1A0204', 'achukrishnamma': '20KB1A05A7',
-               '20kb1a0402': '20KB1A05A8', 'urs_truly_yokshith': '21KB1A1224', 'sai_star_1233': '21KB1A3023',
-               'iamdheerajkrishna': '19KB1A05C2', 'sudheerbabu7797': '19KB1A04D8', 'majestic_king_nari': '21KB1A0528',
-               'narahari1801': '21KB1A0408', 'miss_waste_3': '21KB1A0481', 'bharath_kumar_ry': '21KB5A0338',
-               'bhargav_sarvepalli': '21KB1A3080', 'bhavaniprasad594': '20KB1A0594', 'sushma_muppala': '20KB1A0593',
-               'world_of_adarsh_vikas': '20KB1A0338', 'pramodh_kole': '20KB1A0473', 'i_am_teja_yy4s': '21KB5A1206',
-               'anji4469': '21KB5A1202', 'brokenboy_sudheer_': '20KB5A0214', 'sujith__duvvuru': '20KB1A0220',
-               's_a_i_t_e_j_a_77': '20KB1A1208', 'anu_anvi2645': '20KB1A0209', 'kowshik.ganesh': '19KB1A05C4',
-               'sw_eety1836': '20KB1A0241', 'durgapriya479': '20KB1A0245', 'tejoday4': '20KB1A0239',
-               'devil_moon_81': '20KB1A3027', 'dakshayani_raj': '20KB1A0565', 'munikrishna365955': '20KB1A0202',
-               'sowmya_kurucheti': '21KB5A0413', 'stark_mark_4': '20KB1A0290', 'bobby.nandigam': '20KB1A0595',
-               'its_me_ur_comrade': '21KB1A0312', 'attnbkr222': '19KB1A1221', 'harsha____vip': '21KB1A0256',
-               'keerthipati_mahidhar': '20KB1A1228', 'i_am.siva_': '21KB5A1203', 'duddu_madhavi_113': '21KB1A0536',
-               'yegireddy_nani': '21KB1A04H1', 'saiesh____11': '19KB1A0322', 'hemanthm2003': '20KB1A0371',
-               'v.k_r_i_s_h_n_a__chowdary': '21KB5A1204', 'local_abbai_avinash': '19KB1A0329',
-               'shamsheer_shaik_07': '20KB5A0404', 'manoj___manoj__': '20KB5A0224', 'infinitesoulboy_01': '21KB1A0337',
-               'bharath.pr_in_ce11': '20KB1A0212', '_shr_avankumar': '21KB5A0218', 'megha_meghanadham': '21KB5A0409',
-               'siddu_sreedhar_reddy': '21KB5A0107', 'bhuvan_sai_01': '21KB1A3023', '_hema_nandini_': '20KB1A0534',
-               'ma__nogna': '20KB1A0566', 'divyanth_pathipati': '20KB1A3038', 'greeeshhhuuu': '20KB1A05B9',
-               '_mr.chanduyadav_': '21KB1A0293', 'dha3sh': '20KB1A3030', 'sripathi_vamsi': '21KB1A04E5',
-               'nitenkumar58': '21KB1A05B8', 'murali_mono17': '20KB5A0226', 'bunny_vira': '21KB1A0584',
-               'ravan_asura_2': '19KB1A0319', 'vijji_1408': '19KB1A0210', 'prasanth__0552': '20KB1A3058',
-               'hemanthreddy1437': '21KB1A05I9', 'chandu_reddy_11': '20KB5A0232', 'gowtham_reddy_17': '21KB1A05C3',
-               'sairam_chevuri': '19KB1A1203', '07_hari_krishna': '20KB1A0287', 'pavan_yadav622': '20KB1A1255',
-               'ismart_yash_1207': '20KB5A0360', 'killer.__.dhanush': '20KB1A0383', 'm_r___k_k': '21KB1A0469',
-               'asif_bhai_vr46': '19KB1A1244', 'sai_2_1_': '19KB1A05I4', 'swing_shifter': '21KB1A0567',
-               'its_me_indu1': '19KB1A0421', 'she_call_me_hari546': '20KB1A0546', 'jaswanth_smart_1': '21KB1A0102',
-               'marvelous_guy_harshith_': '20KB1A0445', 'veerawarrior1011': '21KB1A0305', 'akhil._17': '20KB1A3041',
-               '___krish__sai___': '20KB1A0590', 'shiva______sshiv': '20KB1A04B3', 'mr___vivekvikky': '20KB1A0111',
-               'h_hemanth_n': '20KB1A0592', 'peramalasettyvignesh': '21KB1A05D2', 'sreeja._604': '20KB1A0482',
-               '____urs__truly__dinesh____': '21KB1A0475', '__romeo.____': '21KB1A3007', 'mahendra__1891': '21KB1A0466',
-              'kavya__reddy_9': '21KB1A3030', 'dileepking29': '20KB1A0541', 'yogeswar__reddy__': '21KB1A04B4', 
-               'na_ve_en_sai_54': '21KB1A04B3', 'decent_boy_kittu96': '21KB1A0596', 'spmtsanthosh': '20KB5A0240', 
-               'innocent_boy_lokii143': '21KB1A0480', 'dinesh.sandi': '21KB1A04C4', 'harshavardhanreddy____': '20KB1A05G5', 
-               'hemanth_2109_msd': '21KB1A0592', 'hang_over__mind': '21KB1A0324', 'venkatasai6304': '21KB1A05A0', 
-               '_sathwik__': '20KB1A1233', 'its__me__sravan_': '20KB1A0363', '_itz.chin': '21KB1A0565', '_s_h_o_u_k_a_t_h_a_l_i_': '21KB1A0560',
-              '_ray_shiki': '20KB1A0210', 'batta_yadav': '21KB1A0415', 'harsha_vardhan_korapati': '21KB1A0580', 'praveen_1289': '21KB1A0412',
-               'ig_rithwik': '19KB1A05J3', 'poorna_navanari': '21KB1A0321', 'chanduyadav5619': '20KB5A0227', 'raju3869yadav': '20KB1A0301', 'gova__3': '20KB1A0250',
-               'vegurusukumar': '21KB1A05I8', 'vinay_chepuru': '20KB5A0327', 'happiest_balu': '20KB1A0166', 'sameer_shaik__12': '21KB1A04E0', 'bunny_quien': '21KB1A0571'}
+register_id = {'mr.photoholic_ajay_': '20KB1A0339', 'bhanu_bunny_17': '21KB1A0567', 'madeshnelavala': '19KB1A1231', 'saketh169': '21KB1A0319', 'abhi_karate03': '20KB1A1210', '_mr_m_o_n_k_21_': '19KB1A05B6', 'upendra_____2': '19KB1A04E3', 'urs_truly_himakumar': '21KB1A04B2', 'balu_bellamkonda': '19KB1A0308', 'ajmad7268': '21KB5A3004', 'lover_of_psycho_45': '21KB1A0477', 'vineeth_karanam_': '19KB1A0122', 'yedukondalu3634': '21KB1A0227', 'a__.r_.u_.n__': '19KB1A1222', '_hemanth_yadav__': '20KB1A0367', 'prudhvi7391': '20KB1A0329', '_iambabbu': '21KB1A0553', 'sai_stylish_28': '19KB1A0375', 'dr_comrade__loki_106': '20KB1A0106', 'tharun6744': '19KB1A1216', 'venkatesh_chevuru': '20KB5A0327', '_____lm_lucky_____': '20KB1A0419', 'nandini_reddy_koduru': '21KB1A0271', 'ja_ya9725': '20KB1A3011', 'mr_swaroop_silent': '19KB1A0570', '_soul_hacker_giri_': '20KB1A0351', 'honeyrdx7': '20KB1A0305', 'haripulluru': '21KB1A0263', 'k.sivaprasad_12345': '21KB1A0464', 'vamsi_krishna_m589': '21KB1A0589', 'saketh_reddy0908': '20KB1A3012', '_akshay__reddy123_': '21KB1A0474', 'mr_queen_less_bhanu': '19KB1A0493', 'wiz_kidoo_': '20KB1A03B5', '_the_raptor._': '20KB5A0218', 'rebelstarsunny': '21KB1A0333', '_umamahesh___': '20KB1A0548', 'sam_.r._13': '21KB5A0325', 'k.asrithareddy': '21KB1A0563', 'shaik_yakhoob___': '19KB1A05F6', 'precious__sai__05': '20KB1A3060', '__tharun_kumar_b': '19KB1A0415', 'mr.enfielder_6225': '19KB1A1254', 'gnana_prasunambika.dupati': '21KB1A0539', 'sujana__sujju_': '20KB1A3023', 'naveensathyaveti': '21KB5A0321', 'gani.ramireddy': '19KB1A05D3', 'mr_lucky_davood__': '19KB1A0154', 'journey__lover__reddy': '19KB1A0165', 'sameeulla76': '19KB1A0157', 'surekha_0220': '20KB1A3052', '_eyes_roller': '19KB1A0332', 'natural_rock_star_chintu': '19KB1A0307', 'am_harsha_09': '19KB1A0373', '_raja__reddy_': '19KB1A0301', '_harsha_chowdhary_': '21KB1A0285', 'balu.97197': '19KB1A0344', 'prakashyadav_6303': '20KB5A0337', 'swagking1817': '21KB1A0584', 'pranathibathala': '21KB1A0207', 'chinthaneerajaa': '20KB1A0524', '___urs__friendly__surendra___': '21KB1A0493', 'akhil_sanni': '20KB1A3046', '_j__2002._': '20KB1A0425', 'dinesh_ravilla_99': '21KB5A0339', 'rithwick_reddy_143': '21KB1A0327', 'user_not_found_x20': '19KB1A1244', 'future_aviator_karthik': '21KB5A0342', 'vishnu_teja__reddy': '19KB1A1229', 'srikanth_sree012': '20KB1A0201', 'dheerajkrishna0492020': '19KB1A1223', 'revanth____007': '20KB1A0283', 'its_mehemuuu': '19KB1A04G3', '__lovable_i_d_i_o_t__': '20KB1A1204', 'jyothi886677': '20KB1A0205', 'reddy___gari___abbay___': '20KB5A0315', 'challa_is__the_brand': '21KB1A0424', 'p_mahendra_143': '21KB1A04A4', 'b_h_a_n_u_prakashreddy': '19KB1A04J1', 'muni_volley_8': '21KB1A04C0', 'inid2022': '21KB1A0460', 'v_e_n_k_y_1626': '19KB1A0558', 'jaswanth_sai30': '20KB5A0201', 'lalith_allias_karan_3': '21KB1A1212', 'khaliqss': '19KB1A1240', 'j.a.y.a.n.t.h__': '21KB1A0419', 'likith.45': '20KB1A03B9', 'dorababu_0831': '20KB5A0403', '5u34n_': '19KB1A0521', 'vishnuvardhanmalipati': '20KB1A0487', 'niharika_challa_niha': '20KB1A3008', 'sweety__1229': '21KB1A0513', 'sushwanth_k_u_m_a_r': '19KB1A05H3', 'ramprakashreddy45': '19KB1A1230', 'prsnakmr_918': '19KB1A04C0', 'kingwithoutacrown_2k03': '21KB1A04G2', 'sk.nawaz702': '20KB1A04F6', 'p_e_a_c_e_l_i_f_e__': '21KB1A0465', '_mr.__reddy': '20KB1A3044', 'ajay_adeppagari': '20KB1A0404', 'harsha._.official': '20KB1A0217', 'hari_krishna_789': '20KB1A0287', 'harsha__073': '21KB1A30A0', 'shaolin_smaran': '19KB1A1202', 'chegueverachaitanya': '19KB1A1204', 'prudhvirajhasthi': '19KB1A1211', 'yogeeshamuluru': '20KB1A0304', 'call__me__diggi': '20KB1A0269', '_jash_217': '19KB1A05B6', 'venkata__vasanth': '20KB1A0216', 'smile._.killer._.07': '20KB1A0217', 'sasikiran_2003': '20KB1A0522', '_charan_cj_6': '21KB1A0426', 'sahoresuraj': '20KB1A0114', 'panee_9': '20KB1A0438', 'ravi4tr': '21KB1A0249', 'sukumar_royals': '19KB1A0327', '__dynamic_killer__': '21KB1A0330', 'saketh_papareddy': '19KB1A1233', '_surya_suri_789': '20KB1A3051', '_lalith_kumar_reddy_': '21KB1A1212', 'dhinakar__sai': '20KB1A0423', 'heart.hacker_008': '20KB5A0329', 'u_ravi.teja': '20KB5A0140', 'rameez.shaik_': '20KB1A05F4', 'muralikataru': '21KB1A1225', 'pavan_tony_123': '21KB1A1243', 'call_me_poriki___420': '21KB1A04C0', 'my_life_my_rules_46_': '21KB1A0344', 'i_am.nadendla': '20KB1A04A9', 'alwaysjyothish': '21KB1A05I1', 'rahulsurya121': '21KB1A05B4', 'rajeev_92223': '21KB1A0599', 'dad_calls_me_chotu': '21KB1A05F2', 'sumanth5723': '21KB1A0459', 'crazy_boy_jashu': '21KB1A0444', 'sreekanth_leburu': '20KB5A0354', 'sole_soul__3': '21KB1A0481', 'yashuyaswanth1290': '20KB1A0429', '__liyaz_syed__': '20KB1A3055', 'lucky.charm827': '20KB1A04A3', 'revanth.reddy_2405': '19KB1A0513', '_sathvik_777_': '21KB1A1238', 'rock_star_1433_': '21KB1A0238', 'saradhi__v': '19KB1A04I4', 'alone__heart_kishore': '21KB1A1207', 'ch.badri.338': '21KB1A0434', 'sumanthsahho': '21KB1A0584', 'sasi_lxn_455_': '20KB1A0455', 'rockybhai.chandu.52': '21KB1A0293', 'u_rs_lovingly_tharun': '21KB1A1248', 'deepamdeepthi_': '21KB1A3001', 'pradeep_0321': '19KB1A04E6', 'harsha_lebur': '21KB1A0585', 'p.jagadeesh_naidu': '21KB1A1241', 'bigil_008': '21KB1A0476', 'itsme_nawaz53': '20KB1A04F5', 'dreamer_.o4': '20KB1A0502', '_mr_rpm_breaker': '20KB1A03B7', '_chethan_14_': '20KB1A0592', 'loyal__guy_': '20KB1A0427', 'mr.bob_0051': '21KB1A0351', 'loyal_one_praveen': '21KB1A0241', '__babbu____prs': '21KB1A0518', 'akashakash193119': '21KB1A0240', 'happysoul2801': '20KB1A05E3', 'saad_ahamed_syed': '21KB1A0339', 'priyatham_2002': '20KB1A0515', 'im_loki_08': '21KB1A1204', 'a_r_s_h_a_d_s_h_a_i_k': '21KB1A0269', 'bhanuchand.23132': '20KB1A0356', 'sajid_hussain_08': '20KB1A0370', 'parvaz_shaik': '20KB1A04F8', 'kvinayrajj': '20KB1A0464', 'its_me_ss_rowdy': '19KB1A1244', 'suchakridharreddykonduru': '20KB1A0240', 'darling_aniish': '20KB1A1222', 'prem.kumar7830': '21KB1A0449', 'attiutude_king_sai': '21KB1A0403', 'crazy_nick990': '21KB1A0456', 'always_yagna': '19KB1A05I8', 'swe.ety9735': '21KB1A05H0', 'saijaguar.135': '19KB1A1218', 'suresh_reddy_guvvala_': '20KB1A0347', 'vinaycherry143': '21KB5A0332', 'dha1528': '21KB5A0304', 'khushi_sharma2409': '21KB1A0569', 'sujith_v_ch': '21KB1A0430', 'mr.dead_rine_007': '19KB1A0498', 'vemula_na_ni': '19KB1A1252', 'k_rant_hi': '21KB1A1245', 'bindu_madhav_raju': '21KB1A1203', 'ha__rs__hi__tha__37': '21KB1A0571', 'attitude_queen__2503': '21KB1A05C6', 'rishi_kumar_c_e_o': '21KB1A0217', 'yamunaarava6': '19KB1A0322', 'parrot__kt': '20KB1A05C4', 'anon_dhanush__': '20KB1A3019', 'dhaksha_09': '20KB1A1218', 'akhila_neeluru': '20KB1A0599', 'rajuyatham8': '21KB1A04H0', 'jayakrishna.jai.79': '21KB5A0102', 'loveshot7_': '21KB1A0342', 'rajeev_nine9': '21KB1A0599', 'duddu_madhavi': '21KB1A0536', 'chamarthi_yashu': '20KB1A0518', 'deepthireddy_atla': '20KB1A0410', 'shaik_hussain__143': '21KB1A3066', 'n._.identity': '19KB1A0114', 'hemanthbdvm': '20KB1A0596', 'inside_lover999': '21KB1A0467', '_crazy.vinay_': '21KB1A0348', 'jeevith_rebel': '21KB1A0332', 'h_emanth_n': '20KB1A05C4', 'pradeepnaidu1432': '21KB1A0132', 'yogesh_vijay2001': '19KB1A0348', 'delphi_gracy': '21KB1A0226', 'priya_______1188': '21KB1A0206', 'hemu.msd': '21KB1A3044', '__ganesh.03__': '20KB1A04I2', '_yaswanth__reddy__': '19KB1A1250', 'jagadeesh4835': '20KB5A0336', 'balaramreddy__._._': '19KB1A1232', 'jagadeesh_.naidu': '21KB1A1241', '__a._.k_47': '19KB1A0576', 'khalid_0_3_0': '20KB1A03A1', 'thenameisvalivulla': '20KB1A03A6', 'mr.bhargava__2004': '21KB1A3047', 'sr_sarvotham_reddy': '19KB1A04C8', 'chennaiah21': '19KB1A04E1', 'kole_rajasekhar_19': '19KB1A0349', 'dynamo_sasi': '19KB1A0554', 'm.r_idiot_143': '21KB1A05I3', 'saisankarvayugundla': '20KB5A0316', 'devaki_thumati': '21KB1A3041', 'keerthi__reddyyy': '19KB1A1220', 'mr.black_611': '21KB1A0270', 'decoit_one': '21KB1A0217', 'girish_reddy_gangavaram_321': '20KB5A0350', 'prbindu5': '21KB1A0204', 'si.nce_2001': '19KB1A0385', 'truegirl398': '21KB1A0445', 'krishna_makani98': '19KB1A0585', 'mr_frustrated_soul._': '20KB1A0402', 'saikummar05': '20KB5A0325', 'itsmekeertan': '21KB1A0549', 'chaitu_royal_14439': '21KB1A0341', 'ram1091charan': '20KB1A05A5', 'krishaveni55': '20KB1A05A4', 'king_shaik_777': '21KB1A1247', 'nithish.raju.2003': '21KB1A0521', 'i_am_udaykumar_chowdary': '21KB5A0331', 'its_mee_sekhar': '20KB1A1246', '___p.a.n.d.u_loves___': '19KB1A05G9', 'rohi_preethi_2504': '21KB1A05C6', 'jyothiathmakuru': '20KB1A0205', 'jannath_hussen': '21KB5A0336', '__.__jasmine_.__': '19KB1A05F0', 'tinygirlstyle': '19KB1A1214', '_h.o.n.e.y_l.o.v.e.s_': '19KB1A0261', 'oye__its__me__akhil': '20KB1A0130', 'akhila_oo1': '19KB1A1215', 'cool________angel': '19KB1A0146', 'rakshana__chowdary_': '19KB1A0439', 'vamsi_yadav_ulsa_049': '21KB5A0311', '_s_i_s_i_n_d_r_i___009': '21KB1A1202', 'hari_9400': '21KB1A1236', 'naveen__yenuganti': '19KB1A1255', '__r_o_c_k_y______': '19KB1A05E3', 'hemanth_chandra_00': '21KB1A1210', 'volley_lover_uday._ud': '21KB1A1211', 'prasanthchalla143': '21KB1A1215', 'warm_walker_': '20KB5A0366', '__game_boy__yash': '21KB5A0324', 'ganeshannabathina': '21KB1A0204', 'achukrishnamma': '20KB1A05A7', '20kb1a0402': '20KB1A05A8', 'urs_truly_yokshith': '21KB1A1224', 'sai_star_1233': '21KB1A3023', 'iamdheerajkrishna': '19KB1A05C2', 'sudheerbabu7797': '19KB1A04D8', 'majestic_king_nari': '21KB1A0528', 'narahari1801': '21KB1A0408', 'miss_waste_3': '21KB1A0481', 'bharath_kumar_ry': '21KB5A0338', 'bhargav_sarvepalli': '21KB1A3080', 'bhavaniprasad594': '20KB1A0594', 'sushma_muppala': '20KB1A0593', 'world_of_adarsh_vikas': '20KB1A0338', 'pramodh_kole': '20KB1A0473', 'i_am_teja_yy4s': '21KB5A1206', 'anji4469': '21KB5A1202', 'brokenboy_sudheer_': '20KB5A0214', 'sujith__duvvuru': '20KB1A0220', 's_a_i_t_e_j_a_77': '20KB1A1208', 'anu_anvi2645': '20KB1A0209', 'kowshik.ganesh': '19KB1A05C4', 'sw_eety1836': '20KB1A0241', 'durgapriya479': '20KB1A0245', 'tejoday4': '20KB1A0239', 'devil_moon_81': '20KB1A3027', 'dakshayani_raj': '20KB1A0565', 'munikrishna365955': '20KB1A0202', 'sowmya_kurucheti': '21KB5A0413', 'stark_mark_4': '20KB1A0290', 'bobby.nandigam': '20KB1A0595', 'its_me_ur_comrade': '21KB1A0312', 'attnbkr222': '19KB1A1221', 'harsha____vip': '21KB1A0256', 'keerthipati_mahidhar': '20KB1A1228', 'i_am.siva_': '21KB5A1203', 'duddu_madhavi_113': '21KB1A0536', 'yegireddy_nani': '21KB1A04H1', 'saiesh____11': '19KB1A0322', 'hemanthm2003': '20KB1A0371', 'v.k_r_i_s_h_n_a__chowdary': '21KB5A1204', 'local_abbai_avinash': '19KB1A0329', 'shamsheer_shaik_07': '20KB5A0404', 'manoj___manoj__': '20KB5A0224', 'infinitesoulboy_01': '21KB1A0337', 'bharath.pr_in_ce11': '20KB1A0212', '_shr_avankumar': '21KB5A0218', 'megha_meghanadham': '21KB5A0409', 'siddu_sreedhar_reddy': '21KB5A0107', 'bhuvan_sai_01': '21KB1A3023', '_hema_nandini_': '20KB1A0534', 'ma__nogna': '20KB1A0566', 'divyanth_pathipati': '20KB1A3038', 'greeeshhhuuu': '20KB1A05B9', '_mr.chanduyadav_': '21KB1A0293', 'dha3sh': '20KB1A3030', 'sripathi_vamsi': '21KB1A04E5', 'nitenkumar58': '21KB1A05B8', 'murali_mono17': '20KB5A0226', 'bunny_vira': '21KB1A0584', 'ravan_asura_2': '19KB1A0319', 'vijji_1408': '19KB1A0210', 'prasanth__0552': '20KB1A3058', 'hemanthreddy1437': '21KB1A05I9', 'chandu_reddy_11': '20KB5A0232', 'gowtham_reddy_17': '21KB1A05C3', 'sairam_chevuri': '19KB1A1203', '07_hari_krishna': '20KB1A0287', 'pavan_yadav622': '20KB1A1255', 'ismart_yash_1207': '20KB5A0360', 'killer.__.dhanush': '20KB1A0383', 'm_r___k_k': '21KB1A0469', 'asif_bhai_vr46': '19KB1A1244', 'sai_2_1_': '19KB1A05I4', 'swing_shifter': '21KB1A0567', 'its_me_indu1': '19KB1A0421', 'she_call_me_hari546': '20KB1A0546', 'jaswanth_smart_1': '21KB1A0102', 'marvelous_guy_harshith_': '20KB1A0445', 'veerawarrior1011': '21KB1A0305', 'akhil._17': '20KB1A3041', '___krish__sai___': '20KB1A0590', 'shiva______sshiv': '20KB1A04B3', 'mr___vivekvikky': '20KB1A0111', 'h_hemanth_n': '20KB1A0592', 'peramalasettyvignesh': '21KB1A05D2', 'sreeja._604': '20KB1A0482', '____urs__truly__dinesh____': '21KB1A0475', '__romeo.____': '21KB1A3007', 'mahendra__1891': '21KB1A0466', 'kavya__reddy_9': '21KB1A3030', 'dileepking29': '20KB1A0541', 'yogeswar__reddy__': '21KB1A04B4', 'na_ve_en_sai_54': '21KB1A04B3', 'decent_boy_kittu96': '21KB1A0596', 'spmtsanthosh': '20KB5A0240', 'innocent_boy_lokii143': '21KB1A0480', 'dinesh.sandi': '21KB1A04C4', 'harshavardhanreddy____': '20KB1A05G5', 'hemanth_2109_msd': '21KB1A0592', 'hang_over__mind': '21KB1A0324', 'venkatasai6304': '21KB1A05A0', '_sathwik__': '20KB1A1233', 'its__me__sravan_': '20KB1A0363', '_itz.chin': '21KB1A0565', '_s_h_o_u_k_a_t_h_a_l_i_': '21KB1A0560', '_ray_shiki': '20KB1A0210', 'batta_yadav': '21KB1A0415', 'harsha_vardhan_korapati': '21KB1A0580', 'praveen_1289': '21KB1A0412', 'ig_rithwik': '19KB1A05J3', 'poorna_navanari': '21KB1A0321', 'chanduyadav5619': '20KB5A0227', 'raju3869yadav': '20KB1A0301', 'gova__3': '20KB1A0250', 'vegurusukumar': '21KB1A05I8', 'vinay_chepuru': '20KB5A0327', 'happiest_balu': '20KB1A0166', 'sameer_shaik__12': '21KB1A04E0', 'bunny_quien': '21KB1A0571', 'cute_girl__vinni': '21KB1A3014', 'm_r____c_o_o_l': '21KB1A04A2', 'rishi_reddy_121': '19KB1A0316', '_innocent__leap_': '21KB5A0211', 'chandramuni2204': '21KB5A0337', 'nikhilesh_yadav_555': '20KB1A05G9', 'chandu_candy_731': '20KB1A0125', 'its__naani_s': '21KB1A0450', '__dhan_reddy_47': '21KB1A05E5', 'bharath_prince_11': '20KB1A0212', 'diggi__edits': '20KB1A0253', 'vikas_gosula': '21KB1A0454', 'sampath_kumar_jogi_9798': '20KB1A0229'}
 temp_register_id = {}  # only to get logs
-time_slot_bookings = ['07_hari_krishna', '5u34n_', '____urs__truly__dinesh____', '___krish__sai___', '___urs__friendly__surendra___',
-                      '__a._.k_47', '__babbu____prs', '__game_boy__yash', '__liyaz_syed__', '__lovable_i_d_i_o_t__', '__romeo.____',
-                      '_akshay__reddy123_', '_charan_cj_6', '_chethan_14_', '_crazy.vinay_', '_h.o.n.e.y_l.o.v.e.s_', '_hema_nandini_',
-                      '_itz.chin', '_j__2002._', '_jash_217', '_mr.__reddy', '_mr_rpm_breaker', '_raja__reddy_', '_s_h_o_u_k_a_t_h_a_l_i_',
-                      '_sathvik_777_', '_sathwik__', '_soul_hacker_giri_', '_surya_suri_789', '_yaswanth__reddy__', 'a__.r_.u_.n__', 'ajay_adeppagari',
-                      'akashakash193119', 'akhila_neeluru', 'always_yagna', 'alwaysjyothish', 'am_harsha_09', 'anji4469', 'anu_anvi2645',
-                      'balaramreddy__._._', 'batta_yadav', 'bhanuchand.23132', 'bharath.pr_in_ce11', 'bharath_kumar_ry', 'bhargav_sarvepalli',
-                      'bhavaniprasad594', 'bhuvan_sai_01', 'bigil_008', 'bobby.nandigam', 'brokenboy_sudheer_', 'bunny_quien', 'call__me__diggi',
-                      'ch.badri.338', 'challa_is__the_brand', 'chamarthi_yashu', 'chandu_reddy_11', 'chanduyadav5619', 'chegueverachaitanya',
-                      'chennaiah21', 'chinthaneerajaa', 'cool________angel', 'dakshayani_raj', 'decent_boy_kittu96', 'deepthireddy_atla', 'dha3sh',
-                      'dheerajkrishna0492020', 'dhinakar__sai', 'dileepking29', 'dinesh.sandi', 'dinesh_ravilla_99', 'divyanth_pathipati', 'dorababu_0831',
-                      'dreamer_.o4', 'duddu_madhavi', 'duddu_madhavi_113', 'durgapriya479', 'future_aviator_karthik', 'gani.ramireddy',
-                      'girish_reddy_gangavaram_321', 'gnana_prasunambika.dupati', 'gova__3', 'greeeshhhuuu', 'h_emanth_n', 'h_hemanth_n',
-                      'ha__rs__hi__tha__37thenameisvalivulla', 'happysoul2801', 'hari_krishna_789', 'harsha._.official', 'harsha_lebur',
-                      'harsha_vardhan_korapati', 'heart.hacker_008', 'hemanthbdvm', 'hemanthm2003', 'hemu.msd', 'i_am.siva_', 'i_am_teja_yy4s',
-                      'i_am_udaykumar_chowdary', 'iamdheerajkrishna', 'infinitesoulboy_01', 'innocent_boy_lokii143', 'ismart_yash_1207', 'its__me__sravan_',
-                      'its_me_indu1', 'its_me_ur_comrade', 'its_mee_sekhar', 'itsme_nawaz53', 'j.a.y.a.n.t.h__', 'ja_ya9725', 'jeevith_rebel', 'jyothiathmakuru',
-                      'k.asrithareddy', 'k.sivaprasad_12345', 'keerthi__reddyyy', 'khalid_0_3_0', 'khaliqss', 'khushi_sharma2409', 'killer.__.dhanush', 'kowshik.ganesh',
-                      'krishna_makani98', 'likith.45', 'local_abbai_avinash', 'loveshot7_', 'm_r___k_k', 'ma__nogna', 'mahendra__1891', 'majestic_king_nari',
-                      'manoj___manoj__', 'miss_waste_3', 'mr.bhargava__2004', 'mr.bob_0051', 'mr.dead_rine_007', 'mr.enfielder_6225', 'mr_frustrated_soul._',
-                      'mr_lucky_davood__', 'muni_volley_8', 'munikrishna365955', 'murali_mono17', 'na_ve_en_sai_54', 'nandini_reddy_koduru', 'natural_rock_star_chintu',
-                      'naveen__yenuganti', 'naveensathyaveti', 'nithish.raju.2003', 'p_e_a_c_e_l_i_f_e__', 'p_mahendra_143', 'panee_9', 'parrot__kt', 'parvaz_shaik',
-                      'peramalasettyvignesh', 'poorna_navanari', 'pradeep_0321', 'pradeepnaidu1432', 'prasanth__0552', 'prasanthchalla143', 'praveen_1289',
-                      'precious__sai__05', 'priyatham_2002', 'prsnakmr_918', 'rajeev_92223', 'rajeev_nine9', 'rakshana__chowdary_', 'ramprakashreddy45',
-                      'ravi4tr', 'reddy___gari___abbay___', 'revanth.reddy_2405', 'revanth____007', 'rithwick_reddy_143', 's_a_i_t_e_j_a_77',
-                      'sahoresuraj', 'saisankarvayugundla', 'sajid_hussain_08', 'saketh_papareddy', 'saketh_reddy0908', 'sam_.r._13', 'sameer_shaik__12', 'sasi_lxn_455_',
-                      'shaik_yakhoob___', 'shamsheer_shaik_07', 'shaolin_smaran', 'she_call_me_hari546', 'si.nce_2001', 'siddu_sreedhar_reddy', 'sk.nawaz702',
-                      'sole_soul__3', 'sowmya_kurucheti', 'spmtsanthosh', 'sreeja._604', 'sreekanth_leburu', 'srikanth_sree012', 'sripathi_vamsi', 'stark_mark_4',
-                      'sujana__sujju_', 'sujith__duvvuru', 'sujith_v_ch', 'sumanthsahho', 'surekha_0220', 'sushma_muppala', 'sushwanth_k_u_m_a_r', 'sw_eety1836',
-                      'swagking1817', 'sweety__1229', 'tharun6744', 'u_ravi.teja','_mr_m_o_n_k_21_', 'user_not_found_x20', 'v_e_n_k_y_1626', 'vamsi_krishna_m589', 'veerawarrior1011',
-                      'vemula_na_ni', 'venkatasai6304', 'venkatesh_chevuru', 'vijji_1408', 'vinay_chepuru', 'vinaycherry143', 'vishnu_teja__reddy', 'warm_walker_',
-                      'wiz_kidoo_', 'world_of_adarsh_vikas', 'yashuyaswanth1290', 'yedukondalu3634', 'yogeeshamuluru', 'yogesh_vijay2001', 'yogeswar__reddy__',
-                     'mr.photoholic_ajay_', 'bhanu_bunny_17', 'thenameisvalivulla', 'madeshnelavala', 'dr_comrade__loki_106', 'oye__its__me__akhil']
+time_slot_bookings = ['07_hari_krishna', '5u34n_', '____urs__truly__dinesh____', '___krish__sai___', '___urs__friendly__surendra___', '__a._.k_47', '__babbu____prs', '__dhan_reddy_47', '__game_boy__yash', '__liyaz_syed__', '__lovable_i_d_i_o_t__', '__romeo.____', '_akshay__reddy123_', '_charan_cj_6', '_chethan_14_', '_crazy.vinay_', '_h.o.n.e.y_l.o.v.e.s_', '_hema_nandini_', '_itz.chin', '_j__2002._', '_jash_217', '_mr.__reddy', '_mr_m_o_n_k_21_', '_mr_rpm_breaker', '_raja__reddy_', '_s_h_o_u_k_a_t_h_a_l_i_', '_sathvik_777_', '_sathwik__', '_soul_hacker_giri_', '_surya_suri_789', '_yaswanth__reddy__', 'a__.r_.u_.n__', 'ajay_adeppagari', 'akashakash193119', 'akhila_neeluru', 'always_yagna', 'alwaysjyothish', 'am_harsha_09', 'anji4469', 'anon_dhanush__', 'anu_anvi2645', 'balaramreddy__._._', 'batta_yadav', 'bhanu_bunny_17', 'bhanuchand.23132', 'bharath.pr_in_ce11', 'bharath_kumar_ry', 'bharath_prince_11', 'bhargav_sarvepalli', 'bhavaniprasad594', 'bhuvan_sai_01', 'bigil_008', 'bobby.nandigam', 'brokenboy_sudheer_', 'bunny_quien', 'call__me__diggi', 'ch.badri.338', 'challa_is__the_brand', 'chamarthi_yashu', 'chandu_reddy_11', 'chanduyadav5619', 'chegueverachaitanya', 'chennaiah21', 'chinthaneerajaa', 'cool________angel', 'dakshayani_raj', 'decent_boy_kittu96', 'deepthireddy_atla', 'dha1528', 'dha3sh', 'dheerajkrishna0492020', 'dhinakar__sai', 'dileepking29', 'dinesh.sandi', 'dinesh_ravilla_99', 'divyanth_pathipati', 'dorababu_0831', 'dr_comrade__loki_106', 'dreamer_.o4', 'duddu_madhavi', 'duddu_madhavi_113', 'durgapriya479', 'future_aviator_karthik', 'gani.ramireddy', 'girish_reddy_gangavaram_321', 'gnana_prasunambika.dupati', 'gova__3', 'greeeshhhuuu', 'h_emanth_n', 'h_hemanth_n', 'ha__rs__hi__tha__37thenameisvalivulla', 'happysoul2801', 'hari_krishna_789', 'harsha._.official', 'harsha_lebur', 'harsha_vardhan_korapati', 'heart.hacker_008', 'hemanthbdvm', 'hemanthm2003', 'hemu.msd', 'i_am.siva_', 'i_am_teja_yy4s', 'i_am_udaykumar_chowdary', 'iamdheerajkrishna', 'infinitesoulboy_01', 'innocent_boy_lokii143', 'ismart_yash_1207', 'its__me__sravan_', 'its__naani_s', 'its_me_indu1', 'its_me_princess_1573', 'its_me_ur_comrade', 'its_mee_sekhar', 'itsme_nawaz53', 'j.a.y.a.n.t.h__', 'ja_ya9725', 'jeevith_rebel', 'jyothiathmakuru', 'k.asrithareddy', 'k.sivaprasad_12345', 'keerthi__reddyyy', 'khalid_0_3_0', 'khaliqss', 'khushi_sharma2409', 'killer.__.dhanush', 'kowshik.ganesh', 'krishna_makani98', 'likith.45', 'local_abbai_avinash', 'loveshot7_', 'm_r___k_k', 'ma__nogna', 'madeshnelavala', 'mahendra__1891', 'majestic_king_nari', 'manoj___manoj__', 'miss_waste_3', 'mr.bhargava__2004', 'mr.bob_0051', 'mr.dead_rine_007', 'mr.enfielder_6225', 'mr.photoholic_ajay_', 'mr_frustrated_soul._', 'mr_lucky_davood__', 'muni_volley_8', 'munikrishna365955', 'murali_mono17', 'na_ve_en_sai_54', 'nandini_reddy_koduru', 'natural_rock_star_chintu', 'naveen__yenuganti', 'naveensathyaveti', 'nithish.raju.2003', 'oye__its__me__akhil', 'p_e_a_c_e_l_i_f_e__', 'p_mahendra_143', 'panee_9', 'parrot__kt', 'parvaz_shaik', 'peramalasettyvignesh', 'poorna_navanari', 'pradeep_0321', 'pradeepnaidu1432', 'prasanth__0552', 'prasanthchalla143', 'praveen_1289', 'precious__sai__05', 'priyatham_2002', 'prsnakmr_918', 'rajeev_92223', 'rajeev_nine9', 'rakshana__chowdary_', 'ramprakashreddy45', 'ravi4tr', 'rebelstarsunny', 'reddy___gari___abbay___', 'revanth.reddy_2405', 'revanth____007', 'rithwick_reddy_143', 's_a_i_t_e_j_a_77', 'sahoresuraj', 'saisankarvayugundla', 'sajid_hussain_08', 'saketh_papareddy', 'saketh_reddy0908', 'sam_.r._13', 'sameer_shaik__12', 'sampath_kumar_jogi_9798', 'sasi_lxn_455_', 'sasikiran_2003', 'shaik_yakhoob___', 'shamsheer_shaik_07', 'shaolin_smaran', 'she_call_me_hari546', 'si.nce_2001', 'siddu_sreedhar_reddy', 'sk.nawaz702', 'sole_soul__3', 'sowmya_kurucheti', 'spmtsanthosh', 'sreeja._604', 'sreekanth_leburu', 'srikanth_sree012', 'sripathi_vamsi', 'stark_mark_4', 'sujana__sujju_', 'sujith__duvvuru', 'sujith_v_ch', 'sumanthsahho', 'surekha_0220', 'sushma_muppala', 'sushwanth_k_u_m_a_r', 'sw_eety1836', 'swagking1817', 'sweety__1229', 'tharun6744', 'thenameisvalivulla', 'u_ravi.teja', 'user_not_found_x20', 'v_e_n_k_y_1626', 'vamsi_krishna_m589', 'veerawarrior1011', 'vemula_na_ni', 'venkatasai6304', 'venkatesh_chevuru', 'vijji_1408', 'vikas_gosula', 'vinay_chepuru', 'vinaycherry143', 'vishnu_teja__reddy', 'warm_walker_', 'wiz_kidoo_', 'world_of_adarsh_vikas', 'yashuyaswanth1290', 'yedukondalu3634', 'yogeeshamuluru', 'yogesh_vijay2001', 'yogeswar__reddy__']
 temp_time_slot_bookings = [ ]
-
-
 
 
 
@@ -2534,7 +2366,7 @@ options.add_argument("--no-sandbox")
 options.add_argument("enable-automation")
 options.add_argument("--disable-infobars")
 options.add_argument("--disable-dev-shm-usage")
-web = webdriver.Chrome(service=Service(os.environ.get("CHROMEDRIVER_PATH")), options=options)
+web = webdriver.Chrome(service=Service(os.environ.get("CHROMEDRIVER_PATH")), chrome_options=options)
 web.implicitly_wait(2)
 
 def send_att_time():
@@ -2555,7 +2387,7 @@ def send_att_time():
         time.sleep(1)
         try:
             usern = WebDriverWait(web, 10).until(EC.presence_of_element_located((By.XPATH,
-                                                                                 "//div[@class='_ab8w  _ab94 _ab99 _ab9f _ab9m _ab9o  _ab9v']/div[1]//div[@class='_aacl _aaco _aacw _aacx _aad6']"))).text
+                                                                                 "//div[@class='_ab8w  _ab94 _ab99 _ab9f _ab9m _ab9o  _ab9v _abcm']/div[1]//div[@class='_aacl _aaco _aacw _aacx _aad6']"))).text
             i = 1
             while True:
                 if i == 5:
@@ -2564,11 +2396,11 @@ def send_att_time():
                     WebDriverWait(web, 10).until(
                         EC.presence_of_element_located(
                             (
-                            By.XPATH, f"//div[@class='_ab8w  _ab94 _ab99 _ab9f _ab9m _ab9o  _ab9v']/div[{i}]"))).click()
+                            By.XPATH, f"//div[@class='_ab8w  _ab94 _ab99 _ab9f _ab9m _ab9o  _ab9v _abcm']/div[{i}]"))).click()
                     break
                 else:
                     usern = WebDriverWait(web, 10).until(EC.presence_of_element_located((By.XPATH,
-                                                                                         f"//div[@class='_ab8w  _ab94 _ab99 _ab9f _ab9m _ab9o  _ab9v']/div[{i + 1}]//div[@class='_aacl _aaco _aacw _aacx _aad6']"))).text
+                                                                                         f"//div[@class='_ab8w  _ab94 _ab99 _ab9f _ab9m _ab9o  _ab9v _abcm']/div[{i + 1}]//div[@class='_aacl _aaco _aacw _aacx _aad6']"))).text
                     i += 1
                     continue
         except:
@@ -2609,9 +2441,9 @@ def provide_rollno(username):
 def get_data(rollno):
     att = None
     try:
-        data = requests.get(f'http://202.91.76.90:94/attendance/Apps_ren/getSubwiseAttAsJSONGivenRollNo.php?q={rollno}')
+        data = requests.get(f' https://attnbkrist1.herokuapp.com/attapi?roll={rollno}')
         data = data.json()
-        att = data.get('percent')
+        att = data.get('attendance')
         return att
     except Exception as error:
         return att
