@@ -1782,6 +1782,7 @@ student_data = {'21KB1A0301': '3 1 1', '21KB1A0302': '3 1 1', '21KB1A0303': '3 1
                 '20KB5A0418': '6 3 4'}
 
 temp_count = 0
+admin_count=0
 thank_you = [ 'THANK YOU', 'TQ', 'TQ U', 'THANKS', 'THANK', 'THANK U', 'THANKYOU', 'TNQ', 'TNX' ]
 options = Options()
 path = '/Users/sameershaik/PycharmProjects/Checkme/static/chromedriver'
