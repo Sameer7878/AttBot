@@ -1797,99 +1797,10 @@ options.add_argument("--disable-dev-shm-usage")
 web = webdriver.Chrome(service=Service(os.environ.get("CHROMEDRIVER_PATH")), chrome_options=options)
 web.implicitly_wait(2)
 
-def send_to_admins():
-    for admin in admins:
-        try:
-            WebDriverWait(web, 15).until(
-                EC.element_to_be_clickable((By.XPATH, "//div[@class='_aa4m _aa4p']/button"))).click()
-        except:
-            print('Not clickable')
-            web.get('https://www.instagram.com/direct/inbox/general/')
-            continue
-        WebDriverWait(web, 10).until(
-            EC.presence_of_element_located((By.XPATH, "//div[@class=' _aa2u']/input"))).send_keys(admin)
-        time.sleep(1)
-        try:
-            usern = WebDriverWait(web, 10).until(EC.presence_of_element_located((By.XPATH,
-                                                                                 "//div[@class='_ab8w  _ab94 _ab99 _ab9f _ab9m _ab9o  _ab9v _abcm']/div[1]//div[@class='_aacl _aaco _aacw _aacx _aad6']"))).text
-            i = 1
-            while True:
-                if i == 5:
-                    break
-                if admin == usern:
-                    WebDriverWait(web, 10).until(
-                        EC.presence_of_element_located(
-                            (
-                            By.XPATH, f"//div[@class='_ab8w  _ab94 _ab99 _ab9f _ab9m _ab9o  _ab9v _abcm']/div[{i}]"))).click()
-                    break
-                else:
-                    usern = WebDriverWait(web, 10).until(EC.presence_of_element_located((By.XPATH,
-                                                                                         f"//div[@class='_ab8w  _ab94 _ab99 _ab9f _ab9m _ab9o  _ab9v _abcm']/div[{i + 1}]//div[@class='_aacl _aaco _aacw _aacx _aad6']"))).text
-                    i += 1
-                    continue
-        except:
-            web.get('https://www.instagram.com/direct/inbox/general/')
-            continue
-        try:
-            time.sleep(1)
-            WebDriverWait(web, 10).until(
-                EC.presence_of_element_located(
-                    (By.XPATH, "//button[@class='_acan _acao _acas _acav']"))).click()
-            time.sleep(1)
-            send_msg(f'Hello,admin\n{len(temp_time_slot_bookings)} new subscribers\n{len(temp_register_id)} new users today')
-        except:
-            web.get('https://www.instagram.com/direct/inbox/general/')
-            continue
-
-
-def send_to_users():
-    for roll in reg_users:
-        try:
-            WebDriverWait(web, 15).until(
-                EC.element_to_be_clickable((By.XPATH, "//div[@class='_aa4m _aa4p']/button"))).click()
-        except:
-            print('Not clickable')
-            web.get('https://www.instagram.com/direct/inbox/general/')
-            continue
-        WebDriverWait(web, 10).until(
-            EC.presence_of_element_located((By.XPATH, "//div[@class=' _aa2u']/input"))).send_keys(roll)
-        time.sleep(1)
-        try:
-            usern = WebDriverWait(web, 10).until(EC.presence_of_element_located((By.XPATH,
-                                                                                 "//div[@class='_ab8w  _ab94 _ab99 _ab9f _ab9m _ab9o  _ab9v _abcm']/div[1]//div[@class='_aacl _aaco _aacw _aacx _aad6']"))).text
-            i = 1
-            while True:
-                if i == 5:
-                    break
-                if roll == usern:
-                    WebDriverWait(web, 10).until(
-                        EC.presence_of_element_located(
-                            (
-                            By.XPATH, f"//div[@class='_ab8w  _ab94 _ab99 _ab9f _ab9m _ab9o  _ab9v _abcm']/div[{i}]"))).click()
-                    break
-                else:
-                    usern = WebDriverWait(web, 10).until(EC.presence_of_element_located((By.XPATH,
-                                                                                         f"//div[@class='_ab8w  _ab94 _ab99 _ab9f _ab9m _ab9o  _ab9v _abcm']/div[{i + 1}]//div[@class='_aacl _aaco _aacw _aacx _aad6']"))).text
-                    i += 1
-                    continue
-        except:
-            web.get('https://www.instagram.com/direct/inbox/general/')
-            continue
-        try:
-            time.sleep(1)
-            WebDriverWait(web, 10).until(
-                EC.presence_of_element_located(
-                    (By.XPATH, "//button[@class='_acan _acao _acas _acav']"))).click()
-            time.sleep(1)
-            send_msg(f"Hello, {student_names[ register_id[ roll ] ]}\n This 'ATT|NBKRIST' services are stopped permanently.")
-            send_msg("Thanks for using...'ATT|NBKRIST'")
-        except:
-            web.get('https://www.instagram.com/direct/inbox/general/')
-            continue
 def send_att_time():
     for roll in time_slot_bookings:
         try:
-            att = provide_rollno(roll)
+            info = provide_rollno(username)
         except:
             continue
         try:
@@ -1930,7 +1841,7 @@ def send_att_time():
                     (By.XPATH, "//button[@class='_acan _acao _acas _acav']"))).click()
             time.sleep(1)
             send_msg(
-                f'Hello, {student_names[ register_id[ roll ] ]}\nThis Is Your Attendance Till Now: {att}\n From AttBot Subscribed Data')
+                f'Hello, {info.get("name")}\nThis Is Your Attendance Till Now: {info.get("attendance")}\n From AttBot Subscribed Data')
         except:
             web.get('https://www.instagram.com/direct/inbox/general/')
             continue
@@ -1951,28 +1862,23 @@ def login(web):
 
 def provide_rollno(username):
     rollno = register_id[ username ]
-    att = get_data(rollno)
-    return att
-
-
+    info = get_data(rollno)
+    return info
 def get_data(rollno):
     att = None
     try:
         data = requests.get(f' https://attnbkrist1.herokuapp.com/attapi?roll={rollno}')
         data = data.json()
-        att = data.get('attendance')
-        return att
+        return data
     except Exception as error:
         return att
-
-
 def login_insta(usern, passw):
     try:
-        web.find_element(By.XPATH, '//*[@id="loginForm"]/div/div[1]/div/label/input').send_keys(usern)
+        web.find_element(By.XPATH,'//*[@id="loginForm"]/div/div[1]/div/label/input').send_keys(usern)
         time.sleep(2)
         web.find_element(By.XPATH, '//*[@id="loginForm"]/div/div[2]/div/label/input').send_keys(passw)
         time.sleep(2)
-        web.find_element(By.XPATH, '//*[@id="loginForm"]/div/div[3]/button').click()
+        web.find_element(By.XPATH, '//*[@id="loginForm"]/div/div[3]').click()
         print('Login Successful')
     except Exception as error:
         print('Not Logined')
@@ -1981,7 +1887,8 @@ def login_insta(usern, passw):
 def not_now():
     try:
         WebDriverWait(web, 10).until(EC.presence_of_element_located(
-            (By.XPATH, '//*[@id="react-root"]/section/main/div/div/div/div/button'))).click()
+            (By.XPATH,'//*[@id="react-root"]/section/main/div/div/div/div/button'))).click()
+        #notnow
         time.sleep(3)
         WebDriverWait(web, 10).until(EC.presence_of_element_located(
             (By.XPATH, '//button[@class="_a9-- _a9_1"]'))).click()
@@ -2009,20 +1916,13 @@ def read_unread_msgs():
     elif (datetime.datetime.now(pytz.timezone('Asia/Kolkata')).hour == 13 or datetime.datetime.now(
             pytz.timezone('Asia/Kolkata')).hour == 17) and temp_count != 0:
         temp_count = 0
-    elif ((datetime.datetime.now(pytz.timezone('Asia/Kolkata')).hour == 23) and admin_count == 0):  # checks for booking slots reservation
-        send_to_admins()
-        print('sent to admin')
-        admin_count += 1
-    elif ((datetime.datetime.now(pytz.timezone('Asia/Kolkata')).hour == 24) and admin_count != 0):
-        admin_count = 0
-    time.sleep(1)
     try:
         web.get('https://www.instagram.com/direct/requests/')
         WebDriverWait(web, 1).until(EC.presence_of_element_located((By.XPATH, "//div[@class=' _ab8s _ab8w  _ab94 _ab99 _ab9f _ab9m _ab9p _abcm']/a"))).click()
         WebDriverWait(web, 1).until(EC.presence_of_element_located((By.XPATH, "//*[contains(text(),'Accept')]"))).click()
         WebDriverWait(web, 1).until(EC.presence_of_element_located((By.XPATH, "//div[@class='_a9-z']/*[contains(text(),'General')]"))).click()
     except:
-        web.get('https://www.instagram.com/direct/inbox/general/')
+        web.get('https://www.instagram.com/direct/inbox/general/') #clicks general
         try:
             WebDriverWait(web, 300).until(EC.presence_of_element_located(
                 (By.XPATH, '//div[@aria-label="Unread"]'))).click()
@@ -2038,8 +1938,7 @@ def send_msg(msg_data):
         WebDriverWait(web, 15).until(
             EC.presence_of_element_located((By.XPATH, "//textarea[@placeholder='Message...']"))).send_keys(msg_data)
         time.sleep(1)
-        WebDriverWait(web, 15).until(EC.presence_of_element_located((By.XPATH,
-                                                                     "//button[contains(text(),'Send')]"))).click()
+        WebDriverWait(web, 15).until(EC.presence_of_element_located((By.XPATH,"//button[contains(text(),'Send')]"))).click()
     except:
         username = None
         msg = None
@@ -2104,18 +2003,30 @@ while (True):
             msg_count = 0
             read_unread_msgs()
             continue
-
         if not username:
-            username = get_username()  # to get username
+            username = get_username()
+            info = provide_rollno(username)# to get username
         try:
             if msg.isdigit():
                 msg_count = 0
         except:
             pass
         if msg == '1':
-            att = provide_rollno(username)
-            send_msg(f'Hi, {student_names[ register_id[ username ] ]}\nThis is Your Attendance Till Now: {att}.')
-            time.sleep(0.5)
+            name=info.get('name') #fetches student_name
+            att=info.get('attendance') #fetches att
+            incRate = info.get('incRate') #fetches incr_rate
+            decRate = info.get('decRate') #fetches decr_rate
+            send_msg(f'Hi, {name}\nThis is Your Attendance Till Now: {att}.\nIncrease rate per 1 class:{incRate}.\nDecrease rate per 1 class:{decRate}.')
+            time.sleep(1)
+            if float(att)<65.0:
+                to65=info.get('to65')
+                to75=info.get('to75')
+                send_msg(f'Attend {to65} classes to get 65%.\nAttend {to75} classes to get 75%.')
+                time.sleep(0.5)
+            elif float(att)<75.0:
+                to75=info.get('to75')
+                send_msg(f'Attend {to75} classes to get 75%.')
+                time.sleep(0.5)
             if username not in time_slot_bookings:
                 send_msg('Type "1" If you want Again\nType "2" to Book Requests By Time')
                 msg = None
@@ -2124,35 +2035,32 @@ while (True):
                 read_unread_msgs()
                 continue
             else:
-                send_msg('If You want again Type "1".')
+                send_msg("If You want again Type '1'.\nclick on 'https://attnbkrist1.herokuapp.com/' for more details")
                 msg = None
                 username = None
                 msg_count = 0
                 read_unread_msgs()
                 continue
+            send_msg("click on 'https://attnbkrist1.herokuapp.com/' for more details")
         elif msg == '2':
             if username in time_slot_bookings:
-                send_msg(
-                    f"Don't worry...\n{student_names[ register_id[ username ] ]}\nYou Subscribed Already.")
+                send_msg(f"Don't worry...\n{info.get('name')}\nYou Subscribed Already.")
                 username = None
                 msg = None
                 msg_count = 0
                 read_unread_msgs()
                 continue
             else:
-                send_msg(
-                    'Now you will get attendance twice a day automatically\n01:00 PM and 4:30 PM\nType "yes" to Confirm\nType "no" to cancel')
+                send_msg('Now you will get attendance twice a day automatically\n01:00 PM and 4:30 PM\nType "yes" to Confirm\nType "no" to cancel')
                 msg = readmsg(msg)
                 if msg == None:
                     read_unread_msgs()
                     continue
                 elif msg == 'YES':
-                    send_msg(f'Thanks {student_names[ register_id[ username ] ]} For Subscribe.')
+                    send_msg(f'Thanks {info.get("name")} For Subscribe.')
                     temp_time_slot_bookings.append(username)
                     time_slot_bookings.extend(temp_time_slot_bookings)  # Extends original bbokings
                     print(temp_time_slot_bookings)  # To print in logs
-                    att = provide_rollno(username)
-                    send_msg(f'Attendance Till Now: {att}')
                     time.sleep(0.5)
                     msg = None
                     username = None
@@ -2173,6 +2081,7 @@ while (True):
                     msg_count = 0
                     read_unread_msgs()
                     continue
+            send_msg("click on 'https://attnbkrist1.herokuapp.com/' for more details")
         elif msg == '3':
             send_msg('Sorry,Change option is not available')
             username = None
@@ -2195,7 +2104,7 @@ while (True):
                 send_msg('Type "1" For Attendance\nType "2" to Book Requests By Time')
                 continue
             else:
-                send_msg('Hello, This is An Att | Bot \nPlease Enter your ROLL NO\n')
+                send_msg('Hello, This is An ATT | BOT \nPlease Enter your ROLL NO\n')
                 msg = readmsg(msg)
                 if msg == None:
                     read_unread_msgs()
@@ -2241,20 +2150,12 @@ while (True):
                 read_unread_msgs()
                 continue
         elif msg == 'C' and username in admins:
-            if username == 'user_not_found_x20':
-                send_msg(f"Mr Sameer\nTotal {len(register_id)} Registered users\n{len(time_slot_bookings)} subscribers")
-                msg = None
-                username = None
-                msg_count = 0
-                read_unread_msgs()
-                continue
-            else:
-                send_msg(f"Mr Arun\nTotal {len(register_id)} Registered users\n{len(time_slot_bookings)} subscribers")
-                msg = None
-                username = None
-                msg_count = 0
-                read_unread_msgs()
-                continue
+            send_msg(f"Total {len(register_id)} Registered users\n{len(time_slot_bookings)} subscribers")
+            msg = None
+            username = None
+            msg_count = 0
+            read_unread_msgs()
+            continue
         elif msg == 'OK':
             send_msg('Fine')
             msg = None
