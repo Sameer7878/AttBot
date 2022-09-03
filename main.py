@@ -1385,8 +1385,8 @@ while (True):
             att=info.get('attendance') #fetches att
             incRate = info.get('incRate') #fetches incr_rate
             decRate = info.get('decRate') #fetches decr_rate
-            if att==None:
-                send_msg(f'hi, {name}\n try again later')
+            if att==None or att.upper()=='NULL':
+                send_msg(f'HELLO, {name}\nlooks like new semester not started')
                 msg = None
                 username = None
                 msg_count = 0
