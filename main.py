@@ -1,4 +1,6 @@
 import datetime
+
+import psycopg2
 import pytz
 import os
 import time
@@ -11,13 +13,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service
-
-register_id = {'mj.che_vr73304': '21KB1A1248', 'jst_call_me__mahi': '21KB5A0124', 'h_o_n_e_y_1_3_5': '21KB1A05H6', 'alludu._.07': '20KB1A0218', 'nithinpodavakam': '20KB1A0388', 'life_of_lokesh18': '20KB1A0142', 'mohith_mohi_x': '21KB1A04A7',
-               'sudeepthi__narayana': '20KB1A1242', 'rithwik_1221': '20KB1A1258', '_.sohail077._': '21KB5A0112', '_i_am_mr_aloner_': '20KB1A03C1', 'its_me_princess_1573': '20KB1A0516', 'bhavana_chowdary_7': '21KB1A3015', 'mr_yash_6309': '21KB5A0324', '_little_princess_lover_': '20KB1A0154', 'lucky.lucky1267': '20KB1A04A3', 'chittithelover': '20KB1A0335', 'apuroop_pandu': '19KB1A05C7', 'mr__attitude___max_': '20KB1A0402', 'mehraj___shaik': '21KB1A3083', 'mr.photoholic_ajay_': '20KB1A0339', 'bhanu_bunny_17': '21KB1A0567', 'madeshnelavala': '19KB1A1231', 'saketh169': '21KB1A0319', 'abhi_karate03': '20KB1A1210', '_mr_m_o_n_k_21_': '19KB1A05B6', 'upendra_____2': '19KB1A04E3', 'urs_truly_himakumar': '21KB1A04B2', 'balu_bellamkonda': '19KB1A0308', 'ajmad7268': '21KB5A3004', 'lover_of_psycho_45': '21KB1A0477', 'vineeth_karanam_': '19KB1A0122', 'yedukondalu3634': '21KB1A0227', 'a__.r_.u_.n__': '19KB1A1222', '_hemanth_yadav__': '20KB1A0367', 'prudhvi7391': '20KB1A0329', '_iambabbu': '21KB1A0553', 'sai_stylish_28': '19KB1A0375', 'dr_comrade__loki_106': '20KB1A0106', 'tharun6744': '19KB1A1216', 'venkatesh_chevuru': '20KB5A0327', '_____lm_lucky_____': '20KB1A0419', 'nandini_reddy_koduru': '21KB1A0271', 'ja_ya9725': '20KB1A3011', 'mr_swaroop_silent': '19KB1A0570', '_soul_hacker_giri_': '20KB1A0351', 'honeyrdx7': '20KB1A0305', 'haripulluru': '21KB1A0263', 'k.sivaprasad_12345': '21KB1A0464', 'vamsi_krishna_m589': '21KB1A0589', 'saketh_reddy0908': '20KB1A3012', '_akshay__reddy123_': '21KB1A0474', 'mr_queen_less_bhanu': '19KB1A0493', 'wiz_kidoo_': '20KB1A03B5', '_the_raptor._': '20KB5A0218', 'rebelstarsunny': '21KB1A0333', '_umamahesh___': '20KB1A0548', 'sam_.r._13': '21KB5A0325', 'k.asrithareddy': '21KB1A0563', 'shaik_yakhoob___': '19KB1A05F6', 'precious__sai__05': '20KB1A3060', '__tharun_kumar_b': '19KB1A0415', 'mr.enfielder_6225': '19KB1A1254', 'gnana_prasunambika.dupati': '21KB1A0539', 'sujana__sujju_': '20KB1A3023', 'naveensathyaveti': '21KB5A0321', 'gani.ramireddy': '19KB1A05D3', 'mr_lucky_davood__': '19KB1A0154', 'journey__lover__reddy': '19KB1A0165', 'sameeulla76': '19KB1A0157', 'surekha_0220': '20KB1A3052', '_eyes_roller': '19KB1A0332', 'natural_rock_star_chintu': '19KB1A0307', 'am_harsha_09': '19KB1A0373', '_raja__reddy_': '19KB1A0301', '_harsha_chowdhary_': '21KB1A0285', 'balu.97197': '19KB1A0344', 'prakashyadav_6303': '20KB5A0337', 'swagking1817': '21KB1A0584', 'pranathibathala': '21KB1A0207', 'chinthaneerajaa': '20KB1A0524', '___urs__friendly__surendra___': '21KB1A0493', 'akhil_sanni': '20KB1A3046', '_j__2002._': '20KB1A0425', 'dinesh_ravilla_99': '21KB5A0339', 'rithwick_reddy_143': '21KB1A0327', 'user_not_found_x20': '19KB1A1244', 'future_aviator_karthik': '21KB5A0342', 'vishnu_teja__reddy': '19KB1A1229', 'srikanth_sree012': '20KB1A0201', 'dheerajkrishna0492020': '19KB1A1223', 'revanth____007': '20KB1A0283', 'its_mehemuuu': '19KB1A04G3', '__lovable_i_d_i_o_t__': '20KB1A1204', 'jyothi886677': '20KB1A0205', 'reddy___gari___abbay___': '20KB5A0315', 'challa_is__the_brand': '21KB1A0424', 'p_mahendra_143': '21KB1A04A4', 'b_h_a_n_u_prakashreddy': '19KB1A04J1', 'muni_volley_8': '21KB1A04C0', 'inid2022': '21KB1A0460', 'v_e_n_k_y_1626': '19KB1A0558', 'jaswanth_sai30': '20KB5A0201', 'lalith_allias_karan_3': '21KB1A1212', 'khaliqss': '19KB1A1240', 'j.a.y.a.n.t.h__': '21KB1A0419', 'likith.45': '20KB1A03B9', 'dorababu_0831': '20KB5A0403', '5u34n_': '19KB1A0521', 'vishnuvardhanmalipati': '20KB1A0487', 'niharika_challa_niha': '20KB1A3008', 'sweety__1229': '21KB1A0513', 'sushwanth_k_u_m_a_r': '19KB1A05H3', 'ramprakashreddy45': '19KB1A1230', 'prsnakmr_918': '19KB1A04C0', 'kingwithoutacrown_2k03': '21KB1A04G2', 'sk.nawaz702': '20KB1A04F6', 'p_e_a_c_e_l_i_f_e__': '21KB1A0465', '_mr.__reddy': '20KB1A3044', 'ajay_adeppagari': '20KB1A0404', 'harsha._.official': '20KB1A0217', 'hari_krishna_789': '20KB1A0287', 'harsha__073': '21KB1A30A0', 'shaolin_smaran': '19KB1A1202', 'chegueverachaitanya': '19KB1A1204', 'prudhvirajhasthi': '19KB1A1211', 'yogeeshamuluru': '20KB1A0304', 'call__me__diggi': '20KB1A0269', '_jash_217': '19KB1A05B6', 'venkata__vasanth': '20KB1A0216', 'smile._.killer._.07': '20KB1A0217', 'sasikiran_2003': '20KB1A0522', '_charan_cj_6': '21KB1A0426', 'sahoresuraj': '20KB1A0114', 'panee_9': '20KB1A0438', 'ravi4tr': '21KB1A0249', 'sukumar_royals': '19KB1A0327', '__dynamic_killer__': '21KB1A0330', 'saketh_papareddy': '19KB1A1233', '_surya_suri_789': '20KB1A3051', '_lalith_kumar_reddy_': '21KB1A1212', 'dhinakar__sai': '20KB1A0423', 'heart.hacker_008': '20KB5A0329', 'u_ravi.teja': '20KB5A0140', 'rameez.shaik_': '20KB1A05F4', 'muralikataru': '21KB1A1225', 'pavan_tony_123': '21KB1A1243', 'call_me_poriki___420': '21KB1A04C0', 'my_life_my_rules_46_': '21KB1A0344', 'i_am.nadendla': '20KB1A04A9', 'alwaysjyothish': '21KB1A05I1', 'rahulsurya121': '21KB1A05B4', 'rajeev_92223': '21KB1A0599', 'dad_calls_me_chotu': '21KB1A05F2', 'sumanth5723': '21KB1A0459', 'crazy_boy_jashu': '21KB1A0444', 'sreekanth_leburu': '20KB5A0354', 'sole_soul__3': '21KB1A0481', 'yashuyaswanth1290': '20KB1A0429', '__liyaz_syed__': '20KB1A3055', 'lucky.charm827': '20KB1A04A3', 'revanth.reddy_2405': '19KB1A0513', '_sathvik_777_': '21KB1A1238', 'rock_star_1433_': '21KB1A0238', 'saradhi__v': '19KB1A04I4', 'alone__heart_kishore': '21KB1A1207', 'ch.badri.338': '21KB1A0434', 'sumanthsahho': '21KB1A0584', 'sasi_lxn_455_': '20KB1A0455', 'rockybhai.chandu.52': '21KB1A0293', 'u_rs_lovingly_tharun': '21KB1A1248', 'deepamdeepthi_': '21KB1A3001', 'pradeep_0321': '19KB1A04E6', 'harsha_lebur': '21KB1A0585', 'p.jagadeesh_naidu': '21KB1A1241', 'bigil_008': '21KB1A0476', 'itsme_nawaz53': '20KB1A04F5', 'dreamer_.o4': '20KB1A0502', '_mr_rpm_breaker': '20KB1A03B7', '_chethan_14_': '20KB1A0592', 'loyal__guy_': '20KB1A0427', 'mr.bob_0051': '21KB1A0351', 'loyal_one_praveen': '21KB1A0241', '__babbu____prs': '21KB1A0518', 'akashakash193119': '21KB1A0240', 'happysoul2801': '20KB1A05E3', 'saad_ahamed_syed': '21KB1A0339', 'priyatham_2002': '20KB1A0515', 'im_loki_08': '21KB1A1204', 'a_r_s_h_a_d_s_h_a_i_k': '21KB1A0269', 'bhanuchand.23132': '20KB1A0356', 'sajid_hussain_08': '20KB1A0370', 'parvaz_shaik': '20KB1A04F8', 'kvinayrajj': '20KB1A0464', 'its_me_ss_rowdy': '19KB1A1244', 'suchakridharreddykonduru': '20KB1A0240', 'darling_aniish': '20KB1A1222', 'prem.kumar7830': '21KB1A0449', 'attiutude_king_sai': '21KB1A0403', 'crazy_nick990': '21KB1A0456', 'always_yagna': '19KB1A05I8', 'swe.ety9735': '21KB1A05H0', 'saijaguar.135': '19KB1A1218', 'suresh_reddy_guvvala_': '20KB1A0347', 'vinaycherry143': '21KB5A0332', 'dha1528': '21KB5A0304', 'khushi_sharma2409': '21KB1A0569', 'sujith_v_ch': '21KB1A0430', 'mr.dead_rine_007': '19KB1A0498', 'vemula_na_ni': '19KB1A1252', 'k_rant_hi': '21KB1A1245', 'bindu_madhav_raju': '21KB1A1203', 'ha__rs__hi__tha__37': '21KB1A0571', 'attitude_queen__2503': '21KB1A05C6', 'rishi_kumar_c_e_o': '21KB1A0217', 'yamunaarava6': '19KB1A0322', 'parrot__kt': '20KB1A05C4', 'anon_dhanush__': '20KB1A3019', 'dhaksha_09': '20KB1A1218', 'akhila_neeluru': '20KB1A0599', 'rajuyatham8': '21KB1A04H0', 'jayakrishna.jai.79': '21KB5A0102', 'loveshot7_': '21KB1A0342', 'rajeev_nine9': '21KB1A0599', 'duddu_madhavi': '21KB1A0536', 'chamarthi_yashu': '20KB1A0518', 'deepthireddy_atla': '20KB1A0410', 'shaik_hussain__143': '21KB1A3066', 'n._.identity': '19KB1A0114', 'hemanthbdvm': '20KB1A0596', 'inside_lover999': '21KB1A0467', '_crazy.vinay_': '21KB1A0348', 'jeevith_rebel': '21KB1A0332', 'h_emanth_n': '20KB1A05C4', 'pradeepnaidu1432': '21KB1A0132', 'yogesh_vijay2001': '19KB1A0348', 'delphi_gracy': '21KB1A0226', 'priya_______1188': '21KB1A0206', 'hemu.msd': '21KB1A3044', '__ganesh.03__': '20KB1A04I2', '_yaswanth__reddy__': '19KB1A1250', 'jagadeesh4835': '20KB5A0336', 'balaramreddy__._._': '19KB1A1232', 'jagadeesh_.naidu': '21KB1A1241', '__a._.k_47': '19KB1A0576', 'khalid_0_3_0': '20KB1A03A1', 'thenameisvalivulla': '20KB1A03A6', 'mr.bhargava__2004': '21KB1A3047', 'sr_sarvotham_reddy': '19KB1A04C8', 'chennaiah21': '19KB1A04E1', 'kole_rajasekhar_19': '19KB1A0349', 'dynamo_sasi': '19KB1A0554', 'm.r_idiot_143': '21KB1A05I3', 'saisankarvayugundla': '20KB5A0316', 'devaki_thumati': '21KB1A3041', 'keerthi__reddyyy': '19KB1A1220', 'mr.black_611': '21KB1A0270', 'decoit_one': '21KB1A0217', 'girish_reddy_gangavaram_321': '20KB5A0350', 'prbindu5': '21KB1A0204', 'si.nce_2001': '19KB1A0385', 'truegirl398': '21KB1A0445', 'krishna_makani98': '19KB1A0585', 'mr_frustrated_soul._': '20KB1A0402', 'saikummar05': '20KB5A0325', 'itsmekeertan': '21KB1A0549', 'chaitu_royal_14439': '21KB1A0341', 'ram1091charan': '20KB1A05A5', 'krishaveni55': '20KB1A05A4', 'king_shaik_777': '21KB1A1247', 'nithish.raju.2003': '21KB1A0521', 'i_am_udaykumar_chowdary': '21KB5A0331', 'its_mee_sekhar': '20KB1A1246', '___p.a.n.d.u_loves___': '19KB1A05G9', 'rohi_preethi_2504': '21KB1A05C6', 'jyothiathmakuru': '20KB1A0205', 'jannath_hussen': '21KB5A0336', '__.__jasmine_.__': '19KB1A05F0', 'tinygirlstyle': '19KB1A1214', '_h.o.n.e.y_l.o.v.e.s_': '19KB1A0261', 'oye__its__me__akhil': '20KB1A0130', 'akhila_oo1': '19KB1A1215', 'cool________angel': '19KB1A0146', 'rakshana__chowdary_': '19KB1A0439', 'vamsi_yadav_ulsa_049': '21KB5A0311', '_s_i_s_i_n_d_r_i___009': '21KB1A1202', 'hari_9400': '21KB1A1236', 'naveen__yenuganti': '19KB1A1255', '__r_o_c_k_y______': '19KB1A05E3', 'hemanth_chandra_00': '21KB1A1210', 'volley_lover_uday._ud': '21KB1A1211', 'prasanthchalla143': '21KB1A1215', 'warm_walker_': '20KB5A0366', '__game_boy__yash': '21KB5A0324', 'ganeshannabathina': '21KB1A0204', 'achukrishnamma': '20KB1A05A7', '20kb1a0402': '20KB1A05A8', 'urs_truly_yokshith': '21KB1A1224', 'sai_star_1233': '21KB1A3023', 'iamdheerajkrishna': '19KB1A05C2', 'sudheerbabu7797': '19KB1A04D8', 'majestic_king_nari': '21KB1A0528', 'narahari1801': '21KB1A0408', 'miss_waste_3': '21KB1A0481', 'bharath_kumar_ry': '21KB5A0338', 'bhargav_sarvepalli': '21KB1A3080', 'bhavaniprasad594': '20KB1A0594', 'sushma_muppala': '20KB1A0593', 'world_of_adarsh_vikas': '20KB1A0338', 'pramodh_kole': '20KB1A0473', 'i_am_teja_yy4s': '21KB5A1206', 'anji4469': '21KB5A1202', 'brokenboy_sudheer_': '20KB5A0214', 'sujith__duvvuru': '20KB1A0220', 's_a_i_t_e_j_a_77': '20KB1A1208', 'anu_anvi2645': '20KB1A0209', 'kowshik.ganesh': '19KB1A05C4', 'sw_eety1836': '20KB1A0241', 'durgapriya479': '20KB1A0245', 'tejoday4': '20KB1A0239', 'devil_moon_81': '20KB1A3027', 'dakshayani_raj': '20KB1A0565', 'munikrishna365955': '20KB1A0202', 'sowmya_kurucheti': '21KB5A0413', 'stark_mark_4': '20KB1A0290', 'bobby.nandigam': '20KB1A0595', 'its_me_ur_comrade': '21KB1A0312','harsha____vip': '21KB1A0256', 'keerthipati_mahidhar': '20KB1A1228', 'i_am.siva_': '21KB5A1203', 'duddu_madhavi_113': '21KB1A0536', 'yegireddy_nani': '21KB1A04H1', 'saiesh____11': '19KB1A0322', 'hemanthm2003': '20KB1A0371', 'v.k_r_i_s_h_n_a__chowdary': '21KB5A1204', 'local_abbai_avinash': '19KB1A0329', 'shamsheer_shaik_07': '20KB5A0404', 'manoj___manoj__': '20KB5A0224', 'infinitesoulboy_01': '21KB1A0337', 'bharath.pr_in_ce11': '20KB1A0212', '_shr_avankumar': '21KB5A0218', 'megha_meghanadham': '21KB5A0409', 'siddu_sreedhar_reddy': '21KB5A0107', 'bhuvan_sai_01': '21KB1A3023', '_hema_nandini_': '20KB1A0534', 'ma__nogna': '20KB1A0566', 'divyanth_pathipati': '20KB1A3038', 'greeeshhhuuu': '20KB1A05B9', '_mr.chanduyadav_': '21KB1A0293', 'dha3sh': '20KB1A3030', 'sripathi_vamsi': '21KB1A04E5', 'nitenkumar58': '21KB1A05B8', 'murali_mono17': '20KB5A0226', 'bunny_vira': '21KB1A0584', 'ravan_asura_2': '19KB1A0319', 'vijji_1408': '19KB1A0210', 'prasanth__0552': '20KB1A3058', 'hemanthreddy1437': '21KB1A05I9', 'chandu_reddy_11': '20KB5A0232', 'gowtham_reddy_17': '21KB1A05C3', 'sairam_chevuri': '19KB1A1203', '07_hari_krishna': '20KB1A0287', 'pavan_yadav622': '20KB1A1255', 'ismart_yash_1207': '20KB5A0360', 'killer.__.dhanush': '20KB1A0383', 'm_r___k_k': '21KB1A0469', 'asif_bhai_vr46': '19KB1A1244', 'sai_2_1_': '19KB1A05I4', 'swing_shifter': '21KB1A0567', 'its_me_indu1': '19KB1A0421', 'she_call_me_hari546': '20KB1A0546', 'jaswanth_smart_1': '21KB1A0102', 'marvelous_guy_harshith_': '20KB1A0445', 'veerawarrior1011': '21KB1A0305', 'akhil._17': '20KB1A3041', '___krish__sai___': '20KB1A0590', 'shiva______sshiv': '20KB1A04B3', 'mr___vivekvikky': '20KB1A0111', 'h_hemanth_n': '20KB1A0592', 'peramalasettyvignesh': '21KB1A05D2', 'sreeja._604': '20KB1A0482', '____urs__truly__dinesh____': '21KB1A0475', '__romeo.____': '21KB1A3007', 'mahendra__1891': '21KB1A0466', 'kavya__reddy_9': '21KB1A3030', 'dileepking29': '20KB1A0541', 'yogeswar__reddy__': '21KB1A04B4', 'na_ve_en_sai_54': '21KB1A04B3', 'decent_boy_kittu96': '21KB1A0596', 'spmtsanthosh': '20KB5A0240', 'innocent_boy_lokii143': '21KB1A0480', 'dinesh.sandi': '21KB1A04C4', 'harshavardhanreddy____': '20KB1A05G5', 'hemanth_2109_msd': '21KB1A0592', 'hang_over__mind': '21KB1A0324', 'venkatasai6304': '21KB1A05A0', '_sathwik__': '20KB1A1233', 'its__me__sravan_': '20KB1A0363', '_itz.chin': '21KB1A0565', '_s_h_o_u_k_a_t_h_a_l_i_': '21KB1A0560', '_ray_shiki': '20KB1A0210', 'batta_yadav': '21KB1A0415', 'harsha_vardhan_korapati': '21KB1A0580', 'praveen_1289': '21KB1A0412', 'ig_rithwik': '19KB1A05J3', 'poorna_navanari': '21KB1A0321', 'chanduyadav5619': '20KB5A0227', 'raju3869yadav': '20KB1A0301', 'gova__3': '20KB1A0250', 'vegurusukumar': '21KB1A05I8', 'vinay_chepuru': '20KB5A0327', 'happiest_balu': '20KB1A0166', 'sameer_shaik__12': '21KB1A04E0', 'bunny_quien': '21KB1A0571', 'cute_girl__vinni': '21KB1A3014', 'm_r____c_o_o_l': '21KB1A04A2', 'rishi_reddy_121': '19KB1A0316', '_innocent__leap_': '21KB5A0211', 'chandramuni2204': '21KB5A0337', 'nikhilesh_yadav_555': '20KB1A05G9', 'chandu_candy_731': '20KB1A0125', 'its__naani_s': '21KB1A0450', '__dhan_reddy_47': '21KB1A05E5', 'bharath_prince_11': '20KB1A0212', 'diggi__edits': '20KB1A0253', 'vikas_gosula': '21KB1A0454', 'sampath_kumar_jogi_9798': '20KB1A0229', '_janani.reddy': '19KB1A0569', 'nanda_reddy__143': '21KB1A0289', 'saikumar_malli': '21KB1A0247', '_mr_manjunadh_': '20KB1A0277', 'sravankumarannameti': '20KB1A3004', 'lucky.lucky1118': '20KB1A04A3', '__yaswanth__pspk__': '21KB1A0287', 'dhan_reddy47': '21KB1A0289', 'bhanuprakashreddyam': '20KB1A0303'}
-temp_register_id = {}
-reg_users=['a__.r_.u_.n__', 'user_not_found_x20','mj.che_vr73304', 'jst_call_me__mahi', 'h_o_n_e_y_1_3_5', 'alludu._.07', 'nithinpodavakam', 'life_of_lokesh18', 'mohith_mohi_x', 'sudeepthi__narayana', 'rithwik_1221', '_.sohail077._', '_i_am_mr_aloner_', 'its_me_princess_1573', 'bhavana_chowdary_7', 'mr_yash_6309', '_little_princess_lover_', 'lucky.lucky1267', 'chittithelover', 'apuroop_pandu', 'mr__attitude___max_', 'mehraj___shaik', 'mr.photoholic_ajay_', 'bhanu_bunny_17', 'madeshnelavala', 'saketh169', 'abhi_karate03', '_mr_m_o_n_k_21_', 'upendra_____2', 'urs_truly_himakumar', 'balu_bellamkonda', 'ajmad7268', 'lover_of_psycho_45', 'vineeth_karanam_', 'yedukondalu3634', '_hemanth_yadav__', 'prudhvi7391', '_iambabbu', 'sai_stylish_28', 'dr_comrade__loki_106', 'tharun6744', 'venkatesh_chevuru', '_____lm_lucky_____', 'nandini_reddy_koduru', 'ja_ya9725', 'mr_swaroop_silent', '_soul_hacker_giri_', 'honeyrdx7', 'haripulluru', 'k.sivaprasad_12345', 'vamsi_krishna_m589', 'saketh_reddy0908', '_akshay__reddy123_', 'mr_queen_less_bhanu', 'wiz_kidoo_', '_the_raptor._', 'rebelstarsunny', '_umamahesh___', 'sam_.r._13', 'k.asrithareddy', 'shaik_yakhoob___', 'precious__sai__05', '__tharun_kumar_b', 'mr.enfielder_6225', 'gnana_prasunambika.dupati', 'sujana__sujju_', 'naveensathyaveti', 'gani.ramireddy', 'mr_lucky_davood__', 'journey__lover__reddy', 'sameeulla76', 'surekha_0220', '_eyes_roller', 'natural_rock_star_chintu', 'am_harsha_09', '_raja__reddy_', '_harsha_chowdhary_', 'balu.97197', 'prakashyadav_6303', 'swagking1817', 'pranathibathala', 'chinthaneerajaa', '___urs__friendly__surendra___', 'akhil_sanni', '_j__2002._', 'dinesh_ravilla_99', 'rithwick_reddy_143', 'future_aviator_karthik', 'vishnu_teja__reddy', 'srikanth_sree012', 'dheerajkrishna0492020', 'revanth____007', 'its_mehemuuu', '__lovable_i_d_i_o_t__', 'jyothi886677', 'reddy___gari___abbay___', 'challa_is__the_brand', 'p_mahendra_143', 'b_h_a_n_u_prakashreddy', 'muni_volley_8', 'inid2022', 'v_e_n_k_y_1626', 'jaswanth_sai30', 'lalith_allias_karan_3', 'khaliqss', 'j.a.y.a.n.t.h__', 'likith.45', 'dorababu_0831', '5u34n_', 'vishnuvardhanmalipati', 'niharika_challa_niha', 'sweety__1229', 'sushwanth_k_u_m_a_r', 'ramprakashreddy45', 'prsnakmr_918', 'kingwithoutacrown_2k03', 'sk.nawaz702', 'p_e_a_c_e_l_i_f_e__', '_mr.__reddy', 'ajay_adeppagari', 'harsha._.official', 'hari_krishna_789', 'harsha__073', 'shaolin_smaran', 'chegueverachaitanya', 'prudhvirajhasthi', 'yogeeshamuluru', 'call__me__diggi', '_jash_217', 'venkata__vasanth', 'smile._.killer._.07', 'sasikiran_2003', '_charan_cj_6', 'sahoresuraj', 'panee_9', 'ravi4tr', 'sukumar_royals', '__dynamic_killer__', 'saketh_papareddy', '_surya_suri_789', '_lalith_kumar_reddy_', 'dhinakar__sai', 'heart.hacker_008', 'u_ravi.teja', 'rameez.shaik_', 'muralikataru', 'pavan_tony_123', 'call_me_poriki___420', 'my_life_my_rules_46_', 'i_am.nadendla', 'alwaysjyothish', 'rahulsurya121', 'rajeev_92223', 'dad_calls_me_chotu', 'sumanth5723', 'crazy_boy_jashu', 'sreekanth_leburu', 'sole_soul__3', 'yashuyaswanth1290', '__liyaz_syed__', 'lucky.charm827', 'revanth.reddy_2405', '_sathvik_777_', 'rock_star_1433_', 'saradhi__v', 'alone__heart_kishore', 'ch.badri.338', 'sumanthsahho', 'sasi_lxn_455_', 'rockybhai.chandu.52', 'u_rs_lovingly_tharun', 'deepamdeepthi_', 'pradeep_0321', 'harsha_lebur', 'p.jagadeesh_naidu', 'bigil_008', 'itsme_nawaz53', 'dreamer_.o4', '_mr_rpm_breaker', '_chethan_14_', 'loyal__guy_', 'mr.bob_0051', 'loyal_one_praveen', '__babbu____prs', 'akashakash193119', 'happysoul2801', 'saad_ahamed_syed', 'priyatham_2002', 'im_loki_08', 'a_r_s_h_a_d_s_h_a_i_k', 'bhanuchand.23132', 'sajid_hussain_08', 'parvaz_shaik', 'kvinayrajj', 'its_me_ss_rowdy', 'suchakridharreddykonduru', 'darling_aniish', 'prem.kumar7830', 'attiutude_king_sai', 'crazy_nick990', 'always_yagna', 'swe.ety9735', 'saijaguar.135', 'suresh_reddy_guvvala_', 'vinaycherry143', 'dha1528', 'khushi_sharma2409', 'sujith_v_ch', 'mr.dead_rine_007', 'vemula_na_ni', 'k_rant_hi', 'bindu_madhav_raju', 'ha__rs__hi__tha__37', 'attitude_queen__2503', 'rishi_kumar_c_e_o', 'yamunaarava6', 'parrot__kt', 'anon_dhanush__', 'dhaksha_09', 'akhila_neeluru', 'rajuyatham8', 'jayakrishna.jai.79', 'loveshot7_', 'rajeev_nine9', 'duddu_madhavi', 'chamarthi_yashu', 'deepthireddy_atla', 'shaik_hussain__143', 'n._.identity', 'hemanthbdvm', 'inside_lover999', '_crazy.vinay_', 'jeevith_rebel', 'h_emanth_n', 'pradeepnaidu1432', 'yogesh_vijay2001', 'delphi_gracy', 'priya_______1188', 'hemu.msd', '__ganesh.03__', '_yaswanth__reddy__', 'jagadeesh4835', 'balaramreddy__._._', 'jagadeesh_.naidu', '__a._.k_47', 'khalid_0_3_0', 'thenameisvalivulla', 'mr.bhargava__2004', 'sr_sarvotham_reddy', 'chennaiah21', 'kole_rajasekhar_19', 'dynamo_sasi', 'm.r_idiot_143', 'saisankarvayugundla', 'devaki_thumati', 'keerthi__reddyyy', 'mr.black_611', 'decoit_one', 'girish_reddy_gangavaram_321', 'prbindu5', 'si.nce_2001', 'truegirl398', 'krishna_makani98', 'mr_frustrated_soul._', 'saikummar05', 'itsmekeertan', 'chaitu_royal_14439', 'ram1091charan', 'krishaveni55', 'king_shaik_777', 'nithish.raju.2003', 'i_am_udaykumar_chowdary', 'its_mee_sekhar', '___p.a.n.d.u_loves___', 'rohi_preethi_2504', 'jyothiathmakuru', 'jannath_hussen', '__.__jasmine_.__', 'tinygirlstyle', '_h.o.n.e.y_l.o.v.e.s_', 'oye__its__me__akhil', 'akhila_oo1', 'cool________angel', 'rakshana__chowdary_', 'vamsi_yadav_ulsa_049', '_s_i_s_i_n_d_r_i___009', 'hari_9400', 'naveen__yenuganti', '__r_o_c_k_y______', 'hemanth_chandra_00', 'volley_lover_uday._ud', 'prasanthchalla143', 'warm_walker_', '__game_boy__yash', 'ganeshannabathina', 'achukrishnamma', '20kb1a0402', 'urs_truly_yokshith', 'sai_star_1233', 'iamdheerajkrishna', 'sudheerbabu7797', 'majestic_king_nari', 'narahari1801', 'miss_waste_3', 'bharath_kumar_ry', 'bhargav_sarvepalli', 'bhavaniprasad594', 'sushma_muppala', 'world_of_adarsh_vikas', 'pramodh_kole', 'i_am_teja_yy4s', 'anji4469', 'brokenboy_sudheer_', 'sujith__duvvuru', 's_a_i_t_e_j_a_77', 'anu_anvi2645', 'kowshik.ganesh', 'sw_eety1836', 'durgapriya479', 'tejoday4', 'devil_moon_81', 'dakshayani_raj', 'munikrishna365955', 'sowmya_kurucheti', 'stark_mark_4', 'bobby.nandigam', 'its_me_ur_comrade', 'harsha____vip', 'keerthipati_mahidhar', 'i_am.siva_', 'duddu_madhavi_113', 'yegireddy_nani', 'saiesh____11', 'hemanthm2003', 'v.k_r_i_s_h_n_a__chowdary', 'local_abbai_avinash', 'shamsheer_shaik_07', 'manoj___manoj__', 'infinitesoulboy_01', 'bharath.pr_in_ce11', '_shr_avankumar', 'megha_meghanadham', 'siddu_sreedhar_reddy', 'bhuvan_sai_01', '_hema_nandini_', 'ma__nogna', 'divyanth_pathipati', 'greeeshhhuuu', '_mr.chanduyadav_', 'dha3sh', 'sripathi_vamsi', 'nitenkumar58', 'murali_mono17', 'bunny_vira', 'ravan_asura_2', 'vijji_1408', 'prasanth__0552', 'hemanthreddy1437', 'chandu_reddy_11', 'gowtham_reddy_17', 'sairam_chevuri', '07_hari_krishna', 'pavan_yadav622', 'ismart_yash_1207', 'killer.__.dhanush', 'm_r___k_k', 'asif_bhai_vr46', 'sai_2_1_', 'swing_shifter', 'its_me_indu1', 'she_call_me_hari546', 'jaswanth_smart_1', 'marvelous_guy_harshith_', 'veerawarrior1011', 'akhil._17', '___krish__sai___', 'shiva______sshiv', 'mr___vivekvikky', 'h_hemanth_n', 'peramalasettyvignesh', 'sreeja._604', '____urs__truly__dinesh____', '__romeo.____', 'mahendra__1891', 'kavya__reddy_9', 'dileepking29', 'yogeswar__reddy__', 'na_ve_en_sai_54', 'decent_boy_kittu96', 'spmtsanthosh', 'innocent_boy_lokii143', 'dinesh.sandi', 'harshavardhanreddy____', 'hemanth_2109_msd', 'hang_over__mind', 'venkatasai6304', '_sathwik__', 'its__me__sravan_', '_itz.chin', '_s_h_o_u_k_a_t_h_a_l_i_', '_ray_shiki', 'batta_yadav', 'harsha_vardhan_korapati', 'praveen_1289', 'ig_rithwik', 'poorna_navanari', 'chanduyadav5619', 'raju3869yadav', 'gova__3', 'vegurusukumar', 'vinay_chepuru', 'happiest_balu', 'sameer_shaik__12', 'bunny_quien', 'cute_girl__vinni', 'm_r____c_o_o_l', 'rishi_reddy_121', '_innocent__leap_', 'chandramuni2204', 'nikhilesh_yadav_555', 'chandu_candy_731', 'its__naani_s', '__dhan_reddy_47', 'bharath_prince_11', 'diggi__edits', 'vikas_gosula', 'sampath_kumar_jogi_9798', '_janani.reddy', 'nanda_reddy__143', 'saikumar_malli', '_mr_manjunadh_', 'sravankumarannameti', 'lucky.lucky1118', '__yaswanth__pspk__', 'dhan_reddy47', 'bhanuprakashreddyam']
-time_slot_bookings = ['dhan_reddy47', 'mohith_mohi_x', 'sudeepthi__narayana', 'i_am.nadendla','varnith392', '_sai_010', 'i_am.nadendla','07_hari_krishna', '5u34n_', '_.sohail077._', '____urs__truly__dinesh____', '___krish__sai___', '___urs__friendly__surendra___', '__a._.k_47', '__babbu____prs', '__dhan_reddy_47', '__game_boy__yash', '__liyaz_syed__', '__lovable_i_d_i_o_t__', '__romeo.____', '_akshay__reddy123_', '_charan_cj_6', '_chethan_14_', '_crazy.vinay_', '_h.o.n.e.y_l.o.v.e.s_', '_hema_nandini_', '_itz.chin', '_j__2002._', '_janani.reddy', '_jash_217', '_mr.__reddy', '_mr_m_o_n_k_21_', '_mr_manjunadh_', '_mr_rpm_breaker', '_raja__reddy_', '_ray_shiki', '_s_h_o_u_k_a_t_h_a_l_i_', '_sathvik_777_', '_sathwik__', '_soul_hacker_giri_', '_surya_suri_789', '_yaswanth__reddy__', 'a__.r_.u_.n__', 'ajay_adeppagari', 'akashakash193119', 'akhila_neeluru', 'always_yagna', 'alwaysjyothish', 'am_harsha_09', 'anji4469', 'anon_dhanush__', 'anu_anvi2645', 'apuroop_pandu', 'balaramreddy__._._', 'batta_yadav', 'bhanu_bunny_17', 'bhanuchand.23132', 'bhanuprakashreddyam', 'bharath.pr_in_ce11', 'bharath_kumar_ry', 'bharath_prince_11', 'bhargav_sarvepalli', 'bhavaniprasad594', 'bhuvan_sai_01', 'bigil_008', 'bobby.nandigam', 'brokenboy_sudheer_', 'bunny_quien', 'call__me__diggi', 'ch.badri.338', 'challa_is__the_brand', 'chamarthi_yashu', 'chandu_reddy_11', 'chanduyadav5619', 'chegueverachaitanya', 'chennaiah21', 'chinthaneerajaa', 'cool________angel', 'dakshayani_raj', 'decent_boy_kittu96', 'deepthireddy_atla', 'dha1528', 'dha3sh', 'dheerajkrishna0492020', 'dhinakar__sai', 'diggi__edits', 'dileepking29', 'dinesh.sandi', 'dinesh_ravilla_99', 'divyanth_pathipati', 'dorababu_0831', 'dr_comrade__loki_106', 'dreamer_.o4', 'duddu_madhavi', 'duddu_madhavi_113', 'durgapriya479', 'future_aviator_karthik', 'gani.ramireddy', 'girish_reddy_gangavaram_321', 'gnana_prasunambika.dupati', 'gova__3', 'greeeshhhuuu', 'h_emanth_n', 'h_hemanth_n', 'ha__rs__hi__tha__37thenameisvalivulla', 'happysoul2801', 'hari_krishna_789', 'harsha._.official', 'harsha_lebur', 'harsha_vardhan_korapati', 'heart.hacker_008', 'hemanthbdvm', 'hemanthm2003', 'hemu.msd', 'i_am.siva_', 'i_am_teja_yy4s', 'i_am_udaykumar_chowdary', 'iamdheerajkrishna', 'infinitesoulboy_01', 'innocent_boy_lokii143', 'ismart_yash_1207', 'its__me__sravan_', 'its__naani_s', 'its_me_indu1', 'its_me_princess_1573', 'its_me_ur_comrade', 'its_mee_sekhar', 'itsme_nawaz53', 'j.a.y.a.n.t.h__', 'ja_ya9725', 'jeevith_rebel', 'jyothiathmakuru', 'k.asrithareddy', 'k.sivaprasad_12345', 'keerthi__reddyyy', 'khalid_0_3_0', 'khaliqss', 'khushi_sharma2409', 'killer.__.dhanush', 'kowshik.ganesh', 'krishna_makani98', 'likith.45', 'local_abbai_avinash', 'loveshot7_', 'm_r___k_k', 'ma__nogna', 'madeshnelavala', 'mahendra__1891', 'majestic_king_nari', 'manoj___manoj__', 'miss_waste_3', 'mr.bhargava__2004', 'mr.bob_0051', 'mr.dead_rine_007', 'mr.enfielder_6225', 'mr.photoholic_ajay_', 'mr_frustrated_soul._', 'mr_lucky_davood__', 'muni_volley_8', 'munikrishna365955', 'murali_mono17', 'na_ve_en_sai_54', 'nanda_reddy__143', 'nandini_reddy_koduru', 'natural_rock_star_chintu', 'naveen__yenuganti', 'naveensathyaveti', 'nithish.raju.2003', 'oye__its__me__akhil', 'p_e_a_c_e_l_i_f_e__', 'p_mahendra_143', 'panee_9', 'parrot__kt', 'parvaz_shaik', 'peramalasettyvignesh', 'poorna_navanari', 'pradeep_0321', 'pradeepnaidu1432', 'prasanth__0552', 'prasanthchalla143', 'praveen_1289', 'precious__sai__05', 'priyatham_2002', 'prsnakmr_918', 'rajeev_92223', 'rajeev_nine9', 'rakshana__chowdary_', 'ramprakashreddy45', 'ravi4tr', 'rebelstarsunny', 'reddy___gari___abbay___', 'revanth.reddy_2405', 'revanth____007', 'rithwick_reddy_143', 'rithwik_1221', 's_a_i_t_e_j_a_77', 'sahoresuraj', 'saisankarvayugundla', 'sajid_hussain_08', 'saketh_papareddy', 'saketh_reddy0908', 'sam_.r._13', 'sameer_shaik__12', 'sampath_kumar_jogi_9798', 'sasi_lxn_455_', 'sasikiran_2003', 'shaik_yakhoob___', 'shamsheer_shaik_07', 'shaolin_smaran', 'she_call_me_hari546', 'si.nce_2001', 'siddu_sreedhar_reddy', 'sk.nawaz702', 'sole_soul__3', 'sowmya_kurucheti', 'spmtsanthosh', 'sravankumarannameti', 'sreeja._604', 'sreekanth_leburu', 'srikanth_sree012', 'sripathi_vamsi', 'stark_mark_4', 'suchakridharreddykonduru', 'sujana__sujju_', 'sujith__duvvuru', 'sujith_v_ch', 'sumanthsahho', 'surekha_0220', 'sushma_muppala', 'sushwanth_k_u_m_a_r', 'sw_eety1836', 'swagking1817', 'sweety__1229', 'tharun6744', 'thenameisvalivulla', 'u_ravi.teja', 'user_not_found_x20', 'v_e_n_k_y_1626', 'vamsi_krishna_m589', 'veerawarrior1011', 'vemula_na_ni', 'venkatasai6304', 'venkatesh_chevuru', 'vijji_1408', 'vikas_gosula', 'vinay_chepuru', 'vinaycherry143', 'vishnu_teja__reddy', 'warm_walker_', 'wiz_kidoo_', 'world_of_adarsh_vikas', 'yashuyaswanth1290', 'yedukondalu3634', 'yogeeshamuluru', 'yogesh_vijay2001', 'yogeswar__reddy__']
-temp_time_slot_bookings = []
+DATABASE_URL = os.environ['DATABASE_URL']
 admins=['a__.r_.u_.n__', 'user_not_found_x20']
 
 student_names = {'21KB1A0301': 'ALLAM HARSHAVARDHAN', '21KB1A0302': 'ANANTANENI TEJA KIRAN',
@@ -1150,11 +1146,643 @@ student_names = {'21KB1A0301': 'ALLAM HARSHAVARDHAN', '21KB1A0302': 'ANANTANENI 
                  '20KB5A0412': 'I. SASIKIRANMAI ', '20KB5A0413': 'D. MUDDU KRISHNA', '20KB5A0414': 'V. MADHAVA',
                  '20KB5A0415': 'V. RAMA DEVI ', '20KB5A0416': 'P. HEMANTHKUMAR', '20KB5A0417': 'V. TEJESWAR REDDY',
                  '20KB5A0418': 'K. VIJITHA '}
+student_data = {'21KB1A0301': '3 1 1', '21KB1A0302': '3 1 1', '21KB1A0303': '3 1 1', '21KB1A0304': '3 1 1',
+                '21KB1A0305': '3 1 1', '21KB1A0306': '3 1 1', '21KB1A0307': '3 1 1', '21KB1A0308': '3 1 1',
+                '21KB1A0309': '3 1 1', '21KB1A0310': '3 1 1', '21KB1A0311': '3 1 1', '21KB1A0312': '3 1 1',
+                '21KB1A0313': '3 1 1', '21KB1A0314': '3 1 1', '21KB1A0315': '3 1 1', '21KB1A0316': '3 1 1',
+                '21KB1A0317': '3 1 1', '21KB1A0318': '3 1 1', '21KB1A0319': '3 1 1', '21KB1A0320': '3 1 1',
+                '21KB1A0321': '3 1 1', '21KB1A0322': '3 1 1', '21KB1A0323': '3 1 1', '21KB1A0324': '3 1 1',
+                '21KB1A0325': '3 1 1', '21KB1A0326': '3 1 1', '21KB1A0327': '3 1 1', '21KB1A0328': '3 1 1',
+                '21KB1A0329': '3 1 1', '21KB1A0330': '3 1 1', '21KB1A0331': '3 1 1', '21KB1A0332': '3 1 1',
+                '21KB1A0333': '3 1 1', '21KB1A0334': '3 1 1', '21KB1A0335': '3 1 1', '21KB1A0336': '3 1 1',
+                '21KB1A0337': '3 1 1', '21KB1A0338': '3 1 1', '21KB1A0339': '3 1 1', '21KB1A0340': '3 1 1',
+                '21KB1A0341': '3 1 1', '21KB1A0342': '3 1 1', '21KB1A0343': '3 1 1', '21KB1A0344': '3 1 1',
+                '21KB1A0345': '3 1 1', '21KB1A0346': '3 1 1', '21KB1A0347': '3 1 1', '21KB1A0348': '3 1 1',
+                '21KB1A0349': '3 1 1', '21KB1A0350': '3 1 1', '21KB1A0351': '3 1 1', '21KB1A0352': '3 1 1',
+                '21KB1A0353': '3 1 1', '21KB1A0501': '3 2 2', '21KB1A0502': '3 2 2', '21KB1A0503': '3 2 2',
+                '21KB1A0504': '3 2 2', '21KB1A0505': '3 2 2', '21KB1A0506': '3 2 2', '21KB1A0507': '3 2 2',
+                '21KB1A0508': '3 2 2', '21KB1A0509': '3 2 2', '21KB1A0510': '3 2 2', '21KB1A0511': '3 2 2',
+                '21KB1A0512': '3 2 2', '21KB1A0513': '3 2 2', '21KB1A0514': '3 2 2', '21KB1A0515': '3 2 2',
+                '21KB1A0516': '3 2 2', '21KB1A0517': '3 2 2', '21KB1A0518': '3 2 2', '21KB1A0519': '3 2 2',
+                '21KB1A0520': '3 2 2', '21KB1A0521': '3 2 2', '21KB1A0522': '3 2 2', '21KB1A0523': '3 2 2',
+                '21KB1A0524': '3 2 2', '21KB1A0525': '3 2 2', '21KB1A0526': '3 2 2', '21KB1A0527': '3 2 2',
+                '21KB1A0528': '3 2 2', '21KB1A0529': '3 2 2', '21KB1A0530': '3 2 2', '21KB1A0531': '3 2 2',
+                '21KB1A0532': '3 2 2', '21KB1A0533': '3 2 2', '21KB1A0534': '3 2 2', '21KB1A0535': '3 2 2',
+                '21KB1A0536': '3 2 2', '21KB1A0537': '3 2 2', '21KB1A0538': '3 2 2', '21KB1A0539': '3 2 2',
+                '21KB1A0540': '3 2 2', '21KB1A0541': '3 2 2', '21KB1A0542': '3 2 2', '21KB1A0543': '3 2 2',
+                '21KB1A0544': '3 2 2', '21KB1A0545': '3 2 2', '21KB1A0546': '3 2 2', '21KB1A0547': '3 2 2',
+                '21KB1A0548': '3 2 2', '21KB1A0549': '3 2 2', '21KB1A0550': '3 2 2', '21KB1A0551': '3 2 2',
+                '21KB1A0552': '3 2 2', '21KB1A0553': '3 2 2', '21KB1A0554': '3 2 2', '21KB1A0555': '3 2 2',
+                '21KB1A0556': '3 2 2', '21KB1A0557': '3 2 2', '21KB1A0558': '3 2 2', '21KB1A0559': '3 2 2',
+                '21KB1A0560': '3 2 2', '21KB1A0561': '3 2 2', '21KB1A0562': '3 2 2', '21KB1A0563': '3 2 2',
+                '21KB1A0564': '3 2 2', '21KB1A0565': '3 2 2', '21KB1A0566': '3 2 2', '21KB1A0567': '3 2 3',
+                '21KB1A0568': '3 2 3', '21KB1A0569': '3 2 3', '21KB1A0570': '3 2 3', '21KB1A0571': '3 2 3',
+                '21KB1A0572': '3 2 3', '21KB1A0573': '3 2 3', '21KB1A0574': '3 2 3', '21KB1A0575': '3 2 3',
+                '21KB1A0576': '3 2 3', '21KB1A0577': '3 2 3', '21KB1A0578': '3 2 3', '21KB1A0579': '3 2 3',
+                '21KB1A0580': '3 2 3', '21KB1A0581': '3 2 3', '21KB1A0582': '3 2 3', '21KB1A0583': '3 2 3',
+                '21KB1A0584': '3 2 3', '21KB1A0585': '3 2 3', '21KB1A0586': '3 2 3', '21KB1A0587': '3 2 3',
+                '21KB1A0588': '3 2 3', '21KB1A0589': '3 2 3', '21KB1A0590': '3 2 3', '21KB1A0591': '3 2 3',
+                '21KB1A0592': '3 2 3', '21KB1A0593': '3 2 3', '21KB1A0594': '3 2 3', '21KB1A0595': '3 2 3',
+                '21KB1A0596': '3 2 3', '21KB1A0597': '3 2 3', '21KB1A0598': '3 2 3', '21KB1A0599': '3 2 3',
+                '21KB1A05A0': '3 2 3', '21KB1A05A1': '3 2 3', '21KB1A05A2': '3 2 3', '21KB1A05A3': '3 2 3',
+                '21KB1A05A4': '3 2 3', '21KB1A05A5': '3 2 3', '21KB1A05A6': '3 2 3', '21KB1A05A7': '3 2 3',
+                '21KB1A05A8': '3 2 3', '21KB1A05A9': '3 2 3', '21KB1A05B0': '3 2 3', '21KB1A05B1': '3 2 3',
+                '21KB1A05B2': '3 2 3', '21KB1A05B3': '3 2 3', '21KB1A05B4': '3 2 3', '21KB1A05B5': '3 2 3',
+                '21KB1A05B6': '3 2 3', '21KB1A05B7': '3 2 3', '21KB1A05B8': '3 2 3', '21KB1A05B9': '3 2 3',
+                '21KB1A05C0': '3 2 3', '21KB1A05C1': '3 2 3', '21KB1A05C2': '3 2 3', '21KB1A05C3': '3 2 3',
+                '21KB1A05C4': '3 2 3', '21KB1A05C5': '3 2 3', '21KB1A05C6': '3 2 3', '21KB1A05C7': '3 2 3',
+                '21KB1A05C8': '3 2 3', '21KB1A05C9': '3 2 3', '21KB1A05D0': '3 2 3', '21KB1A05D1': '3 2 3',
+                '21KB1A05D2': '3 2 3', '21KB1A05D3': '3 2 4', '21KB1A05D4': '3 2 4', '21KB1A05D5': '3 2 4',
+                '21KB1A05D6': '3 2 4', '21KB1A05D7': '3 2 4', '21KB1A05D8': '3 2 4', '21KB1A05D9': '3 2 4',
+                '21KB1A05E0': '3 2 4', '21KB1A05E1': '3 2 4', '21KB1A05E2': '3 2 4', '21KB1A05E3': '3 2 4',
+                '21KB1A05E4': '3 2 4', '21KB1A05E5': '3 2 4', '21KB1A05E6': '3 2 4', '21KB1A05E7': '3 2 4',
+                '21KB1A05E8': '3 2 4', '21KB1A05E9': '3 2 4', '21KB1A05F0': '3 2 4', '21KB1A05F1': '3 2 4',
+                '21KB1A05F2': '3 2 4', '21KB1A05F3': '3 2 4', '21KB1A05F4': '3 2 4', '21KB1A05F5': '3 2 4',
+                '21KB1A05F6': '3 2 4', '21KB1A05F7': '3 2 4', '21KB1A05F8': '3 2 4', '21KB1A05F9': '3 2 4',
+                '21KB1A05G0': '3 2 4', '21KB1A05G1': '3 2 4', '21KB1A05G2': '3 2 4', '21KB1A05G3': '3 2 4',
+                '21KB1A05G4': '3 2 4', '21KB1A05G5': '3 2 4', '21KB1A05G6': '3 2 4', '21KB1A05G7': '3 2 4',
+                '21KB1A05G8': '3 2 4', '21KB1A05G9': '3 2 4', '21KB1A05H0': '3 2 4', '21KB1A05H1': '3 2 4',
+                '21KB1A05H2': '3 2 4', '21KB1A05H3': '3 2 4', '21KB1A05H4': '3 2 4', '21KB1A05H5': '3 2 4',
+                '21KB1A05H6': '3 2 4', '21KB1A05H7': '3 2 4', '21KB1A05H8': '3 2 4', '21KB1A05H9': '3 2 4',
+                '21KB1A05I0': '3 2 4', '21KB1A05I1': '3 2 4', '21KB1A05I2': '3 2 4', '21KB1A05I3': '3 2 4',
+                '21KB1A05I4': '3 2 4', '21KB1A05I5': '3 2 4', '21KB1A05I6': '3 2 4', '21KB1A05I7': '3 2 4',
+                '21KB1A05I8': '3 2 4', '21KB1A05I9': '3 2 4', '21KB1A05J0': '3 2 4', '21KB1A05J1': '3 2 4',
+                '21KB1A05J2': '3 2 4', '21KB1A05J3': '3 2 4', '21KB1A05J4': '3 2 4', '21KB1A05J5': '3 2 4',
+                '21KB1A05J6': '3 2 4', '21KB1A05J7': '3 2 4', '21KB1A05J8': '3 2 4', '21KB1A0401': '3 3 2',
+                '21KB1A0402': '3 3 2', '21KB1A0403': '3 3 2', '21KB1A0404': '3 3 2', '21KB1A0405': '3 3 2',
+                '21KB1A0406': '3 3 2', '21KB1A0407': '3 3 2', '21KB1A0408': '3 3 2', '21KB1A0409': '3 3 2',
+                '21KB1A0410': '3 3 2', '21KB1A0411': '3 3 2', '21KB1A0412': '3 3 2', '21KB1A0413': '3 3 2',
+                '21KB1A0414': '3 3 2', '21KB1A0415': '3 3 2', '21KB1A0416': '3 3 2', '21KB1A0417': '3 3 2',
+                '21KB1A0418': '3 3 2', '21KB1A0419': '3 3 2', '21KB1A0420': '3 3 2', '21KB1A0421': '3 3 2',
+                '21KB1A0422': '3 3 2', '21KB1A0423': '3 3 2', '21KB1A0424': '3 3 2', '21KB1A0425': '3 3 2',
+                '21KB1A0426': '3 3 2', '21KB1A0427': '3 3 2', '21KB1A0428': '3 3 2', '21KB1A0429': '3 3 2',
+                '21KB1A0430': '3 3 2', '21KB1A0431': '3 3 2', '21KB1A0432': '3 3 2', '21KB1A0433': '3 3 2',
+                '21KB1A0434': '3 3 2', '21KB1A0435': '3 3 2', '21KB1A0436': '3 3 2', '21KB1A0437': '3 3 2',
+                '21KB1A0438': '3 3 2', '21KB1A0439': '3 3 2', '21KB1A0440': '3 3 2', '21KB1A0441': '3 3 2',
+                '21KB1A0442': '3 3 2', '21KB1A0443': '3 3 2', '21KB1A0444': '3 3 2', '21KB1A0445': '3 3 2',
+                '21KB1A0446': '3 3 2', '21KB1A0447': '3 3 2', '21KB1A0448': '3 3 2', '21KB1A0449': '3 3 2',
+                '21KB1A0450': '3 3 2', '21KB1A0451': '3 3 2', '21KB1A0452': '3 3 2', '21KB1A0453': '3 3 2',
+                '21KB1A0454': '3 3 2', '21KB1A0455': '3 3 2', '21KB1A0456': '3 3 2', '21KB1A0457': '3 3 2',
+                '21KB1A0458': '3 3 3', '21KB1A0459': '3 3 3', '21KB1A0460': '3 3 3', '21KB1A0461': '3 3 3',
+                '21KB1A0462': '3 3 3', '21KB1A0463': '3 3 3', '21KB1A0464': '3 3 3', '21KB1A0465': '3 3 3',
+                '21KB1A0466': '3 3 3', '21KB1A0467': '3 3 3', '21KB1A0468': '3 3 3', '21KB1A0469': '3 3 3',
+                '21KB1A0470': '3 3 3', '21KB1A0471': '3 3 3', '21KB1A0472': '3 3 3', '21KB1A0473': '3 3 3',
+                '21KB1A0474': '3 3 3', '21KB1A0475': '3 3 3', '21KB1A0476': '3 3 3', '21KB1A0477': '3 3 3',
+                '21KB1A0478': '3 3 3', '21KB1A0479': '3 3 3', '21KB1A0480': '3 3 3', '21KB1A0481': '3 3 3',
+                '21KB1A0482': '3 3 3', '21KB1A0483': '3 3 3', '21KB1A0484': '3 3 3', '21KB1A0485': '3 3 3',
+                '21KB1A0486': '3 3 3', '21KB1A0487': '3 3 3', '21KB1A0488': '3 3 3', '21KB1A0489': '3 3 3',
+                '21KB1A0490': '3 3 3', '21KB1A0491': '3 3 3', '21KB1A0492': '3 3 3', '21KB1A0493': '3 3 3',
+                '21KB1A0494': '3 3 3', '21KB1A0495': '3 3 3', '21KB1A0496': '3 3 3', '21KB1A0497': '3 3 3',
+                '21KB1A0498': '3 3 3', '21KB1A0499': '3 3 3', '21KB1A04A0': '3 3 3', '21KB1A04A1': '3 3 3',
+                '21KB1A04A2': '3 3 3', '21KB1A04A3': '3 3 3', '21KB1A04A4': '3 3 3', '21KB1A04A5': '3 3 3',
+                '21KB1A04A6': '3 3 3', '21KB1A04A7': '3 3 3', '21KB1A04A8': '3 3 3', '21KB1A04A9': '3 3 3',
+                '21KB1A04B0': '3 3 3', '21KB1A04B1': '3 3 3', '21KB1A04B2': '3 3 3', '21KB1A04B3': '3 3 3',
+                '21KB1A04B4': '3 3 3', '21KB1A04B5': '3 3 4', '21KB1A04B6': '3 3 4', '21KB1A04B7': '3 3 4',
+                '21KB1A04B8': '3 3 4', '21KB1A04B9': '3 3 4', '21KB1A04C0': '3 3 4', '21KB1A04C1': '3 3 4',
+                '21KB1A04C2': '3 3 4', '21KB1A04C3': '3 3 4', '21KB1A04C4': '3 3 4', '21KB1A04C5': '3 3 4',
+                '21KB1A04C6': '3 3 4', '21KB1A04C7': '3 3 4', '21KB1A04C8': '3 3 4', '21KB1A04C9': '3 3 4',
+                '21KB1A04D0': '3 3 4', '21KB1A04D1': '3 3 4', '21KB1A04D2': '3 3 4', '21KB1A04D3': '3 3 4',
+                '21KB1A04D4': '3 3 4', '21KB1A04D5': '3 3 4', '21KB1A04D6': '3 3 4', '21KB1A04D7': '3 3 4',
+                '21KB1A04D8': '3 3 4', '21KB1A04D9': '3 3 4', '21KB1A04E0': '3 3 4', '21KB1A04E1': '3 3 4',
+                '21KB1A04E2': '3 3 4', '21KB1A04E3': '3 3 4', '21KB1A04E4': '3 3 4', '21KB1A04E5': '3 3 4',
+                '21KB1A04E6': '3 3 4', '21KB1A04E7': '3 3 4', '21KB1A04E8': '3 3 4', '21KB1A04E9': '3 3 4',
+                '21KB1A04F0': '3 3 4', '21KB1A04F1': '3 3 4', '21KB1A04F2': '3 3 4', '21KB1A04F3': '3 3 4',
+                '21KB1A04F4': '3 3 4', '21KB1A04F5': '3 3 4', '21KB1A04F6': '3 3 4', '21KB1A04F7': '3 3 4',
+                '21KB1A04F9': '3 3 4', '21KB1A04G0': '3 3 4', '21KB1A04G1': '3 3 4', '21KB1A04G2': '3 3 4',
+                '21KB1A04G3': '3 3 4', '21KB1A04G4': '3 3 4', '21KB1A04G5': '3 3 4', '21KB1A04G6': '3 3 4',
+                '21KB1A04G7': '3 3 4', '21KB1A04G8': '3 3 4', '21KB1A04G9': '3 3 4', '21KB1A04H0': '3 3 4',
+                '21KB1A04H1': '3 3 4', '21KB1A04H2': '3 3 4', '21KB1A0201': '3 4 2', '21KB1A0202': '3 4 2',
+                '21KB1A0203': '3 4 2', '21KB1A0204': '3 4 2', '21KB1A0205': '3 4 2', '21KB1A0206': '3 4 2',
+                '21KB1A0207': '3 4 2', '21KB1A0208': '3 4 2', '21KB1A0209': '3 4 2', '21KB1A0210': '3 4 2',
+                '21KB1A0211': '3 4 2', '21KB1A0212': '3 4 2', '21KB1A0213': '3 4 2', '21KB1A0214': '3 4 2',
+                '21KB1A0215': '3 4 2', '21KB1A0216': '3 4 2', '21KB1A0217': '3 4 2', '21KB1A0218': '3 4 2',
+                '21KB1A0219': '3 4 2', '21KB1A0220': '3 4 2', '21KB1A0221': '3 4 2', '21KB1A0222': '3 4 2',
+                '21KB1A0223': '3 4 2', '21KB1A0224': '3 4 2', '21KB1A0225': '3 4 2', '21KB1A0226': '3 4 2',
+                '21KB1A0227': '3 4 2', '21KB1A0228': '3 4 2', '21KB1A0229': '3 4 2', '21KB1A0230': '3 4 2',
+                '21KB1A0231': '3 4 2', '21KB1A0232': '3 4 2', '21KB1A0233': '3 4 2', '21KB1A0234': '3 4 2',
+                '21KB1A0235': '3 4 2', '21KB1A0236': '3 4 2', '21KB1A0237': '3 4 2', '21KB1A0238': '3 4 2',
+                '21KB1A0239': '3 4 2', '21KB1A0240': '3 4 2', '21KB1A0241': '3 4 2', '21KB1A0242': '3 4 2',
+                '21KB1A0243': '3 4 2', '21KB1A0244': '3 4 2', '21KB1A0245': '3 4 2', '21KB1A0246': '3 4 2',
+                '21KB1A0247': '3 4 2', '21KB1A0248': '3 4 3', '21KB1A0249': '3 4 3', '21KB1A0250': '3 4 3',
+                '21KB1A0251': '3 4 3', '21KB1A0252': '3 4 3', '21KB1A0253': '3 4 3', '21KB1A0254': '3 4 3',
+                '21KB1A0255': '3 4 3', '21KB1A0256': '3 4 3', '21KB1A0257': '3 4 3', '21KB1A0258': '3 4 3',
+                '21KB1A0259': '3 4 3', '21KB1A0260': '3 4 3', '21KB1A0261': '3 4 3', '21KB1A0262': '3 4 3',
+                '21KB1A0263': '3 4 3', '21KB1A0264': '3 4 3', '21KB1A0265': '3 4 3', '21KB1A0266': '3 4 3',
+                '21KB1A0267': '3 4 3', '21KB1A0268': '3 4 3', '21KB1A0269': '3 4 3', '21KB1A0270': '3 4 3',
+                '21KB1A0271': '3 4 3', '21KB1A0272': '3 4 3', '21KB1A0273': '3 4 3', '21KB1A0274': '3 4 3',
+                '21KB1A0275': '3 4 3', '21KB1A0276': '3 4 3', '21KB1A0277': '3 4 3', '21KB1A0278': '3 4 3',
+                '21KB1A0279': '3 4 3', '21KB1A0280': '3 4 3', '21KB1A0281': '3 4 3', '21KB1A0282': '3 4 3',
+                '21KB1A0283': '3 4 3', '21KB1A0284': '3 4 3', '21KB1A0285': '3 4 3', '21KB1A0286': '3 4 3',
+                '21KB1A0287': '3 4 3', '21KB1A0288': '3 4 3', '21KB1A0289': '3 4 3', '21KB1A0290': '3 4 3',
+                '21KB1A0291': '3 4 3', '21KB1A0292': '3 4 3', '21KB1A0293': '3 4 3', '21KB1A0294': '3 4 3',
+                '21KB1A0101': '3 6 1', '21KB1A0102': '3 6 1', '21KB1A0103': '3 6 1', '21KB1A0104': '3 6 1',
+                '21KB1A0105': '3 6 1', '21KB1A0106': '3 6 1', '21KB1A0107': '3 6 1', '21KB1A0108': '3 6 1',
+                '21KB1A0109': '3 6 1', '21KB1A0110': '3 6 1', '21KB1A0111': '3 6 1', '21KB1A0112': '3 6 1',
+                '21KB1A0113': '3 6 1', '21KB1A0114': '3 6 1', '21KB1A0115': '3 6 1', '21KB1A0116': '3 6 1',
+                '21KB1A0117': '3 6 1', '21KB1A0118': '3 6 1', '21KB1A0119': '3 6 1', '21KB1A0120': '3 6 1',
+                '21KB1A0121': '3 6 1', '21KB1A0122': '3 6 1', '21KB1A0123': '3 6 1', '21KB1A0124': '3 6 1',
+                '21KB1A0125': '3 6 1', '21KB1A0126': '3 6 1', '21KB1A0127': '3 6 1', '21KB1A0128': '3 6 1',
+                '21KB1A0129': '3 6 1', '21KB1A0130': '3 6 1', '21KB1A0131': '3 6 1', '21KB1A0132': '3 6 1',
+                '21KB1A0133': '3 6 1', '21KB1A0134': '3 6 1', '21KB1A0135': '3 6 1', '21KB1A0136': '3 6 1',
+                '21KB1A0137': '3 6 1', '21KB1A0138': '3 6 1', '21KB1A1201': '3 10 1', '21KB1A1202': '3 10 1',
+                '21KB1A1203': '3 10 1', '21KB1A1204': '3 10 1', '21KB1A1205': '3 10 1', '21KB1A1206': '3 10 1',
+                '21KB1A1207': '3 10 1', '21KB1A1208': '3 10 1', '21KB1A1209': '3 10 1', '21KB1A1210': '3 10 1',
+                '21KB1A1211': '3 10 1', '21KB1A1212': '3 10 1', '21KB1A1213': '3 10 1', '21KB1A1214': '3 10 1',
+                '21KB1A1215': '3 10 1', '21KB1A1216': '3 10 1', '21KB1A1217': '3 10 1', '21KB1A1218': '3 10 1',
+                '21KB1A1219': '3 10 1', '21KB1A1220': '3 10 1', '21KB1A1221': '3 10 1', '21KB1A1222': '3 10 1',
+                '21KB1A1223': '3 10 1', '21KB1A1224': '3 10 1', '21KB1A1225': '3 10 1', '21KB1A1226': '3 10 1',
+                '21KB1A1227': '3 10 1', '21KB1A1228': '3 10 1', '21KB1A1229': '3 10 1', '21KB1A1230': '3 10 1',
+                '21KB1A1231': '3 10 1', '21KB1A1232': '3 10 1', '21KB1A1233': '3 10 1', '21KB1A1234': '3 10 1',
+                '21KB1A1235': '3 10 1', '21KB1A1236': '3 10 1', '21KB1A1237': '3 10 1', '21KB1A1238': '3 10 1',
+                '21KB1A1239': '3 10 1', '21KB1A1240': '3 10 1', '21KB1A1241': '3 10 1', '21KB1A1242': '3 10 1',
+                '21KB1A1243': '3 10 1', '21KB1A1244': '3 10 1', '21KB1A1245': '3 10 1', '21KB1A1246': '3 10 1',
+                '21KB1A1247': '3 10 1', '21KB1A1248': '3 10 1', '21KB1A3001': '3 11 2', '21KB1A3002': '3 11 2',
+                '21KB1A3003': '3 11 2', '21KB1A3004': '3 11 2', '21KB1A3005': '3 11 2', '21KB1A3006': '3 11 2',
+                '21KB1A3007': '3 11 2', '21KB1A3008': '3 11 2', '21KB1A3009': '3 11 2', '21KB1A3010': '3 11 2',
+                '21KB1A3011': '3 11 2', '21KB1A3012': '3 11 2', '21KB1A3013': '3 11 2', '21KB1A3014': '3 11 2',
+                '21KB1A3015': '3 11 2', '21KB1A3016': '3 11 2', '21KB1A3017': '3 11 2', '21KB1A3018': '3 11 2',
+                '21KB1A3019': '3 11 2', '21KB1A3020': '3 11 2', '21KB1A3021': '3 11 2', '21KB1A3022': '3 11 2',
+                '21KB1A3023': '3 11 2', '21KB1A3024': '3 11 2', '21KB1A3025': '3 11 2', '21KB1A3026': '3 11 2',
+                '21KB1A3027': '3 11 2', '21KB1A3028': '3 11 2', '21KB1A3029': '3 11 2', '21KB1A3030': '3 11 2',
+                '21KB1A3031': '3 11 2', '21KB1A3032': '3 11 2', '21KB1A3033': '3 11 2', '21KB1A3035': '3 11 2',
+                '21KB1A3036': '3 11 2', '21KB1A3037': '3 11 2', '21KB1A3038': '3 11 2', '21KB1A3039': '3 11 2',
+                '21KB1A3040': '3 11 2', '21KB1A3041': '3 11 2', '21KB1A3042': '3 11 2', '21KB1A3043': '3 11 2',
+                '21KB1A3044': '3 11 2', '21KB1A3045': '3 11 2', '21KB1A3046': '3 11 2', '21KB1A3047': '3 11 2',
+                '21KB1A3048': '3 11 2', '21KB1A3049': '3 11 2', '21KB1A3050': '3 11 2', '21KB1A3051': '3 11 2',
+                '21KB1A3052': '3 11 2', '21KB1A3053': '3 11 3', '21KB1A3054': '3 11 3', '21KB1A3055': '3 11 3',
+                '21KB1A3056': '3 11 3', '21KB1A3057': '3 11 3', '21KB1A3058': '3 11 3', '21KB1A3059': '3 11 3',
+                '21KB1A3060': '3 11 3', '21KB1A3061': '3 11 3', '21KB1A3062': '3 11 3', '21KB1A3063': '3 11 3',
+                '21KB1A3064': '3 11 3', '21KB1A3065': '3 11 3', '21KB1A3066': '3 11 3', '21KB1A3067': '3 11 3',
+                '21KB1A3068': '3 11 3', '21KB1A3069': '3 11 3', '21KB1A3070': '3 11 3', '21KB1A3071': '3 11 3',
+                '21KB1A3072': '3 11 3', '21KB1A3073': '3 11 3', '21KB1A3074': '3 11 3', '21KB1A3075': '3 11 3',
+                '21KB1A3076': '3 11 3', '21KB1A3077': '3 11 3', '21KB1A3078': '3 11 3', '21KB1A3079': '3 11 3',
+                '21KB1A3080': '3 11 3', '21KB1A3081': '3 11 3', '21KB1A3082': '3 11 3', '21KB1A3083': '3 11 3',
+                '21KB1A3084': '3 11 3', '21KB1A3085': '3 11 3', '21KB1A3086': '3 11 3', '21KB1A3087': '3 11 3',
+                '21KB1A3088': '3 11 3', '21KB1A3089': '3 11 3', '21KB1A3090': '3 11 3', '21KB1A3091': '3 11 3',
+                '21KB1A3092': '3 11 3', '21KB1A3093': '3 11 3', '21KB1A3094': '3 11 3', '21KB1A3095': '3 11 3',
+                '21KB1A3096': '3 11 3', '21KB1A3097': '3 11 3', '21KB1A3098': '3 11 3', '21KB1A3099': '3 11 3',
+                '21KB1A30A0': '3 11 3', '21KB1A30A1': '3 11 3', '21KB1A30A2': '3 11 3', '21KB1A30A3': '3 11 3',
+                '20KB1A0301': '5 1 2', '20KB1A0302': '5 1 2', '20KB1A0303': '5 1 2', '20KB1A0304': '5 1 2',
+                '20KB1A0305': '5 1 2', '20KB1A0306': '5 1 2', '20KB1A0307': '5 1 2', '20KB1A0308': '5 1 2',
+                '20KB1A0309': '5 1 2', '20KB1A0310': '5 1 2', '20KB1A0312': '5 1 2', '20KB1A0313': '5 1 2',
+                '20KB1A0314': '5 1 2', '20KB1A0315': '5 1 2', '20KB1A0316': '5 1 2', '20KB1A0317': '5 1 2',
+                '20KB1A0318': '5 1 2', '20KB1A0319': '5 1 2', '20KB1A0320': '5 1 2', '20KB1A0321': '5 1 2',
+                '20KB1A0322': '5 1 2', '20KB1A0323': '5 1 2', '20KB1A0324': '5 1 2', '20KB1A0325': '5 1 2',
+                '20KB1A0326': '5 1 2', '20KB1A0327': '5 1 2', '20KB1A0328': '5 1 2', '20KB1A0329': '5 1 2',
+                '20KB1A0330': '5 1 2', '20KB1A0331': '5 1 2', '20KB1A0332': '5 1 2', '20KB1A0333': '5 1 2',
+                '20KB1A0334': '5 1 2', '20KB1A0335': '5 1 2', '20KB1A0336': '5 1 2', '20KB1A0337': '5 1 2',
+                '20KB1A0338': '5 1 2', '20KB1A0339': '5 1 2', '20KB1A0342': '5 1 2', '20KB1A0343': '5 1 2',
+                '21KB5A0301': '5 1 2', '21KB5A0302': '5 1 2', '21KB5A0303': '5 1 2', '21KB5A0304': '5 1 2',
+                '21KB5A0305': '5 1 2', '21KB5A0306': '5 1 2', '21KB5A0307': '5 1 2', '21KB5A0308': '5 1 2',
+                '21KB5A0309': '5 1 2', '21KB5A0310': '5 1 2', '21KB5A0311': '5 1 2', '21KB5A0312': '5 1 2',
+                '21KB5A0313': '5 1 2', '21KB5A0314': '5 1 2', '21KB5A0315': '5 1 2', '21KB5A0316': '5 1 2',
+                '20KB1A0344': '5 1 3', '20KB1A0345': '5 1 3', '20KB1A0346': '5 1 3', '20KB1A0347': '5 1 3',
+                '20KB1A0348': '5 1 3', '20KB1A0349': '5 1 3', '20KB1A0350': '5 1 3', '20KB1A0351': '5 1 3',
+                '20KB1A0352': '5 1 3', '20KB1A0353': '5 1 3', '20KB1A0354': '5 1 3', '20KB1A0355': '5 1 3',
+                '20KB1A0356': '5 1 3', '20KB1A0357': '5 1 3', '20KB1A0358': '5 1 3', '20KB1A0359': '5 1 3',
+                '20KB1A0360': '5 1 3', '20KB1A0361': '5 1 3', '20KB1A0362': '5 1 3', '20KB1A0363': '5 1 3',
+                '20KB1A0364': '5 1 3', '20KB1A0365': '5 1 3', '20KB1A0366': '5 1 3', '20KB1A0367': '5 1 3',
+                '20KB1A0368': '5 1 3', '20KB1A0369': '5 1 3', '20KB1A0370': '5 1 3', '20KB1A0371': '5 1 3',
+                '20KB1A0372': '5 1 3', '20KB1A0373': '5 1 3', '20KB1A0374': '5 1 3', '20KB1A0375': '5 1 3',
+                '20KB1A0376': '5 1 3', '20KB1A0377': '5 1 3', '20KB1A0378': '5 1 3', '20KB1A0379': '5 1 3',
+                '20KB1A0380': '5 1 3', '20KB1A0381': '5 1 3', '20KB1A0382': '5 1 3', '20KB1A0383': '5 1 3',
+                '20KB1A0384': '5 1 3', '20KB1A0385': '5 1 3', '21KB5A0317': '5 1 3', '21KB5A0318': '5 1 3',
+                '21KB5A0319': '5 1 3', '21KB5A0320': '5 1 3', '21KB5A0321': '5 1 3', '21KB5A0322': '5 1 3',
+                '21KB5A0323': '5 1 3', '21KB5A0324': '5 1 3', '21KB5A0325': '5 1 3', '21KB5A0326': '5 1 3',
+                '21KB5A0327': '5 1 3', '21KB5A0328': '5 1 3', '21KB5A0329': '5 1 3', '21KB5A0330': '5 1 3',
+                '21KB5A0331': '5 1 3', '21KB5A0332': '5 1 3', '20KB1A0386': '5 1 4', '20KB1A0387': '5 1 4',
+                '20KB1A0388': '5 1 4', '20KB1A0389': '5 1 4', '20KB1A0390': '5 1 4', '20KB1A0391': '5 1 4',
+                '20KB1A0392': '5 1 4', '20KB1A0393': '5 1 4', '20KB1A0394': '5 1 4', '20KB1A0395': '5 1 4',
+                '20KB1A0396': '5 1 4', '20KB1A0397': '5 1 4', '20KB1A0398': '5 1 4', '20KB1A0399': '5 1 4',
+                '20KB1A03A0': '5 1 4', '20KB1A03A1': '5 1 4', '20KB1A03A2': '5 1 4', '20KB1A03A3': '5 1 4',
+                '20KB1A03A4': '5 1 4', '20KB1A03A5': '5 1 4', '20KB1A03A6': '5 1 4', '20KB1A03A7': '5 1 4',
+                '20KB1A03A8': '5 1 4', '20KB1A03A9': '5 1 4', '20KB1A03B0': '5 1 4', '20KB1A03B1': '5 1 4',
+                '20KB1A03B2': '5 1 4', '20KB1A03B3': '5 1 4', '20KB1A03B4': '5 1 4', '20KB1A03B5': '5 1 4',
+                '20KB1A03B6': '5 1 4', '20KB1A03B7': '5 1 4', '20KB1A03B8': '5 1 4', '20KB1A03B9': '5 1 4',
+                '20KB1A03C0': '5 1 4', '20KB1A03C1': '5 1 4', '20KB1A03C2': '5 1 4', '20KB1A03C3': '5 1 4',
+                '20KB1A03C4': '5 1 4', '20KB1A03C5': '5 1 4', '20KB1A03C6': '5 1 4', '20KB1A03C7': '5 1 4',
+                '20KB1A03C8': '5 1 4', '21KB5A0333': '5 1 4', '21KB5A0334': '5 1 4', '21KB5A0335': '5 1 4',
+                '21KB5A0336': '5 1 4', '21KB5A0337': '5 1 4', '21KB5A0338': '5 1 4', '21KB5A0339': '5 1 4',
+                '21KB5A0340': '5 1 4', '21KB5A0341': '5 1 4', '21KB5A0342': '5 1 4', '21KB5A0343': '5 1 4',
+                '21KB5A0344': '5 1 4', '21KB5A0345': '5 1 4', '21KB5A0346': '5 1 4', '21KB5A0347': '5 1 4',
+                '21KB5A0348': '5 1 4', '20KB1A0501': '5 2 2', '20KB1A0502': '5 2 2', '20KB1A0503': '5 2 2',
+                '20KB1A0504': '5 2 2', '20KB1A0505': '5 2 2', '20KB1A0506': '5 2 2', '20KB1A0507': '5 2 2',
+                '20KB1A0508': '5 2 2', '20KB1A0509': '5 2 2', '20KB1A0510': '5 2 2', '20KB1A0511': '5 2 2',
+                '20KB1A0512': '5 2 2', '20KB1A0513': '5 2 2', '20KB1A0514': '5 2 2', '20KB1A0515': '5 2 2',
+                '20KB1A0516': '5 2 2', '20KB1A0517': '5 2 2', '20KB1A0518': '5 2 2', '20KB1A0519': '5 2 2',
+                '20KB1A0520': '5 2 2', '20KB1A0521': '5 2 2', '20KB1A0522': '5 2 2', '20KB1A0523': '5 2 2',
+                '20KB1A0524': '5 2 2', '20KB1A0525': '5 2 2', '20KB1A0526': '5 2 2', '20KB1A0527': '5 2 2',
+                '20KB1A0528': '5 2 2', '20KB1A0529': '5 2 2', '20KB1A0530': '5 2 2', '20KB1A0531': '5 2 2',
+                '20KB1A0532': '5 2 2', '20KB1A0533': '5 2 2', '20KB1A0534': '5 2 2', '20KB1A0535': '5 2 2',
+                '20KB1A0536': '5 2 2', '20KB1A0537': '5 2 2', '20KB1A0538': '5 2 2', '20KB1A0539': '5 2 2',
+                '20KB1A0540': '5 2 2', '20KB1A0541': '5 2 2', '20KB1A0542': '5 2 2', '20KB1A0543': '5 2 2',
+                '20KB1A0544': '5 2 2', '20KB1A0545': '5 2 2', '20KB1A0546': '5 2 2', '20KB1A0547': '5 2 2',
+                '20KB1A0548': '5 2 2', '20KB1A0549': '5 2 2', '20KB1A0550': '5 2 2', '20KB1A0551': '5 2 2',
+                '20KB1A0552': '5 2 2', '20KB1A0553': '5 2 2', '20KB1A0554': '5 2 2', '20KB1A0555': '5 2 2',
+                '20KB1A0556': '5 2 2', '20KB1A0557': '5 2 2', '20KB1A0558': '5 2 2', '20KB1A0559': '5 2 2',
+                '20KB1A0560': '5 2 2', '20KB1A0561': '5 2 2', '20KB1A0562': '5 2 2', '20KB1A0563': '5 2 2',
+                '20KB1A0564': '5 2 2', '21KB5A0501': '5 2 2', '21KB5A0502': '5 2 2', '21KB5A0503': '5 2 2',
+                '21KB5A0504': '5 2 2', '21KB5A0505': '5 2 2', '21KB5A0506': '5 2 2', '20KB1A0565': '5 2 3',
+                '20KB1A0566': '5 2 3', '20KB1A0567': '5 2 3', '20KB1A0568': '5 2 3', '20KB1A0569': '5 2 3',
+                '20KB1A0570': '5 2 3', '20KB1A0571': '5 2 3', '20KB1A0572': '5 2 3', '20KB1A0573': '5 2 3',
+                '20KB1A0574': '5 2 3', '20KB1A0576': '5 2 3', '20KB1A0577': '5 2 3', '20KB1A0578': '5 2 3',
+                '20KB1A0579': '5 2 3', '20KB1A0580': '5 2 3', '20KB1A0581': '5 2 3', '20KB1A0582': '5 2 3',
+                '20KB1A0583': '5 2 3', '20KB1A0584': '5 2 3', '20KB1A0585': '5 2 3', '20KB1A0586': '5 2 3',
+                '20KB1A0587': '5 2 3', '20KB1A0588': '5 2 3', '20KB1A0589': '5 2 3', '20KB1A0590': '5 2 3',
+                '20KB1A0591': '5 2 3', '20KB1A0592': '5 2 3', '20KB1A0593': '5 2 3', '20KB1A0594': '5 2 3',
+                '20KB1A0595': '5 2 3', '20KB1A0596': '5 2 3', '20KB1A0597': '5 2 3', '20KB1A0599': '5 2 3',
+                '20KB1A05A0': '5 2 3', '20KB1A05A1': '5 2 3', '20KB1A05A2': '5 2 3', '20KB1A05A3': '5 2 3',
+                '20KB1A05A4': '5 2 3', '20KB1A05A5': '5 2 3', '20KB1A05A6': '5 2 3', '20KB1A05A7': '5 2 3',
+                '20KB1A05A8': '5 2 3', '20KB1A05A9': '5 2 3', '20KB1A05B0': '5 2 3', '20KB1A05B1': '5 2 3',
+                '20KB1A05B2': '5 2 3', '20KB1A05B3': '5 2 3', '20KB1A05B4': '5 2 3', '20KB1A05B5': '5 2 3',
+                '20KB1A05B6': '5 2 3', '20KB1A05B7': '5 2 3', '20KB1A05B8': '5 2 3', '20KB1A05B9': '5 2 3',
+                '20KB1A05C0': '5 2 3', '20KB1A05C1': '5 2 3', '20KB1A05C2': '5 2 3', '20KB1A05C3': '5 2 3',
+                '20KB1A05C4': '5 2 3', '20KB1A05C5': '5 2 3', '20KB1A05C6': '5 2 3', '20KB1A05C7': '5 2 3',
+                '20KB1A05C8': '5 2 3', '20KB1A05C9': '5 2 3', '21KB5A0507': '5 2 3', '21KB5A0508': '5 2 3',
+                '21KB5A0509': '5 2 3', '21KB5A0510': '5 2 3', '21KB5A0511': '5 2 3', '21KB5A0512': '5 2 3',
+                '20KB1A05D0': '5 2 4', '20KB1A05D1': '5 2 4', '20KB1A05D2': '5 2 4', '20KB1A05D3': '5 2 4',
+                '20KB1A05D4': '5 2 4', '20KB1A05D5': '5 2 4', '20KB1A05D6': '5 2 4', '20KB1A05D7': '5 2 4',
+                '20KB1A05D8': '5 2 4', '20KB1A05D9': '5 2 4', '20KB1A05E0': '5 2 4', '20KB1A05E1': '5 2 4',
+                '20KB1A05E2': '5 2 4', '20KB1A05E3': '5 2 4', '20KB1A05E4': '5 2 4', '20KB1A05E5': '5 2 4',
+                '20KB1A05E6': '5 2 4', '20KB1A05E7': '5 2 4', '20KB1A05E8': '5 2 4', '20KB1A05E9': '5 2 4',
+                '20KB1A05F0': '5 2 4', '20KB1A05F1': '5 2 4', '20KB1A05F2': '5 2 4', '20KB1A05F3': '5 2 4',
+                '20KB1A05F4': '5 2 4', '20KB1A05F5': '5 2 4', '20KB1A05F6': '5 2 4', '20KB1A05F7': '5 2 4',
+                '20KB1A05F8': '5 2 4', '20KB1A05F9': '5 2 4', '20KB1A05G0': '5 2 4', '20KB1A05G1': '5 2 4',
+                '20KB1A05G2': '5 2 4', '20KB1A05G3': '5 2 4', '20KB1A05G4': '5 2 4', '20KB1A05G5': '5 2 4',
+                '20KB1A05G6': '5 2 4', '20KB1A05G7': '5 2 4', '20KB1A05G8': '5 2 4', '20KB1A05G9': '5 2 4',
+                '20KB1A05H0': '5 2 4', '20KB1A05H1': '5 2 4', '20KB1A05H2': '5 2 4', '20KB1A05H3': '5 2 4',
+                '20KB1A05H4': '5 2 4', '20KB1A05H5': '5 2 4', '20KB1A05H6': '5 2 4', '20KB1A05H7': '5 2 4',
+                '20KB1A05H8': '5 2 4', '20KB1A05H9': '5 2 4', '20KB1A05I0': '5 2 4', '20KB1A05I1': '5 2 4',
+                '20KB1A05I2': '5 2 4', '20KB1A05I3': '5 2 4', '20KB1A05I4': '5 2 4', '20KB1A05I5': '5 2 4',
+                '20KB1A05I6': '5 2 4', '20KB1A05I7': '5 2 4', '20KB1A05I8': '5 2 4', '20KB1A05I9': '5 2 4',
+                '20KB1A05J0': '5 2 4', '20KB1A05J1': '5 2 4', '20KB1A05J2': '5 2 4', '20KB1A05J3': '5 2 4',
+                '18KB1A05E0': '5 2 4', '21KB5A0513': '5 2 4', '21KB5A0514': '5 2 4', '21KB5A0515': '5 2 4',
+                '21KB5A0516': '5 2 4', '21KB5A0517': '5 2 4', '21KB5A0518': '5 2 4', '20KB1A0401': '5 3 2',
+                '20KB1A0402': '5 3 2', '20KB1A0403': '5 3 2', '20KB1A0404': '5 3 2', '20KB1A0405': '5 3 2',
+                '20KB1A0406': '5 3 2', '20KB1A0407': '5 3 2', '20KB1A0408': '5 3 2', '20KB1A0409': '5 3 2',
+                '20KB1A0410': '5 3 2', '20KB1A0411': '5 3 2', '20KB1A0413': '5 3 2', '20KB1A0414': '5 3 2',
+                '20KB1A0415': '5 3 2', '20KB1A0416': '5 3 2', '20KB1A0417': '5 3 2', '20KB1A0418': '5 3 2',
+                '20KB1A0419': '5 3 2', '20KB1A0420': '5 3 2', '20KB1A0421': '5 3 2', '20KB1A0422': '5 3 2',
+                '20KB1A0423': '5 3 2', '20KB1A0424': '5 3 2', '20KB1A0425': '5 3 2', '20KB1A0426': '5 3 2',
+                '20KB1A0427': '5 3 2', '20KB1A0428': '5 3 2', '20KB1A0429': '5 3 2', '20KB1A0430': '5 3 2',
+                '20KB1A0431': '5 3 2', '20KB1A0432': '5 3 2', '20KB1A0433': '5 3 2', '20KB1A0434': '5 3 2',
+                '20KB1A0435': '5 3 2', '20KB1A0436': '5 3 2', '20KB1A0438': '5 3 2', '20KB1A0439': '5 3 2',
+                '20KB1A0440': '5 3 2', '20KB1A0441': '5 3 2', '20KB1A0442': '5 3 2', '20KB1A0443': '5 3 2',
+                '20KB1A0444': '5 3 2', '20KB1A0445': '5 3 2', '20KB1A0446': '5 3 2', '20KB1A0447': '5 3 2',
+                '20KB1A0448': '5 3 2', '20KB1A0449': '5 3 2', '20KB1A0450': '5 3 2', '20KB1A0451': '5 3 2',
+                '20KB1A0452': '5 3 2', '20KB1A0453': '5 3 2', '20KB1A0454': '5 3 2', '20KB1A0455': '5 3 2',
+                '20KB1A0456': '5 3 2', '20KB1A0457': '5 3 2', '20KB1A0458': '5 3 2', '20KB1A0459': '5 3 2',
+                '20KB1A0460': '5 3 2', '20KB1A0461': '5 3 2', '20KB1A0462': '5 3 2', '20KB1A0463': '5 3 2',
+                '20KB1A0464': '5 3 2', '21KB5A0401': '5 3 2', '21KB5A0402': '5 3 2', '21KB5A0403': '5 3 2',
+                '21KB5A0404': '5 3 2', '21KB5A0405': '5 3 2', '21KB5A0406': '5 3 2', '20KB1A0465': '5 3 3',
+                '20KB1A0466': '5 3 3', '20KB1A0467': '5 3 3', '20KB1A0468': '5 3 3', '20KB1A0469': '5 3 3',
+                '20KB1A0470': '5 3 3', '20KB1A0471': '5 3 3', '20KB1A0472': '5 3 3', '20KB1A0473': '5 3 3',
+                '20KB1A0474': '5 3 3', '20KB1A0475': '5 3 3', '20KB1A0476': '5 3 3', '20KB1A0477': '5 3 3',
+                '20KB1A0478': '5 3 3', '20KB1A0479': '5 3 3', '20KB1A0480': '5 3 3', '20KB1A0481': '5 3 3',
+                '20KB1A0482': '5 3 3', '20KB1A0483': '5 3 3', '20KB1A0484': '5 3 3', '20KB1A0485': '5 3 3',
+                '20KB1A0486': '5 3 3', '20KB1A0487': '5 3 3', '20KB1A0488': '5 3 3', '20KB1A0489': '5 3 3',
+                '20KB1A0490': '5 3 3', '20KB1A0491': '5 3 3', '20KB1A0492': '5 3 3', '20KB1A0493': '5 3 3',
+                '20KB1A0494': '5 3 3', '20KB1A0495': '5 3 3', '20KB1A0496': '5 3 3', '20KB1A0497': '5 3 3',
+                '20KB1A0498': '5 3 3', '20KB1A04A0': '5 3 3', '20KB1A04A1': '5 3 3', '20KB1A04A2': '5 3 3',
+                '20KB1A04A3': '5 3 3', '20KB1A04A4': '5 3 3', '20KB1A04A5': '5 3 3', '20KB1A04A6': '5 3 3',
+                '20KB1A04A7': '5 3 3', '20KB1A04A8': '5 3 3', '20KB1A04A9': '5 3 3', '20KB1A04B0': '5 3 3',
+                '20KB1A04B1': '5 3 3', '20KB1A04B2': '5 3 3', '20KB1A04B3': '5 3 3', '20KB1A04B4': '5 3 3',
+                '20KB1A04B5': '5 3 3', '20KB1A04B6': '5 3 3', '20KB1A04B7': '5 3 3', '20KB1A04B8': '5 3 3',
+                '20KB1A04B9': '5 3 3', '20KB1A04C0': '5 3 3', '20KB1A04C1': '5 3 3', '20KB1A04C2': '5 3 3',
+                '20KB1A04C3': '5 3 3', '20KB1A04C4': '5 3 3', '20KB1A04C5': '5 3 3', '20KB1A04C6': '5 3 3',
+                '20KB1A04C7': '5 3 3', '20KB1A04C8': '5 3 3', '21KB5A0407': '5 3 3', '21KB5A0408': '5 3 3',
+                '21KB5A0409': '5 3 3', '21KB5A0410': '5 3 3', '21KB5A0411': '5 3 3', '21KB5A0412': '5 3 3',
+                '20KB1A04C9': '5 3 4', '20KB1A04D0': '5 3 4', '20KB1A04D1': '5 3 4', '20KB1A04D2': '5 3 4',
+                '20KB1A04D3': '5 3 4', '20KB1A04D4': '5 3 4', '20KB1A04D5': '5 3 4', '20KB1A04D6': '5 3 4',
+                '20KB1A04D7': '5 3 4', '20KB1A04D8': '5 3 4', '20KB1A04D9': '5 3 4', '20KB1A04E0': '5 3 4',
+                '20KB1A04E1': '5 3 4', '20KB1A04E2': '5 3 4', '20KB1A04E3': '5 3 4', '20KB1A04E4': '5 3 4',
+                '20KB1A04E5': '5 3 4', '20KB1A04E6': '5 3 4', '20KB1A04E7': '5 3 4', '20KB1A04E8': '5 3 4',
+                '20KB1A04E9': '5 3 4', '20KB1A04F0': '5 3 4', '20KB1A04F1': '5 3 4', '20KB1A04F2': '5 3 4',
+                '20KB1A04F3': '5 3 4', '20KB1A04F4': '5 3 4', '20KB1A04F5': '5 3 4', '20KB1A04F6': '5 3 4',
+                '20KB1A04F7': '5 3 4', '20KB1A04F8': '5 3 4', '20KB1A04F9': '5 3 4', '20KB1A04G0': '5 3 4',
+                '20KB1A04G1': '5 3 4', '20KB1A04G2': '5 3 4', '20KB1A04G3': '5 3 4', '20KB1A04G4': '5 3 4',
+                '20KB1A04G5': '5 3 4', '20KB1A04G6': '5 3 4', '20KB1A04G7': '5 3 4', '20KB1A04G8': '5 3 4',
+                '20KB1A04G9': '5 3 4', '20KB1A04H0': '5 3 4', '20KB1A04H1': '5 3 4', '20KB1A04H2': '5 3 4',
+                '20KB1A04H3': '5 3 4', '20KB1A04H4': '5 3 4', '20KB1A04H5': '5 3 4', '20KB1A04H6': '5 3 4',
+                '20KB1A04H7': '5 3 4', '20KB1A04H8': '5 3 4', '20KB1A04H9': '5 3 4', '20KB1A04I0': '5 3 4',
+                '20KB1A04I1': '5 3 4', '20KB1A04I2': '5 3 4', '20KB1A04I3': '5 3 4', '20KB1A04I4': '5 3 4',
+                '20KB1A04I5': '5 3 4', '20KB1A04I6': '5 3 4', '20KB1A04I7': '5 3 4', '20KB1A04I8': '5 3 4',
+                '20KB1A04I9': '5 3 4', '20KB1A04J0': '5 3 4', '20KB1A04J1': '5 3 4', '21KB5A0413': '5 3 4',
+                '21KB5A0414': '5 3 4', '21KB5A0415': '5 3 4', '21KB5A0416': '5 3 4', '21KB5A0417': '5 3 4',
+                '21KB5A0418': '5 3 4', '21KB5A0419': '5 3 4', '20KB1A0201': '5 4 2', '20KB1A0202': '5 4 2',
+                '20KB1A0203': '5 4 2', '20KB1A0204': '5 4 2', '20KB1A0205': '5 4 2', '20KB1A0206': '5 4 2',
+                '20KB1A0207': '5 4 2', '20KB1A0208': '5 4 2', '20KB1A0209': '5 4 2', '20KB1A0210': '5 4 2',
+                '20KB1A0211': '5 4 2', '20KB1A0212': '5 4 2', '20KB1A0213': '5 4 2', '20KB1A0214': '5 4 2',
+                '20KB1A0215': '5 4 2', '20KB1A0216': '5 4 2', '20KB1A0217': '5 4 2', '20KB1A0218': '5 4 2',
+                '20KB1A0219': '5 4 2', '20KB1A0220': '5 4 2', '20KB1A0221': '5 4 2', '20KB1A0222': '5 4 2',
+                '20KB1A0223': '5 4 2', '20KB1A0224': '5 4 2', '20KB1A0225': '5 4 2', '20KB1A0226': '5 4 2',
+                '20KB1A0227': '5 4 2', '20KB1A0228': '5 4 2', '20KB1A0229': '5 4 2', '20KB1A0230': '5 4 2',
+                '20KB1A0231': '5 4 2', '20KB1A0232': '5 4 2', '20KB1A0233': '5 4 2', '20KB1A0234': '5 4 2',
+                '20KB1A0235': '5 4 2', '20KB1A0236': '5 4 2', '20KB1A0237': '5 4 2', '20KB1A0238': '5 4 2',
+                '20KB1A0239': '5 4 2', '20KB1A0240': '5 4 2', '20KB1A0241': '5 4 2', '20KB1A0242': '5 4 2',
+                '20KB1A0243': '5 4 2', '20KB1A0244': '5 4 2', '20KB1A0245': '5 4 2', '21KB5A0201': '5 4 2',
+                '21KB5A0202': '5 4 2', '21KB5A0203': '5 4 2', '21KB5A0204': '5 4 2', '21KB5A0205': '5 4 2',
+                '21KB5A0206': '5 4 2', '21KB5A0207': '5 4 2', '21KB5A0208': '5 4 2', '21KB5A0209': '5 4 2',
+                '21KB5A0210': '5 4 2', '21KB5A0211': '5 4 2', '20KB1A0246': '5 4 3', '20KB1A0247': '5 4 3',
+                '20KB1A0248': '5 4 3', '20KB1A0250': '5 4 3', '20KB1A0251': '5 4 3', '20KB1A0252': '5 4 3',
+                '20KB1A0253': '5 4 3', '20KB1A0254': '5 4 3', '20KB1A0255': '5 4 3', '20KB1A0256': '5 4 3',
+                '20KB1A0257': '5 4 3', '20KB1A0258': '5 4 3', '20KB1A0259': '5 4 3', '20KB1A0260': '5 4 3',
+                '20KB1A0261': '5 4 3', '20KB1A0263': '5 4 3', '20KB1A0264': '5 4 3', '20KB1A0265': '5 4 3',
+                '20KB1A0266': '5 4 3', '20KB1A0267': '5 4 3', '20KB1A0268': '5 4 3', '20KB1A0269': '5 4 3',
+                '20KB1A0270': '5 4 3', '20KB1A0271': '5 4 3', '20KB1A0272': '5 4 3', '20KB1A0273': '5 4 3',
+                '20KB1A0274': '5 4 3', '20KB1A0275': '5 4 3', '20KB1A0276': '5 4 3', '20KB1A0277': '5 4 3',
+                '20KB1A0278': '5 4 3', '20KB1A0279': '5 4 3', '20KB1A0280': '5 4 3', '20KB1A0281': '5 4 3',
+                '20KB1A0282': '5 4 3', '20KB1A0283': '5 4 3', '20KB1A0284': '5 4 3', '20KB1A0285': '5 4 3',
+                '20KB1A0286': '5 4 3', '20KB1A0287': '5 4 3', '20KB1A0288': '5 4 3', '20KB1A0289': '5 4 3',
+                '20KB1A0290': '5 4 3', '21KB5A0212': '5 4 3', '21KB5A0213': '5 4 3', '21KB5A0214': '5 4 3',
+                '21KB5A0215': '5 4 3', '21KB5A0216': '5 4 3', '21KB5A0217': '5 4 3', '21KB5A0218': '5 4 3',
+                '21KB5A0219': '5 4 3', '21KB5A0220': '5 4 3', '21KB5A0221': '5 4 3', '21KB5A0222': '5 4 3',
+                '19KB1A0244': '5 4 3', '': '5 11 4', '20KB1A0101': '5 6 2', '20KB1A0102': '5 6 2',
+                '20KB1A0103': '5 6 2', '20KB1A0104': '5 6 2', '20KB1A0105': '5 6 2', '20KB1A0106': '5 6 2',
+                '20KB1A0107': '5 6 2', '20KB1A0108': '5 6 2', '20KB1A0109': '5 6 2', '20KB1A0110': '5 6 2',
+                '20KB1A0111': '5 6 2', '20KB1A0112': '5 6 2', '20KB1A0113': '5 6 2', '20KB1A0114': '5 6 2',
+                '20KB1A0115': '5 6 2', '20KB1A0116': '5 6 2', '20KB1A0117': '5 6 2', '20KB1A0118': '5 6 2',
+                '20KB1A0119': '5 6 2', '20KB1A0120': '5 6 2', '20KB1A0121': '5 6 2', '20KB1A0122': '5 6 2',
+                '20KB1A0123': '5 6 2', '20KB1A0124': '5 6 2', '20KB1A0125': '5 6 2', '20KB1A0126': '5 6 2',
+                '20KB1A0127': '5 6 2', '20KB1A0128': '5 6 2', '20KB1A0129': '5 6 2', '20KB1A0130': '5 6 2',
+                '20KB1A0131': '5 6 2', '20KB1A0132': '5 6 2', '20KB1A0133': '5 6 2', '20KB1A0135': '5 6 2',
+                '20KB1A0136': '5 6 2', '20KB1A0137': '5 6 2', '20KB1A0138': '5 6 2', '20KB1A0139': '5 6 2',
+                '20KB1A0140': '5 6 2', '21KB5A0101': '5 6 2', '21KB5A0102': '5 6 2', '21KB5A0103': '5 6 2',
+                '21KB5A0104': '5 6 2', '21KB5A0105': '5 6 2', '21KB5A0106': '5 6 2', '21KB5A0107': '5 6 2',
+                '21KB5A0108': '5 6 2', '21KB5A0109': '5 6 2', '21KB5A0110': '5 6 2', '21KB5A0111': '5 6 2',
+                '21KB5A0112': '5 6 2', '21KB5A0113': '5 6 2', '21KB5A0114': '5 6 2', '20KB1A0141': '5 6 3',
+                '20KB1A0142': '5 6 3', '20KB1A0143': '5 6 3', '20KB1A0144': '5 6 3', '20KB1A0145': '5 6 3',
+                '20KB1A0146': '5 6 3', '20KB1A0147': '5 6 3', '20KB1A0148': '5 6 3', '20KB1A0149': '5 6 3',
+                '20KB1A0150': '5 6 3', '20KB1A0151': '5 6 3', '20KB1A0152': '5 6 3', '20KB1A0153': '5 6 3',
+                '20KB1A0154': '5 6 3', '20KB1A0155': '5 6 3', '20KB1A0156': '5 6 3', '20KB1A0157': '5 6 3',
+                '20KB1A0158': '5 6 3', '20KB1A0159': '5 6 3', '20KB1A0160': '5 6 3', '20KB1A0161': '5 6 3',
+                '20KB1A0162': '5 6 3', '20KB1A0163': '5 6 3', '20KB1A0164': '5 6 3', '20KB1A0165': '5 6 3',
+                '20KB1A0166': '5 6 3', '20KB1A0167': '5 6 3', '20KB1A0168': '5 6 3', '20KB1A0169': '5 6 3',
+                '20KB1A0170': '5 6 3', '20KB1A0171': '5 6 3', '20KB1A0172': '5 6 3', '20KB1A0173': '5 6 3',
+                '20KB1A0174': '5 6 3', '20KB1A0175': '5 6 3', '20KB1A0176': '5 6 3', '20KB1A0177': '5 6 3',
+                '20KB1A0178': '5 6 3', '20KB1A0179': '5 6 3', '21KB5A0115': '5 6 3', '21KB5A0116': '5 6 3',
+                '21KB5A0117': '5 6 3', '21KB5A0118': '5 6 3', '21KB5A0119': '5 6 3', '21KB5A0120': '5 6 3',
+                '21KB5A0121': '5 6 3', '21KB5A0122': '5 6 3', '21KB5A0123': '5 6 3', '21KB5A0124': '5 6 3',
+                '21KB5A0125': '5 6 3', '21KB5A0126': '5 6 3', '21KB5A0127': '5 6 3', '21KB5A0128': '5 6 3',
+                '21KB5A0129': '5 6 3', '21KB5A0130': '5 6 3', '20KB1A1201': '5 10 1', '20KB1A1202': '5 10 1',
+                '20KB1A1203': '5 10 1', '20KB1A1204': '5 10 1', '20KB1A1205': '5 10 1', '20KB1A1206': '5 10 1',
+                '20KB1A1207': '5 10 1', '20KB1A1208': '5 10 1', '20KB1A1209': '5 10 1', '20KB1A1210': '5 10 1',
+                '20KB1A1211': '5 10 1', '20KB1A1212': '5 10 1', '20KB1A1213': '5 10 1', '20KB1A1214': '5 10 1',
+                '20KB1A1215': '5 10 1', '20KB1A1216': '5 10 1', '20KB1A1217': '5 10 1', '20KB1A1218': '5 10 1',
+                '20KB1A1219': '5 10 1', '20KB1A1220': '5 10 1', '20KB1A1221': '5 10 1', '20KB1A1222': '5 10 1',
+                '20KB1A1224': '5 10 1', '20KB1A1225': '5 10 1', '20KB1A1226': '5 10 1', '20KB1A1227': '5 10 1',
+                '20KB1A1228': '5 10 1', '20KB1A1229': '5 10 1', '20KB1A1230': '5 10 1', '20KB1A1231': '5 10 1',
+                '20KB1A1232': '5 10 1', '20KB1A1233': '5 10 1', '20KB1A1234': '5 10 1', '20KB1A1235': '5 10 1',
+                '20KB1A1236': '5 10 1', '20KB1A1237': '5 10 1', '20KB1A1238': '5 10 1', '20KB1A1239': '5 10 1',
+                '20KB1A1240': '5 10 1', '20KB1A1241': '5 10 1', '20KB1A1242': '5 10 1', '20KB1A1243': '5 10 1',
+                '20KB1A1244': '5 10 1', '20KB1A1245': '5 10 1', '20KB1A1246': '5 10 1', '20KB1A1247': '5 10 1',
+                '20KB1A1248': '5 10 1', '20KB1A1249': '5 10 1', '20KB1A1250': '5 10 1', '20KB1A1251': '5 10 1',
+                '20KB1A1252': '5 10 1', '20KB1A1253': '5 10 1', '20KB1A1254': '5 10 1', '20KB1A1255': '5 10 1',
+                '20KB1A1256': '5 10 1', '20KB1A1257': '5 10 1', '20KB1A1258': '5 10 1', '20KB1A1259': '5 10 1',
+                '20KB1A1260': '5 10 1', '20KB1A1261': '5 10 1', '20KB1A1262': '5 10 1', '21KB5A1201': '5 10 1',
+                '21KB5A1202': '5 10 1', '21KB5A1203': '5 10 1', '21KB5A1204': '5 10 1', '21KB5A1205': '5 10 1',
+                '21KB5A1206': '5 10 1', '20KB1A3001': '5 11 1', '20KB1A3002': '5 11 1', '20KB1A3003': '5 11 1',
+                '20KB1A3004': '5 11 1', '20KB1A3005': '5 11 1', '20KB1A3007': '5 11 1', '20KB1A3008': '5 11 1',
+                '20KB1A3009': '5 11 1', '20KB1A3010': '5 11 1', '20KB1A3011': '5 11 1', '20KB1A3012': '5 11 1',
+                '20KB1A3013': '5 11 1', '20KB1A3014': '5 11 1', '20KB1A3015': '5 11 1', '20KB1A3016': '5 11 1',
+                '20KB1A3017': '5 11 1', '20KB1A3018': '5 11 1', '20KB1A3019': '5 11 1', '20KB1A3020': '5 11 1',
+                '20KB1A3021': '5 11 1', '20KB1A3022': '5 11 1', '20KB1A3023': '5 11 1', '20KB1A3024': '5 11 1',
+                '20KB1A3025': '5 11 1', '20KB1A3026': '5 11 1', '20KB1A3027': '5 11 1', '20KB1A3028': '5 11 1',
+                '20KB1A3029': '5 11 1', '20KB1A3030': '5 11 1', '20KB1A3031': '5 11 1', '20KB1A3032': '5 11 1',
+                '20KB1A3033': '5 11 1', '20KB1A3034': '5 11 1', '20KB1A3035': '5 11 1', '20KB1A3036': '5 11 1',
+                '20KB1A3037': '5 11 1', '20KB1A3038': '5 11 1', '20KB1A3039': '5 11 1', '20KB1A3040': '5 11 1',
+                '20KB1A3041': '5 11 1', '20KB1A3042': '5 11 1', '20KB1A3043': '5 11 1', '20KB1A3044': '5 11 1',
+                '20KB1A3045': '5 11 1', '20KB1A3046': '5 11 1', '20KB1A3047': '5 11 1', '20KB1A3048': '5 11 1',
+                '20KB1A3049': '5 11 1', '20KB1A3050': '5 11 1', '20KB1A3051': '5 11 1', '20KB1A3052': '5 11 1',
+                '20KB1A3053': '5 11 1', '20KB1A3054': '5 11 1', '20KB1A3055': '5 11 1', '20KB1A3056': '5 11 1',
+                '20KB1A3057': '5 11 1', '20KB1A3058': '5 11 1', '20KB1A3059': '5 11 1', '20KB1A3060': '5 11 1',
+                '20KB1A3061': '5 11 1', '20KB1A3062': '5 11 1', '20KB1A3063': '5 11 1', '20KB1A3064': '5 11 1',
+                '21KB5A3001': '5 11 1', '21KB5A3002': '5 11 1', '21KB5A3003': '5 11 1', '21KB5A3004': '5 11 1',
+                '21KB5A3005': '5 11 1', '21KB5A3006': '5 11 1', '19KB1A1201': '6 10 1', '19KB1A1202': '6 10 1',
+                '19KB1A1203': '6 10 1', '19KB1A1204': '6 10 1', '19KB1A1205': '6 10 1', '19KB1A1206': '6 10 1',
+                '19KB1A1208': '6 10 1', '19KB1A1209': '6 10 1', '19KB1A1210': '6 10 1', '19KB1A1211': '6 10 1',
+                '19KB1A1212': '6 10 1', '19KB1A1213': '6 10 1', '19KB1A1214': '6 10 1', '19KB1A1215': '6 10 1',
+                '19KB1A1216': '6 10 1', '19KB1A1218': '6 10 1', '19KB1A1219': '6 10 1', '19KB1A1220': '6 10 1',
+                '19KB1A1221': '6 10 1', '19KB1A1222': '6 10 1', '19KB1A1223': '6 10 1', '19KB1A1224': '6 10 1',
+                '19KB1A1225': '6 10 1', '19KB1A1226': '6 10 1', '19KB1A1227': '6 10 1', '19KB1A1228': '6 10 1',
+                '19KB1A1229': '6 10 1', '19KB1A1230': '6 10 1', '19KB1A1231': '6 10 1', '19KB1A1232': '6 10 1',
+                '19KB1A1233': '6 10 1', '19KB1A1234': '6 10 1', '19KB1A1235': '6 10 1', '19KB1A1236': '6 10 1',
+                '19KB1A1237': '6 10 1', '19KB1A1239': '6 10 1', '19KB1A1240': '6 10 1', '19KB1A1241': '6 10 1',
+                '19KB1A1242': '6 10 1', '19KB1A1243': '6 10 1', '19KB1A1244': '6 10 1', '19KB1A1245': '6 10 1',
+                '19KB1A1246': '6 10 1', '19KB1A1247': '6 10 1', '19KB1A1248': '6 10 1', '19KB1A1250': '6 10 1',
+                '19KB1A1251': '6 10 1', '19KB1A1252': '6 10 1', '19KB1A1253': '6 10 1', '19KB1A1254': '6 10 1',
+                '19KB1A1255': '6 10 1', '19KB1A0301': '6 1 2', '19KB1A0302': '6 1 2', '19KB1A0303': '6 1 2',
+                '19KB1A0304': '6 1 2', '19KB1A0305': '6 1 2', '19KB1A0306': '6 1 2', '19KB1A0307': '6 1 2',
+                '19KB1A0308': '6 1 2', '19KB1A0309': '6 1 2', '19KB1A0310': '6 1 2', '19KB1A0311': '6 1 2',
+                '19KB1A0312': '6 1 2', '19KB1A0313': '6 1 2', '19KB1A0314': '6 1 2', '19KB1A0315': '6 1 2',
+                '19KB1A0316': '6 1 2', '19KB1A0317': '6 1 2', '19KB1A0318': '6 1 2', '19KB1A0319': '6 1 2',
+                '19KB1A0320': '6 1 2', '19KB1A0322': '6 1 2', '19KB1A0323': '6 1 2', '19KB1A0324': '6 1 2',
+                '19KB1A0325': '6 1 2', '19KB1A0326': '6 1 2', '19KB1A0327': '6 1 2', '19KB1A0328': '6 1 2',
+                '19KB1A0329': '6 1 2', '19KB1A0330': '6 1 2', '19KB1A0331': '6 1 2', '19KB1A0332': '6 1 2',
+                '19KB1A0333': '6 1 2', '19KB1A0334': '6 1 2', '19KB1A0335': '6 1 2', '19KB1A0336': '6 1 2',
+                '19KB1A0337': '6 1 2', '19KB1A0338': '6 1 2', '19KB1A0339': '6 1 2', '19KB1A0340': '6 1 2',
+                '19KB1A0341': '6 1 2', '19KB1A0342': '6 1 2', '19KB1A0343': '6 1 2', '19KB1A0344': '6 1 2',
+                '19KB1A0345': '6 1 2', '19KB1A0347': '6 1 2', '19KB1A0348': '6 1 2', '19KB1A0349': '6 1 2',
+                '19KB1A0350': '6 1 2', '19KB1A0351': '6 1 2', '19KB1A0501': '6 2 2', '19KB1A0502': '6 2 2',
+                '19KB1A0503': '6 2 2', '19KB1A0505': '6 2 2', '19KB1A0506': '6 2 2', '19KB1A0507': '6 2 2',
+                '19KB1A0508': '6 2 2', '19KB1A0509': '6 2 2', '19KB1A0510': '6 2 2', '19KB1A0511': '6 2 2',
+                '19KB1A0512': '6 2 2', '19KB1A0513': '6 2 2', '19KB1A0514': '6 2 2', '19KB1A0515': '6 2 2',
+                '19KB1A0516': '6 2 2', '19KB1A0517': '6 2 2', '19KB1A0518': '6 2 2', '19KB1A0519': '6 2 2',
+                '19KB1A0520': '6 2 2', '19KB1A0521': '6 2 2', '19KB1A0522': '6 2 2', '19KB1A0523': '6 2 2',
+                '19KB1A0524': '6 2 2', '19KB1A0525': '6 2 2', '19KB1A0526': '6 2 2', '19KB1A0527': '6 2 2',
+                '19KB1A0528': '6 2 2', '19KB1A0529': '6 2 2', '19KB1A0530': '6 2 2', '19KB1A0531': '6 2 2',
+                '19KB1A0532': '6 2 2', '19KB1A0533': '6 2 2', '19KB1A0534': '6 2 2', '19KB1A0535': '6 2 2',
+                '19KB1A0536': '6 2 2', '19KB1A0537': '6 2 2', '19KB1A0538': '6 2 2', '19KB1A0539': '6 2 2',
+                '19KB1A0540': '6 2 2', '19KB1A0541': '6 2 2', '19KB1A0542': '6 2 2', '19KB1A0543': '6 2 2',
+                '19KB1A0544': '6 2 2', '19KB1A0545': '6 2 2', '19KB1A0546': '6 2 2', '19KB1A0547': '6 2 2',
+                '19KB1A0548': '6 2 2', '19KB1A0549': '6 2 2', '19KB1A0550': '6 2 2', '19KB1A0551': '6 2 2',
+                '19KB1A0552': '6 2 2', '19KB1A0553': '6 2 2', '19KB1A0554': '6 2 2', '19KB1A0555': '6 2 2',
+                '19KB1A0556': '6 2 2', '19KB1A0557': '6 2 2', '19KB1A0558': '6 2 2', '19KB1A0559': '6 2 2',
+                '19KB1A0560': '6 2 2', '19KB1A0561': '6 2 2', '19KB1A0562': '6 2 2', '19KB1A0563': '6 2 2',
+                '19KB1A0564': '6 2 2', '20KB5A0501': '6 2 2', '20KB5A0502': '6 2 2', '20KB5A0503': '6 2 2',
+                '20KB5A0504': '6 2 2', '20KB5A0505': '6 2 2', '20KB5A0506': '6 2 2', '16KB1A0553': '6 2 2',
+                '19KB1A0401': '6 3 2', '19KB1A0402': '6 3 2', '19KB1A0403': '6 3 2', '19KB1A0404': '6 3 2',
+                '19KB1A0405': '6 3 2', '19KB1A0406': '6 3 2', '19KB1A0407': '6 3 2', '19KB1A0408': '6 3 2',
+                '19KB1A0409': '6 3 2', '19KB1A0410': '6 3 2', '19KB1A0411': '6 3 2', '19KB1A0412': '6 3 2',
+                '19KB1A0413': '6 3 2', '19KB1A0414': '6 3 2', '19KB1A0415': '6 3 2', '19KB1A0416': '6 3 2',
+                '19KB1A0417': '6 3 2', '19KB1A0418': '6 3 2', '19KB1A0419': '6 3 2', '19KB1A0420': '6 3 2',
+                '19KB1A0421': '6 3 2', '19KB1A0422': '6 3 2', '19KB1A0423': '6 3 2', '19KB1A0424': '6 3 2',
+                '19KB1A0425': '6 3 2', '19KB1A0426': '6 3 2', '19KB1A0427': '6 3 2', '19KB1A0428': '6 3 2',
+                '19KB1A0429': '6 3 2', '19KB1A0430': '6 3 2', '19KB1A0431': '6 3 2', '19KB1A0432': '6 3 2',
+                '19KB1A0433': '6 3 2', '19KB1A0434': '6 3 2', '19KB1A0435': '6 3 2', '19KB1A0436': '6 3 2',
+                '19KB1A0437': '6 3 2', '19KB1A0438': '6 3 2', '19KB1A0439': '6 3 2', '19KB1A0440': '6 3 2',
+                '19KB1A0441': '6 3 2', '19KB1A0442': '6 3 2', '19KB1A0443': '6 3 2', '19KB1A0444': '6 3 2',
+                '19KB1A0445': '6 3 2', '19KB1A0446': '6 3 2', '19KB1A0447': '6 3 2', '19KB1A0448': '6 3 2',
+                '19KB1A0449': '6 3 2', '19KB1A0450': '6 3 2', '19KB1A0451': '6 3 2', '19KB1A0452': '6 3 2',
+                '19KB1A0453': '6 3 2', '19KB1A0454': '6 3 2', '19KB1A0455': '6 3 2', '19KB1A0456': '6 3 2',
+                '19KB1A0457': '6 3 2', '19KB1A0458': '6 3 2', '19KB1A0459': '6 3 2', '19KB1A0460': '6 3 2',
+                '19KB1A0461': '6 3 2', '19KB1A0462': '6 3 2', '19KB1A0463': '6 3 2', '19KB1A0464': '6 3 2',
+                '19KB1A0201': '6 4 2', '19KB1A0202': '6 4 2', '19KB1A0203': '6 4 2', '19KB1A0204': '6 4 2',
+                '19KB1A0205': '6 4 2', '19KB1A0206': '6 4 2', '19KB1A0207': '6 4 2', '19KB1A0208': '6 4 2',
+                '19KB1A0209': '6 4 2', '19KB1A0210': '6 4 2', '19KB1A0211': '6 4 2', '19KB1A0212': '6 4 2',
+                '19KB1A0213': '6 4 2', '19KB1A0214': '6 4 2', '19KB1A0215': '6 4 2', '19KB1A0216': '6 4 2',
+                '19KB1A0217': '6 4 2', '19KB1A0218': '6 4 2', '19KB1A0219': '6 4 2', '19KB1A0220': '6 4 2',
+                '19KB1A0221': '6 4 2', '19KB1A0222': '6 4 2', '19KB1A0223': '6 4 2', '19KB1A0224': '6 4 2',
+                '19KB1A0225': '6 4 2', '19KB1A0226': '6 4 2', '19KB1A0227': '6 4 2', '19KB1A0228': '6 4 2',
+                '19KB1A0229': '6 4 2', '19KB1A0230': '6 4 2', '19KB1A0231': '6 4 2', '19KB1A0232': '6 4 2',
+                '19KB1A0233': '6 4 2', '19KB1A0234': '6 4 2', '19KB1A0235': '6 4 2', '19KB1A0236': '6 4 2',
+                '19KB1A0237': '6 4 2', '19KB1A0238': '6 4 2', '19KB1A0239': '6 4 2', '20KB5A0201': '6 4 2',
+                '20KB5A0202': '6 4 2', '20KB5A0203': '6 4 2', '20KB5A0204': '6 4 2', '20KB5A0205': '6 4 2',
+                '20KB5A0206': '6 4 2', '20KB5A0207': '6 4 2', '20KB5A0208': '6 4 2', '20KB5A0209': '6 4 2',
+                '20KB5A0210': '6 4 2', '20KB5A0211': '6 4 2', '20KB5A0212': '6 4 2', '20KB5A0213': '6 4 2',
+                '20KB5A0214': '6 4 2', '20KB5A0215': '6 4 2', '20KB5A0216': '6 4 2', '20KB5A0217': '6 4 2',
+                '20KB5A0218': '6 4 2', '20KB5A0219': '6 4 2', '20KB5A0220': '6 4 2', '20KB5A0221': '6 4 2',
+                '19KB1A0101': '6 6 2', '19KB1A0103': '6 6 2', '19KB1A0104': '6 6 2', '19KB1A0105': '6 6 2',
+                '19KB1A0106': '6 6 2', '19KB1A0107': '6 6 2', '19KB1A0108': '6 6 2', '19KB1A0109': '6 6 2',
+                '19KB1A0110': '6 6 2', '19KB1A0111': '6 6 2', '19KB1A0112': '6 6 2', '19KB1A0113': '6 6 2',
+                '19KB1A0114': '6 6 2', '19KB1A0115': '6 6 2', '19KB1A0116': '6 6 2', '19KB1A0117': '6 6 2',
+                '19KB1A0118': '6 6 2', '19KB1A0119': '6 6 2', '19KB1A0120': '6 6 2', '19KB1A0121': '6 6 2',
+                '19KB1A0122': '6 6 2', '19KB1A0123': '6 6 2', '19KB1A0124': '6 6 2', '19KB1A0125': '6 6 2',
+                '19KB1A0126': '6 6 2', '19KB1A0127': '6 6 2', '19KB1A0128': '6 6 2', '19KB1A0129': '6 6 2',
+                '19KB1A0130': '6 6 2', '19KB1A0131': '6 6 2', '19KB1A0132': '6 6 2', '19KB1A0133': '6 6 2',
+                '19KB1A0134': '6 6 2', '19KB1A0135': '6 6 2', '19KB1A0136': '6 6 2', '19KB1A0137': '6 6 2',
+                '19KB1A0138': '6 6 2', '19KB1A0139': '6 6 2', '19KB1A0141': '6 6 2', '19KB1A0142': '6 6 2',
+                '19KB1A0143': '6 6 2', '19KB1A0144': '6 6 2', '19KB1A0145': '6 6 2', '19KB1A0146': '6 6 2',
+                '19KB1A0147': '6 6 2', '19KB1A0148': '6 6 2', '19KB1A0149': '6 6 2', '19KB1A0150': '6 6 2',
+                '19KB1A0151': '6 6 2', '19KB1A0153': '6 6 2', '19KB1A0154': '6 6 2', '19KB1A0155': '6 6 2',
+                '19KB1A0156': '6 6 2', '19KB1A0157': '6 6 2', '19KB1A0158': '6 6 2', '19KB1A0159': '6 6 2',
+                '19KB1A0160': '6 6 2', '19KB1A0161': '6 6 2', '19KB1A0162': '6 6 2', '19KB1A0163': '6 6 2',
+                '19KB1A0164': '6 6 2', '19KB1A0165': '6 6 2', '19KB1A0166': '6 6 2', '19KB1A0167': '6 6 2',
+                '19KB1A0168': '6 6 2', '18KB1A0140': '6 6 2', '19KB1A0352': '6 1 3', '19KB1A0353': '6 1 3',
+                '19KB1A0354': '6 1 3', '19KB1A0355': '6 1 3', '19KB1A0356': '6 1 3', '19KB1A0357': '6 1 3',
+                '19KB1A0358': '6 1 3', '19KB1A0359': '6 1 3', '19KB1A0361': '6 1 3', '19KB1A0362': '6 1 3',
+                '19KB1A0363': '6 1 3', '19KB1A0364': '6 1 3', '19KB1A0365': '6 1 3', '19KB1A0366': '6 1 3',
+                '19KB1A0367': '6 1 3', '19KB1A0368': '6 1 3', '19KB1A0369': '6 1 3', '19KB1A0370': '6 1 3',
+                '19KB1A0371': '6 1 3', '19KB1A0372': '6 1 3', '19KB1A0373': '6 1 3', '19KB1A0374': '6 1 3',
+                '19KB1A0375': '6 1 3', '19KB1A0376': '6 1 3', '19KB1A0377': '6 1 3', '19KB1A0378': '6 1 3',
+                '19KB1A0379': '6 1 3', '19KB1A0380': '6 1 3', '19KB1A0381': '6 1 3', '19KB1A0382': '6 1 3',
+                '19KB1A0383': '6 1 3', '19KB1A0384': '6 1 3', '19KB1A0385': '6 1 3', '19KB1A0386': '6 1 3',
+                '19KB1A0387': '6 1 3', '19KB1A0388': '6 1 3', '19KB1A0389': '6 1 3', '19KB1A0390': '6 1 3',
+                '19KB1A0391': '6 1 3', '19KB1A0393': '6 1 3', '19KB1A0394': '6 1 3', '19KB1A0395': '6 1 3',
+                '19KB1A0396': '6 1 3', '19KB1A0397': '6 1 3', '19KB1A0398': '6 1 3', '19KB1A0399': '6 1 3',
+                '19KB1A03A0': '6 1 3', '19KB1A03A1': '6 1 3', '19KB1A03A2': '6 1 3', '17KB1A03B2': '6 1 3',
+                '16KB1A0335': '6 1 3', '19KB1A0565': '6 2 3', '19KB1A0566': '6 2 3', '19KB1A0567': '6 2 3',
+                '19KB1A0568': '6 2 3', '19KB1A0569': '6 2 3', '19KB1A0570': '6 2 3', '19KB1A0571': '6 2 3',
+                '19KB1A0572': '6 2 3', '19KB1A0573': '6 2 3', '19KB1A0574': '6 2 3', '19KB1A0575': '6 2 3',
+                '19KB1A0576': '6 2 3', '19KB1A0577': '6 2 3', '19KB1A0578': '6 2 3', '19KB1A0579': '6 2 3',
+                '19KB1A0580': '6 2 3', '19KB1A0581': '6 2 3', '19KB1A0582': '6 2 3', '19KB1A0583': '6 2 3',
+                '19KB1A0584': '6 2 3', '19KB1A0585': '6 2 3', '19KB1A0586': '6 2 3', '19KB1A0587': '6 2 3',
+                '19KB1A0588': '6 2 3', '19KB1A0589': '6 2 3', '19KB1A0590': '6 2 3', '19KB1A0591': '6 2 3',
+                '19KB1A0592': '6 2 3', '19KB1A0593': '6 2 3', '19KB1A0594': '6 2 3', '19KB1A0595': '6 2 3',
+                '19KB1A0596': '6 2 3', '19KB1A0597': '6 2 3', '19KB1A0598': '6 2 3', '19KB1A0599': '6 2 3',
+                '19KB1A05A0': '6 2 3', '19KB1A05A1': '6 2 3', '19KB1A05A2': '6 2 3', '19KB1A05A3': '6 2 3',
+                '19KB1A05A4': '6 2 3', '19KB1A05A5': '6 2 3', '19KB1A05A6': '6 2 3', '19KB1A05A7': '6 2 3',
+                '19KB1A05A8': '6 2 3', '19KB1A05A9': '6 2 3', '19KB1A05B0': '6 2 3', '19KB1A05B1': '6 2 3',
+                '19KB1A05B2': '6 2 3', '19KB1A05B3': '6 2 3', '19KB1A05B4': '6 2 3', '19KB1A05B5': '6 2 3',
+                '19KB1A05B6': '6 2 3', '19KB1A05B7': '6 2 3', '19KB1A05B8': '6 2 3', '19KB1A05B9': '6 2 3',
+                '19KB1A05C0': '6 2 3', '19KB1A05C1': '6 2 3', '19KB1A05C2': '6 2 3', '19KB1A05C3': '6 2 3',
+                '19KB1A05C4': '6 2 3', '19KB1A05C5': '6 2 3', '19KB1A05C6': '6 2 3', '19KB1A05C7': '6 2 3',
+                '19KB1A05C8': '6 2 3', '20KB5A0507': '6 2 3', '20KB5A0508': '6 2 3', '20KB5A0509': '6 2 3',
+                '20KB5A0510': '6 2 3', '20KB5A0511': '6 2 3', '20KB5A0512': '6 2 3', '19KB1A0465': '6 3 3',
+                '19KB1A0466': '6 3 3', '19KB1A0467': '6 3 3', '19KB1A0468': '6 3 3', '19KB1A0469': '6 3 3',
+                '19KB1A0470': '6 3 3', '19KB1A0471': '6 3 3', '19KB1A0472': '6 3 3', '19KB1A0473': '6 3 3',
+                '19KB1A0474': '6 3 3', '19KB1A0475': '6 3 3', '19KB1A0476': '6 3 3', '19KB1A0477': '6 3 3',
+                '19KB1A0478': '6 3 3', '19KB1A0479': '6 3 3', '19KB1A0480': '6 3 3', '19KB1A0481': '6 3 3',
+                '19KB1A0482': '6 3 3', '19KB1A0483': '6 3 3', '19KB1A0484': '6 3 3', '19KB1A0485': '6 3 3',
+                '19KB1A0486': '6 3 3', '19KB1A0487': '6 3 3', '19KB1A0488': '6 3 3', '19KB1A0489': '6 3 3',
+                '19KB1A0490': '6 3 3', '19KB1A0491': '6 3 3', '19KB1A0492': '6 3 3', '19KB1A0493': '6 3 3',
+                '19KB1A0494': '6 3 3', '19KB1A0495': '6 3 3', '19KB1A0496': '6 3 3', '19KB1A0497': '6 3 3',
+                '19KB1A0498': '6 3 3', '19KB1A0499': '6 3 3', '19KB1A04A0': '6 3 3', '19KB1A04A1': '6 3 3',
+                '19KB1A04A2': '6 3 3', '19KB1A04A3': '6 3 3', '19KB1A04A4': '6 3 3', '19KB1A04A5': '6 3 3',
+                '19KB1A04A6': '6 3 3', '19KB1A04A7': '6 3 3', '19KB1A04A8': '6 3 3', '19KB1A04A9': '6 3 3',
+                '19KB1A04B0': '6 3 3', '19KB1A04B1': '6 3 3', '19KB1A04B2': '6 3 3', '19KB1A04B3': '6 3 3',
+                '19KB1A04B4': '6 3 3', '19KB1A04B5': '6 3 3', '19KB1A04B6': '6 3 3', '19KB1A04B7': '6 3 3',
+                '19KB1A04B8': '6 3 3', '19KB1A04B9': '6 3 3', '19KB1A04C0': '6 3 3', '19KB1A04C1': '6 3 3',
+                '19KB1A04C2': '6 3 3', '19KB1A04C3': '6 3 3', '19KB1A04C4': '6 3 3', '19KB1A04C5': '6 3 3',
+                '19KB1A04C6': '6 3 3', '19KB1A04C7': '6 3 3', '19KB1A04C8': '6 3 3', '20KB5A0401': '6 3 3',
+                '20KB5A0402': '6 3 3', '20KB5A0403': '6 3 3', '20KB5A0404': '6 3 3', '20KB5A0405': '6 3 3',
+                '20KB5A0406': '6 3 3', '20KB5A0407': '6 3 3', '20KB5A0408': '6 3 3', '19KB1A0240': '6 4 3',
+                '19KB1A0241': '6 4 3', '19KB1A0242': '6 4 3', '19KB1A0243': '6 4 3', '19KB1A0245': '6 4 3',
+                '19KB1A0246': '6 4 3', '19KB1A0247': '6 4 3', '19KB1A0248': '6 4 3', '19KB1A0249': '6 4 3',
+                '19KB1A0250': '6 4 3', '19KB1A0252': '6 4 3', '19KB1A0253': '6 4 3', '19KB1A0254': '6 4 3',
+                '19KB1A0255': '6 4 3', '19KB1A0256': '6 4 3', '19KB1A0257': '6 4 3', '19KB1A0258': '6 4 3',
+                '19KB1A0259': '6 4 3', '19KB1A0260': '6 4 3', '19KB1A0261': '6 4 3', '19KB1A0262': '6 4 3',
+                '19KB1A0263': '6 4 3', '19KB1A0264': '6 4 3', '19KB1A0265': '6 4 3', '19KB1A0266': '6 4 3',
+                '19KB1A0267': '6 4 3', '19KB1A0268': '6 4 3', '19KB1A0269': '6 4 3', '19KB1A0270': '6 4 3',
+                '19KB1A0271': '6 4 3', '19KB1A0272': '6 4 3', '19KB1A0273': '6 4 3', '19KB1A0274': '6 4 3',
+                '19KB1A0275': '6 4 3', '19KB1A0276': '6 4 3', '20KB5A0222': '6 4 3', '20KB5A0223': '6 4 3',
+                '20KB5A0224': '6 4 3', '20KB5A0225': '6 4 3', '20KB5A0226': '6 4 3', '20KB5A0227': '6 4 3',
+                '20KB5A0228': '6 4 3', '20KB5A0229': '6 4 3', '20KB5A0230': '6 4 3', '20KB5A0231': '6 4 3',
+                '20KB5A0232': '6 4 3', '20KB5A0233': '6 4 3', '20KB5A0234': '6 4 3', '20KB5A0235': '6 4 3',
+                '20KB5A0236': '6 4 3', '20KB5A0237': '6 4 3', '20KB5A0238': '6 4 3', '20KB5A0239': '6 4 3',
+                '20KB5A0240': '6 4 3', '20KB5A0241': '6 4 3', '20KB5A0242': '6 4 3', '18KB5A0202': '6 4 3',
+                '20KB5A0101': '6 6 3', '20KB5A0102': '6 6 3', '20KB5A0103': '6 6 3', '20KB5A0104': '6 6 3',
+                '20KB5A0105': '6 6 3', '20KB5A0106': '6 6 3', '20KB5A0107': '6 6 3', '20KB5A0108': '6 6 3',
+                '20KB5A0109': '6 6 3', '20KB5A0110': '6 6 3', '20KB5A0111': '6 6 3', '20KB5A0112': '6 6 3',
+                '20KB5A0113': '6 6 3', '20KB5A0114': '6 6 3', '20KB5A0115': '6 6 3', '20KB5A0116': '6 6 3',
+                '20KB5A0117': '6 6 3', '20KB5A0118': '6 6 3', '20KB5A0119': '6 6 3', '20KB5A0120': '6 6 3',
+                '20KB5A0121': '6 6 3', '20KB5A0122': '6 6 3', '20KB5A0123': '6 6 3', '20KB5A0124': '6 6 3',
+                '20KB5A0125': '6 6 3', '20KB5A0126': '6 6 3', '20KB5A0127': '6 6 3', '20KB5A0128': '6 6 3',
+                '20KB5A0129': '6 6 3', '20KB5A0130': '6 6 3', '20KB5A0131': '6 6 3', '20KB5A0132': '6 6 3',
+                '20KB5A0133': '6 6 3', '20KB5A0134': '6 6 3', '20KB5A0135': '6 6 3', '20KB5A0136': '6 6 3',
+                '20KB5A0137': '6 6 3', '20KB5A0138': '6 6 3', '20KB5A0139': '6 6 3', '20KB5A0140': '6 6 3',
+                '20KB5A0141': '6 6 3', '20KB5A0142': '6 6 3', '20KB5A0143': '6 6 3', '20KB5A0144': '6 6 3',
+                '20KB5A0145': '6 6 3', '20KB5A0146': '6 6 3', '20KB5A0147': '6 6 3', '18KB1A0124': '6 6 3',
+                '18KB1A0127': '6 6 3', '20KB5A0301': '6 1 4', '20KB5A0302': '6 1 4', '20KB5A0303': '6 1 4',
+                '20KB5A0304': '6 1 4', '20KB5A0305': '6 1 4', '20KB5A0306': '6 1 4', '20KB5A0307': '6 1 4',
+                '20KB5A0308': '6 1 4', '20KB5A0309': '6 1 4', '20KB5A0310': '6 1 4', '20KB5A0311': '6 1 4',
+                '20KB5A0312': '6 1 4', '20KB5A0313': '6 1 4', '20KB5A0314': '6 1 4', '20KB5A0315': '6 1 4',
+                '20KB5A0316': '6 1 4', '20KB5A0317': '6 1 4', '20KB5A0318': '6 1 4', '20KB5A0319': '6 1 4',
+                '20KB5A0320': '6 1 4', '20KB5A0321': '6 1 4', '20KB5A0322': '6 1 4', '20KB5A0323': '6 1 4',
+                '20KB5A0324': '6 1 4', '20KB5A0325': '6 1 4', '20KB5A0326': '6 1 4', '20KB5A0327': '6 1 4',
+                '20KB5A0328': '6 1 4', '20KB5A0329': '6 1 4', '20KB5A0330': '6 1 4', '20KB5A0331': '6 1 4',
+                '20KB5A0332': '6 1 4', '20KB5A0333': '6 1 4', '20KB5A0334': '6 1 4', '20KB5A0335': '6 1 4',
+                '20KB5A0336': '6 1 4', '20KB5A0337': '6 1 4', '20KB5A0338': '6 1 4', '20KB5A0339': '6 1 4',
+                '20KB5A0340': '6 1 4', '20KB5A0341': '6 1 4', '20KB5A0342': '6 1 4', '20KB5A0343': '6 1 4',
+                '20KB5A0344': '6 1 4', '20KB5A0345': '6 1 4', '20KB5A0346': '6 1 4', '20KB5A0347': '6 1 4',
+                '20KB5A0348': '6 1 4', '20KB5A0349': '6 1 4', '20KB5A0350': '6 1 4', '20KB5A0351': '6 1 4',
+                '20KB5A0352': '6 1 4', '20KB5A0353': '6 1 4', '20KB5A0354': '6 1 4', '20KB5A0356': '6 1 4',
+                '20KB5A0357': '6 1 4', '20KB5A0358': '6 1 4', '20KB5A0359': '6 1 4', '20KB5A0360': '6 1 4',
+                '20KB5A0362': '6 1 4', '20KB5A0363': '6 1 4', '20KB5A0364': '6 1 4', '20KB5A0365': '6 1 4',
+                '20KB5A0366': '6 1 4', '20KB5A0367': '6 1 4', '20KB5A0368': '6 1 4', '20KB5A0370': '6 1 4',
+                '20KB5A0371': '6 1 4', '20KB5A0372': '6 1 4', '19KB1A05C9': '6 2 4', '19KB1A05D0': '6 2 4',
+                '19KB1A05D1': '6 2 4', '19KB1A05D2': '6 2 4', '19KB1A05D3': '6 2 4', '19KB1A05D4': '6 2 4',
+                '19KB1A05D5': '6 2 4', '19KB1A05D6': '6 2 4', '19KB1A05D7': '6 2 4', '19KB1A05D8': '6 2 4',
+                '19KB1A05D9': '6 2 4', '19KB1A05E0': '6 2 4', '19KB1A05E1': '6 2 4', '19KB1A05E2': '6 2 4',
+                '19KB1A05E3': '6 2 4', '19KB1A05E4': '6 2 4', '19KB1A05E5': '6 2 4', '19KB1A05E6': '6 2 4',
+                '19KB1A05E7': '6 2 4', '19KB1A05E8': '6 2 4', '19KB1A05E9': '6 2 4', '19KB1A05F0': '6 2 4',
+                '19KB1A05F1': '6 2 4', '19KB1A05F2': '6 2 4', '19KB1A05F3': '6 2 4', '19KB1A05F4': '6 2 4',
+                '19KB1A05F5': '6 2 4', '19KB1A05F6': '6 2 4', '19KB1A05F7': '6 2 4', '19KB1A05F8': '6 2 4',
+                '19KB1A05F9': '6 2 4', '19KB1A05G0': '6 2 4', '19KB1A05G1': '6 2 4', '19KB1A05G2': '6 2 4',
+                '19KB1A05G3': '6 2 4', '19KB1A05G4': '6 2 4', '19KB1A05G5': '6 2 4', '19KB1A05G6': '6 2 4',
+                '19KB1A05G7': '6 2 4', '19KB1A05G8': '6 2 4', '19KB1A05G9': '6 2 4', '19KB1A05H0': '6 2 4',
+                '19KB1A05H1': '6 2 4', '19KB1A05H2': '6 2 4', '19KB1A05H3': '6 2 4', '19KB1A05H4': '6 2 4',
+                '19KB1A05H5': '6 2 4', '19KB1A05H6': '6 2 4', '19KB1A05H7': '6 2 4', '19KB1A05H8': '6 2 4',
+                '19KB1A05H9': '6 2 4', '19KB1A05I0': '6 2 4', '19KB1A05I1': '6 2 4', '19KB1A05I2': '6 2 4',
+                '19KB1A05I3': '6 2 4', '19KB1A05I4': '6 2 4', '19KB1A05I5': '6 2 4', '19KB1A05I6': '6 2 4',
+                '19KB1A05I7': '6 2 4', '19KB1A05I8': '6 2 4', '19KB1A05I9': '6 2 4', '19KB1A05J0': '6 2 4',
+                '19KB1A05J1': '6 2 4', '19KB1A05J2': '6 2 4', '19KB1A05J3': '6 2 4', '20KB5A0513': '6 2 4',
+                '20KB5A0514': '6 2 4', '20KB5A0515': '6 2 4', '20KB5A0516': '6 2 4', '20KB5A0517': '6 2 4',
+                '20KB5A0518': '6 2 4', '19KB1A04C9': '6 3 4', '19KB1A04D0': '6 3 4', '19KB1A04D1': '6 3 4',
+                '19KB1A04D2': '6 3 4', '19KB1A04D3': '6 3 4', '19KB1A04D4': '6 3 4', '19KB1A04D5': '6 3 4',
+                '19KB1A04D6': '6 3 4', '19KB1A04D7': '6 3 4', '19KB1A04D8': '6 3 4', '19KB1A04D9': '6 3 4',
+                '19KB1A04E0': '6 3 4', '19KB1A04E1': '6 3 4', '19KB1A04E2': '6 3 4', '19KB1A04E3': '6 3 4',
+                '19KB1A04E4': '6 3 4', '19KB1A04E5': '6 3 4', '19KB1A04E6': '6 3 4', '19KB1A04E7': '6 3 4',
+                '19KB1A04E9': '6 3 4', '19KB1A04F0': '6 3 4', '19KB1A04F1': '6 3 4', '19KB1A04F2': '6 3 4',
+                '19KB1A04F3': '6 3 4', '19KB1A04F4': '6 3 4', '19KB1A04F5': '6 3 4', '19KB1A04F6': '6 3 4',
+                '19KB1A04F7': '6 3 4', '19KB1A04F8': '6 3 4', '19KB1A04F9': '6 3 4', '19KB1A04G0': '6 3 4',
+                '19KB1A04G1': '6 3 4', '19KB1A04G2': '6 3 4', '19KB1A04G3': '6 3 4', '19KB1A04G4': '6 3 4',
+                '19KB1A04G5': '6 3 4', '19KB1A04G6': '6 3 4', '19KB1A04G7': '6 3 4', '19KB1A04G8': '6 3 4',
+                '19KB1A04G9': '6 3 4', '19KB1A04H0': '6 3 4', '19KB1A04H1': '6 3 4', '19KB1A04H2': '6 3 4',
+                '19KB1A04H3': '6 3 4', '19KB1A04H4': '6 3 4', '19KB1A04H5': '6 3 4', '19KB1A04H6': '6 3 4',
+                '19KB1A04H7': '6 3 4', '19KB1A04H8': '6 3 4', '19KB1A04H9': '6 3 4', '19KB1A04I0': '6 3 4',
+                '19KB1A04I1': '6 3 4', '19KB1A04I2': '6 3 4', '19KB1A04I3': '6 3 4', '19KB1A04I4': '6 3 4',
+                '19KB1A04I5': '6 3 4', '19KB1A04I6': '6 3 4', '19KB1A04I7': '6 3 4', '19KB1A04I8': '6 3 4',
+                '19KB1A04I9': '6 3 4', '19KB1A04J0': '6 3 4', '19KB1A04J1': '6 3 4', '19KB1A04J3': '6 3 4',
+                '20KB5A0410': '6 3 4', '20KB5A0411': '6 3 4', '20KB5A0412': '6 3 4', '20KB5A0413': '6 3 4',
+                '20KB5A0414': '6 3 4', '20KB5A0415': '6 3 4', '20KB5A0416': '6 3 4', '20KB5A0417': '6 3 4',
+                '20KB5A0418': '6 3 4'}
 
 temp_count = 0
+admin_count=0
 thank_you = [ 'THANK YOU', 'TQ', 'TQ U', 'THANKS', 'THANK', 'THANK U', 'THANKYOU', 'TNQ', 'TNX' ]
 options = Options()
-path = '/Users/sameershaik/PycharmProjects/Checkme/static/chromedriver'
+path ="/Users/sameershaik/Downloads/chromedriver 2"
 options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
 options.add_argument("--headless")
 options.add_argument("--disable-gpu")
@@ -1166,10 +1794,14 @@ web = webdriver.Chrome(service=Service(os.environ.get("CHROMEDRIVER_PATH")), chr
 web.implicitly_wait(2)
 
 def send_att_time():
-    for roll in admins:
+    conn=psycopg2.connect(DATABASE_URL, sslmode='require')
+    cur=conn.cursor()
+    cur.execute("select insta_username from instad;")
+    bo_data=cur.fetchall()
+    conn.close()
+    for roll in bo_data:
         try:
-            info = provide_rollno(username)
-            print('tried to get info')
+            info = provide_rollno(roll[0])
         except:
             continue
         try:
@@ -1184,12 +1816,12 @@ def send_att_time():
         time.sleep(1)
         try:
             usern = WebDriverWait(web, 10).until(EC.presence_of_element_located((By.XPATH,
-                                                                                 "//div[@class='_ab8w  _ab94 _ab99 _ab9f _ab9m _ab9o  _ab9v _abcm']/div[1]//div[@class='_aacl _aaco _aacw _aacx _aad6']"))).text
+                                                                                 "//div[@class='_ab8w  _ab94 _ab99 _ab9f _ab9m _ab9o  _ab9v _abcm']/div[1]//div[@class='_aacl _aaco _aacw _adda _aacx _aad6']"))).text
             i = 1
             while True:
                 if i == 5:
                     break
-                if roll == usern:
+                if roll[0] == usern:
                     WebDriverWait(web, 10).until(
                         EC.presence_of_element_located(
                             (
@@ -1197,7 +1829,7 @@ def send_att_time():
                     break
                 else:
                     usern = WebDriverWait(web, 10).until(EC.presence_of_element_located((By.XPATH,
-                                                                                         f"//div[@class='_ab8w  _ab94 _ab99 _ab9f _ab9m _ab9o  _ab9v _abcm']/div[{i + 1}]//div[@class='_aacl _aaco _aacw _aacx _aad6']"))).text
+                                                                                         f"//div[@class='_ab8w  _ab94 _ab99 _ab9f _ab9m _ab9o  _ab9v _abcm']/div[{i + 1}]//div[@class='_aacl _aaco _aacw _adda _aacx _aad6']"))).text
                     i += 1
                     continue
         except:
@@ -1230,14 +1862,20 @@ def login(web):
 
 
 def provide_rollno(username):
-    rollno = register_id[ username ]
+    conn=psycopg2.connect(DATABASE_URL, sslmode='require')
+    cur=conn.cursor()
+    cur.execute(f"select rolid from instad where insta_username='{username}';")
+    rollno = cur.fetchone()[0]
+    conn.close()
     info = get_data(rollno)
     return info
 def get_data(rollno):
     att = None
     try:
-        data = requests.get(f'https://attnbkrist1.herokuapp.com/attapi?roll={rollno}')
+        data = requests.get(f' https://attnbkrist1.herokuapp.com/attapi?roll={rollno}')
         data = data.json()
+        if 'status' in data:
+            return att
         return data
     except Exception as error:
         return att
@@ -1355,6 +1993,7 @@ def readmsg(oldmsg):
             continue
         else:
             break
+    print(msg)
     return msg
 
 
@@ -1365,83 +2004,128 @@ username = None
 msg = None
 msg_count = 0
 while (True):
+    conn=psycopg2.connect(DATABASE_URL, sslmode='require')
+    cur=conn.cursor()
     try:
         msg = readmsg(msg)
         if msg == None:
             username = None
             msg_count = 0
             read_unread_msgs()
+            conn.close()
             continue
-        if not username:
-            username = get_username()
-            info = provide_rollno(username)# to get user data
         try:
             if msg.isdigit():
                 msg_count = 0
         except:
             pass
-        if msg == '1':
+        if not username:
+            username = get_username()
+            print(username)
+        cur.execute(f"select count(*) from instad where insta_username='{username}';")
+        status=cur.fetchone()
+        if status:
+            status=status[0]
+        if msg and not(status):
+            if msg in student_data:
+               cur.execute(f"select count(*) from instad where rolid='{msg}'")
+               if not cur.fetchone()[0]:
+                   cur.execute(f"insert into instad(rolid,insta_username) values('{msg}','{username}');")
+                   conn.commit()
+               send_msg(f'Hi,{student_names[msg]}\nYour ROLL NO Registered Successfully')
+               send_msg('Type "1" For Attendance\nType "2" to Book Requests By Time')
+               conn.close()
+               continue
+            else:
+                send_msg('Hello, This is An ATT | BOT \nPlease Enter your ROLL NO\n')
+                msg=readmsg(msg)
+                if msg == None:
+                    read_unread_msgs()
+                    conn.close()
+                    continue
+                if msg in student_data:
+                    cur.execute(f"select count(*) from instad where rolid='{msg}'")
+                    if not cur.fetchone()[0]:
+                        cur.execute(f"insert into main(rolid,insta_username) values('{msg}','{username}');")
+                        conn.commit()
+                    send_msg(f'Hi,{student_names[msg]}\nYour ROLL NO Registered Successfully')
+                    send_msg('Type "1" For Attendance\nType "2" to Book Requests By Time')
+                    conn.close()
+                    continue
+                else:
+                        send_msg('Roll No not available\nPlease try Again')
+                        username=None
+                        msg=None
+                        msg_count=0
+                        read_unread_msgs()
+                        conn.close()
+                        continue
+        elif msg == '1':
+            info=provide_rollno(username)
             name=info.get('name') #fetches student_name
             att=info.get('attendance') #fetches att
             incRate = info.get('incRate') #fetches incr_rate
             decRate = info.get('decRate') #fetches decr_rate
-            if att==None or att.upper()=='NULL':
-                send_msg(f'HELLO, {name}\nlooks like new semester not started')
-                msg = None
-                username = None
-                msg_count = 0
-                read_unread_msgs()
-                continue
-            else:
-                send_msg(f'Hi, {name}\nThis is Your Attendance Till Now: {att}.\nIncrease rate per 1 class:{incRate}.\nDecrease rate per 1 class:{decRate}.')
-                time.sleep(1)
-                if float(att)<65.0:
+            send_msg(f'Hi, {name}\nThis is Your Attendance Till Now: {att}.\nIncrease rate per 1 class:{incRate}.\nDecrease rate per 1 class:{decRate}.')
+            time.sleep(1)
+            if not att:
+                if float(att) < 65.0:
                     to65=info.get('to65')
                     to75=info.get('to75')
                     send_msg(f'Attend {to65} classes to get 65%.\nAttend {to75} classes to get 75%.')
                     time.sleep(0.5)
-                elif float(att)<75.0:
+                elif float(att) < 75.0:
                     to75=info.get('to75')
                     send_msg(f'Attend {to75} classes to get 75%.')
                     time.sleep(0.5)
-                if username not in time_slot_bookings:
-                    send_msg('Type "1" If you want Again\nType "2" to Book Requests By Time')
-                    msg = None
-                    username = None
-                    msg_count = 0
-                    read_unread_msgs()
-                    continue
-                else:
-                    send_msg("If You want again Type '1'.\nclick on 'https://attnbkrist1.herokuapp.com/' for more details")
-                    msg = None
-                    username = None
-                    msg_count = 0
-                    read_unread_msgs()
-                    continue
+            else:
+                pass
+            cur.execute(f"select book_req from instad where insta_username='{username}'")
+            book_req=cur.fetchone()
+            if not book_req[0]:
+                send_msg('Type "1" If you want Again\nType "2" to Book Requests By Time')
+                msg = None
+                username = None
+                msg_count = 0
+                read_unread_msgs()
+                conn.close()
+                continue
+            else:
+                send_msg("If You want again Type '1'.\nclick on 'https://attnbkrist1.herokuapp.com/' for more details")
+                msg = None
+                username = None
+                msg_count = 0
+                read_unread_msgs()
+                conn.close()
+                continue
         elif msg == '2':
-            if username in time_slot_bookings:
-                send_msg(f"Don't worry...\n{info.get('name')}\nYou Subscribed Already.")
+            cur.execute(f"select book_req,rolid from instad where insta_username='{username}'")
+            book_req=cur.fetchone()
+            if book_req[0]:
+                send_msg(f"Don't worry...\n{student_names[book_req[1]]}\nYou Subscribed Already.")
                 username = None
                 msg = None
                 msg_count = 0
                 read_unread_msgs()
+                conn.close()
                 continue
             else:
                 send_msg('Now you will get attendance twice a day automatically\n01:00 PM and 4:30 PM\nType "yes" to Confirm\nType "no" to cancel')
                 msg = readmsg(msg)
                 if msg == None:
                     read_unread_msgs()
+                    conn.close()
                     continue
                 elif msg == 'YES':
                     send_msg(f'Thanks {info.get("name")} For Subscribe.')
-                    temp_time_slot_bookings.append(username)
-                    time_slot_bookings.extend(temp_time_slot_bookings)  # Extends original bbokings
-                    print(temp_time_slot_bookings)  # To print in logs
+                    cur.execute(f"update instad set book_req=true where insta_username='{username}'")
+                    conn.commit()
                     time.sleep(0.5)
                     msg = None
                     username = None
                     msg_count = 0
                     read_unread_msgs()
+                    conn.close()
                     continue
                 elif msg == 'NO':
                     send_msg('Not a Problem\nThank you')
@@ -1449,6 +2133,7 @@ while (True):
                     msg = None
                     msg_count = 0
                     read_unread_msgs()
+                    conn.close()
                     continue
                 else:
                     send_msg("Sorry, I can't understand")
@@ -1456,14 +2141,15 @@ while (True):
                     msg = None
                     msg_count = 0
                     read_unread_msgs()
+                    conn.close()
                     continue
-            send_msg("click on 'https://attnbkrist1.herokuapp.com/' for more details")
         elif msg == '3':
             send_msg('Sorry,Change option is not available')
             username = None
             msg = None
             msg_count = 0
             read_unread_msgs()
+            conn.close()
             continue
         elif msg in thank_you:
             send_msg('You are welcome')
@@ -1471,45 +2157,22 @@ while (True):
             msg = None
             msg_count = None
             read_unread_msgs()
+            conn.close()
             continue
-        elif msg and (username not in register_id):
-            if msg in student_names:
-                temp_register_id[ username ] = msg
-                register_id.update(temp_register_id)
-                send_msg(f'Hi,{student_names[ msg ]}\nYour ROLL NO Registered Successfully')
-                send_msg('Type "1" For Attendance\nType "2" to Book Requests By Time')
-                continue
-            else:
-                send_msg('Hello, This is An ATT | BOT \nPlease Enter your ROLL NO\n')
-                msg = readmsg(msg)
-                if msg == None:
-                    read_unread_msgs()
-                    continue
-                if msg in student_names:
-                    temp_register_id[ username ] = msg
-                    register_id.update(temp_register_id)
-                    send_msg(f'Hi,{student_names[ msg ]}\nYour ROLL NO Registered Successfully')
-                    send_msg('Type "1" For Attendance\nType "2" to Book Requests By Time')
-                    print(temp_register_id)
-                    continue
-                else:
-                    send_msg('Roll No not available\nPlease try Again')
-                    username = None
-                    msg = None
-                    msg_count = 0
-                    read_unread_msgs()
-                    continue
         elif msg == 'SEND' and username in admins:
+            cur.execute("select count(rolid) from instad where book_req=true;")
+            book_count=cur.fetchone()[0]
             send_msg(
-                f'You want to send att to your {len(time_slot_bookings)} subscribers\n"Yes" to confirm \n "No" to cancel')
+                f'You want to send att to your {book_count} subscribers\n"Yes" to confirm \n "No" to cancel')
             msg = readmsg(msg)
             if msg == 'YES':
                 send_msg('Sending')
-                send_to_users()
+                send_att_time()
                 msg = None
                 username = None
                 msg_count = 0
                 read_unread_msgs()
+                conn.close()
                 continue
             elif msg == 'NO':
                 send_msg('Ok, Not A Problem chinna Bot\nEnjoy pandago')
@@ -1517,6 +2180,7 @@ while (True):
                 username = None
                 msg_count = 0
                 read_unread_msgs()
+                conn.close()
                 continue
             else:
                 send_msg('Enduku Bot Time Waste Chestav\nChaduvuko First malli chudam bye')
@@ -1524,13 +2188,19 @@ while (True):
                 username = None
                 msg_count = 0
                 read_unread_msgs()
+                conn.close()
                 continue
         elif msg == 'C' and username in admins:
-            send_msg(f"Total {len(register_id)} Registered users\n{len(time_slot_bookings)} subscribers")
+            cur.execute("select count(rolid) from instad;")
+            count=cur.fetchone()[0]
+            cur.execute("select count(rolid) from instad where book_req=true;")
+            book_count=cur.fetchone()[0]
+            send_msg(f"Total {count} Registered users\n{book_count} subscribers")
             msg = None
             username = None
             msg_count = 0
             read_unread_msgs()
+            conn.close()
             continue
         elif msg == 'OK':
             send_msg('Fine')
@@ -1538,11 +2208,14 @@ while (True):
             username = None
             msg_count = 0
             read_unread_msgs()
+            conn.close()
             continue
-        elif username in register_id and msg and msg_count == 0:
+        elif status and msg and msg_count == 0:
             msg_count += 1
+            cur.execute(f"select rolid from instad where insta_username='{username}'")
             send_msg(
-                f'Hello,{student_names[ register_id[ username ] ]}\nYou registered already\nType "1" for Attendance\nType "2" to Book Requests By Time.')
+                f'Hello,{student_names[cur.fetchone()[0]]}\nYou registered already\nType "1" for Attendance\nType "2" to Book Requests By Time.')
+            conn.close()
             continue
         else:
             send_msg("Sorry, I can't understand")
@@ -1550,9 +2223,12 @@ while (True):
             msg = None
             msg_count = 0
             read_unread_msgs()
+            conn.close()
             continue
     except Exception as error:
+        print(error)
         username = None
         msg = None
         msg_count = 0
         read_unread_msgs()
+    conn.close()
