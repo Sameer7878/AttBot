@@ -2068,7 +2068,7 @@ while (True):
             decRate = info.get('decRate') #fetches decr_rate
             send_msg(f'Hi, {name}\nThis is Your Attendance Till Now: {att}.\nIncrease rate per 1 class:{incRate}.\nDecrease rate per 1 class:{decRate}.')
             time.sleep(1)
-            if not att:
+            if att:
                 if float(att) < 65.0:
                     to65=info.get('to65')
                     to75=info.get('to75')
@@ -2226,7 +2226,7 @@ while (True):
             msg_count += 1
             cur.execute(f"select rolid from instad where insta_username='{username}'")
             send_msg(
-                f'Hello,{student_names[cur.fetchone()[0]]}\nYou registered already\nType "1" for Attendance\nType "2" to Book Requests By Time.')
+                f'Hello,{student_names[cur.fetchone()[0]]}\nYou registered already\nType "1" for Attendance\nType "2" to Book Requests By Time.\n Type "3" to change RollNo.')
             conn.close()
             continue
         else:
