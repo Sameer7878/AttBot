@@ -2144,7 +2144,19 @@ while (True):
                     conn.close()
                     continue
         elif msg == '3':
-            send_msg('Sorry,Change option is not available')
+            send_msg('Enter Roll No.')
+            msg=readmsg(msg)
+            if msg in student_data:
+                cur.execute(f"select count(*) from instad where rolid='{msg}'")
+                rd=cur.fetchone()
+                if not rd[0]:
+                    cur.execute(f"update instad set rolid='{msg}' where insta_username='{username}';")
+                    conn.commit()
+                    send_msg(f'Hello {student_names[msg]},\nRollNo changed.')
+                else:
+                    send_msg('Ur rollno already link another username.\ncontact support@attnbkrist.live')
+            else:
+                send_msg('Rollno is not found.\nTry Again')
             username = None
             msg = None
             msg_count = 0
