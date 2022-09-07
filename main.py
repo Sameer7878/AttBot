@@ -1780,21 +1780,24 @@ student_data = {'21KB1A0301': '3 1 1', '21KB1A0302': '3 1 1', '21KB1A0303': '3 1
 
 temp_count = 0
 admin_count=0
-thank_you = [ 'THANK YOU', 'TQ', 'TQ U', 'THANKS', 'THANK', 'THANK U', 'THANKYOU', 'TNQ', 'TNX' ]
+thank_you = [ 'THANK YOU', 'TQ', 'TQ U', 'THANKS', 'THANK', 'THANK U', 'THANKYOU', 'TNQ', 'TNX','TQS' ]
 options = Options()
 path ="/Users/sameershaik/Downloads/chromedriver 2"
-options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+#options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
 options.add_argument("--headless")
 options.add_argument("--disable-gpu")
 options.add_argument("--no-sandbox")
 options.add_argument("enable-automation")
 options.add_argument("--disable-infobars")
 options.add_argument("--disable-dev-shm-usage")
-web = webdriver.Chrome(service=Service(os.environ.get("CHROMEDRIVER_PATH")), chrome_options=options)
+web = webdriver.Chrome(executable_path=path)
 web.implicitly_wait(2)
 
 def send_att_time():
     conn=psycopg2.connect(DATABASE_URL, sslmode='require')
+    '''conn=psycopg2.connect(database="dqe54aoft23do", host="ec2-34-199-68-114.compute-1.amazonaws.com",
+                         user="cgncgmtvnnnjki", port="5432",
+                         password="9c67b17c47ac756d8b94edf5b9a65dc71f9da48e272a73e77860aa057b20204f")'''
     cur=conn.cursor()
     cur.execute("select insta_username from instad;")
     bo_data=cur.fetchall()
@@ -1841,6 +1844,9 @@ def send_att_time():
                 EC.presence_of_element_located(
                     (By.XPATH, "//button[@class='_acan _acao _acas _acav']"))).click()
             time.sleep(1)
+            reuser=get_username()
+            if reuser!=roll[0]:
+                continue
             send_msg(
                 f'Hello, {info.get("name")}\nThis Is Your Attendance Till Now: {info.get("attendance")}\n From AttBot Subscribed Data')
         except:
@@ -1863,6 +1869,9 @@ def login(web):
 
 def provide_rollno(username):
     conn=psycopg2.connect(DATABASE_URL, sslmode='require')
+    '''conn=psycopg2.connect(database="dqe54aoft23do", host="ec2-34-199-68-114.compute-1.amazonaws.com",
+                          user="cgncgmtvnnnjki", port="5432",
+                          password="9c67b17c47ac756d8b94edf5b9a65dc71f9da48e272a73e77860aa057b20204f")'''
     cur=conn.cursor()
     cur.execute(f"select rolid from instad where insta_username='{username}';")
     rollno = cur.fetchone()[0]
@@ -1936,7 +1945,12 @@ def read_unread_msgs():
             print('msg found')
         except:
             read_unread_msgs()
-
+def move_general():
+    try:
+        web.find_element(By.XPATH, "//*[local-name()='svg' and @aria-label='View thread details']").click()
+        web.find_element(By.XPATH, "//button[@class='_acan _acap _acat']").click()
+    except:
+        print('Error in moving')
 
 def send_msg(msg_data):
     global username, msg, msg_count
@@ -1954,14 +1968,22 @@ def send_msg(msg_data):
 
 
 def get_username():
-    WebDriverWait(web, 10).until(
-        EC.element_to_be_clickable((By.XPATH, "//button[@class='_acan _acao _acaq _acat']"))).click()
     try:
-        username = web.find_element(By.XPATH, "//h2[@class='_aacl _aacs _aact _aacx _aada']").text
+        time.sleep(0.2)
+        web.find_element(By.XPATH, "//*[local-name()='svg' and @aria-label='View thread details']").click()
+        time.sleep(0.2)
+        username=web.find_element(By.XPATH, "//div[@class='_aacl _aaco _aacw _adda _aacx _aad6']").text
+        time.sleep(0.2)
+        web.find_element(By.XPATH,"//*[local-name()='svg' and @aria-label='Navigate back to chat from thread details']").click()
     except:
-        username = web.find_element(By.XPATH, "//h1[@class='_aacl _aacs _aact _aacx _aada']").text
-    time.sleep(0.3)
-    web.back()
+        WebDriverWait(web, 10).until(
+            EC.element_to_be_clickable((By.XPATH, "//button[@class='_acan _acao _acaq _acat']"))).click()
+        try:
+            username = web.find_element(By.XPATH, "//h2[@class='_aacl _aacs _aact _aacx _aada']").text
+        except:
+            username = web.find_element(By.XPATH, "//h1[@class='_aacl _aacs _aact _aacx _aada']").text
+        time.sleep(0.3)
+        web.back()
     return username
 
 
@@ -2005,6 +2027,9 @@ msg = None
 msg_count = 0
 while (True):
     conn=psycopg2.connect(DATABASE_URL, sslmode='require')
+    '''conn=psycopg2.connect(database="dqe54aoft23do", host="ec2-34-199-68-114.compute-1.amazonaws.com",
+                          user="cgncgmtvnnnjki", port="5432",
+                          password="9c67b17c47ac756d8b94edf5b9a65dc71f9da48e272a73e77860aa057b20204f")'''
     cur=conn.cursor()
     try:
         msg = readmsg(msg)
@@ -2046,19 +2071,29 @@ while (True):
                 if msg in student_data:
                     cur.execute(f"select count(*) from instad where rolid='{msg}'")
                     if not cur.fetchone()[0]:
-                        cur.execute(f"insert into main(rolid,insta_username) values('{msg}','{username}');")
+                        cur.execute(f"insert into instad(rolid,insta_username) values('{msg}','{username}');")
                         conn.commit()
-                    send_msg(f'Hi,{student_names[msg]}\nYour ROLL NO Registered Successfully')
-                    send_msg('Type "1" For Attendance\nType "2" to Book Requests By Time')
-                    conn.close()
-                    continue
+                        send_msg(f'Hi,{student_names[msg]}\nYour ROLL NO Registered Successfully')
+                        send_msg('Type "1" For Attendance\nType "2" to Book Requests By Time')
+                        conn.close()
+                        continue
+                    else:
+                        send_msg('Your RollNo Already Linked with another InstaId.\nPlease Contact Admin by Type "admin".')
+                        username=None
+                        msg=None
+                        msg_count=0
+                        conn.close()
+                        read_unread_msgs()
+                        continue
+
+
                 else:
                         send_msg('Roll No not available\nPlease try Again')
                         username=None
                         msg=None
                         msg_count=0
-                        read_unread_msgs()
                         conn.close()
+                        read_unread_msgs()
                         continue
         elif msg == '1':
             info=provide_rollno(username)
@@ -2083,7 +2118,7 @@ while (True):
             cur.execute(f"select book_req from instad where insta_username='{username}'")
             book_req=cur.fetchone()
             if not book_req[0]:
-                send_msg('Type "1" If you want Again\nType "2" to Book Requests By Time')
+                send_msg('Type "1" If you want Again\nType "2" to Book Requests By Time\nType "admin" to get Support')
                 msg = None
                 username = None
                 msg_count = 0
@@ -2091,7 +2126,7 @@ while (True):
                 conn.close()
                 continue
             else:
-                send_msg("If You want again Type '1'.\nclick on 'https://attnbkrist1.herokuapp.com/' for more details")
+                send_msg("If You want again Type '1'.\nType 'admin' to get Support\nclick on 'https://attnbkrist.live' for more details")
                 msg = None
                 username = None
                 msg_count = 0
@@ -2102,7 +2137,7 @@ while (True):
             cur.execute(f"select book_req,rolid from instad where insta_username='{username}'")
             book_req=cur.fetchone()
             if book_req[0]:
-                send_msg(f"Don't worry...\n{student_names[book_req[1]]}\nYou Subscribed Already.")
+                send_msg(f"Don't worry...\n{student_names[book_req[1]]}\nYou Subscribed Already.\nType 'admin' to get Support")
                 username = None
                 msg = None
                 msg_count = 0
@@ -2154,9 +2189,9 @@ while (True):
                     conn.commit()
                     send_msg(f'Hello {student_names[msg]},\nRollNo changed.')
                 else:
-                    send_msg('Ur rollno already link another username.\ncontact support@attnbkrist.live')
+                    send_msg('Ur rollno already link another username.\ncontact support@attnbkrist.live\nType "admin" to get Support')
             else:
-                send_msg('Rollno is not found.\nTry Again')
+                send_msg('Rollno is not found.\nTry Again\nType "admin" to get Support')
             username = None
             msg = None
             msg_count = 0
@@ -2222,11 +2257,23 @@ while (True):
             read_unread_msgs()
             conn.close()
             continue
+        elif msg == 'ADMIN':
+            try:
+                send_msg('Send Your Problem')
+                move_general()
+            except:
+                print('skip')
+            msg = None
+            username = None
+            msg_count = 0
+            read_unread_msgs()
+            conn.close()
+            continue
         elif status and msg and msg_count == 0:
             msg_count += 1
             cur.execute(f"select rolid from instad where insta_username='{username}'")
             send_msg(
-                f'Hello,{student_names[cur.fetchone()[0]]}\nYou registered already\nType "1" for Attendance\nType "2" to Book Requests By Time.\n Type "3" to change RollNo.')
+                f'Hello,{student_names[cur.fetchone()[0]]}\nYou registered already\nType "1" for Attendance\nType "2" to Book Requests By Time.\n Type "3" to change RollNo.\nType "admin" to get Support')
             conn.close()
             continue
         else:
