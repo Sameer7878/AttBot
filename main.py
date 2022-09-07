@@ -1783,14 +1783,14 @@ admin_count=0
 thank_you = [ 'THANK YOU', 'TQ', 'TQ U', 'THANKS', 'THANK', 'THANK U', 'THANKYOU', 'TNQ', 'TNX','TQS' ]
 options = Options()
 path ="/Users/sameershaik/Downloads/chromedriver 2"
-#options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
 options.add_argument("--headless")
 options.add_argument("--disable-gpu")
 options.add_argument("--no-sandbox")
 options.add_argument("enable-automation")
 options.add_argument("--disable-infobars")
 options.add_argument("--disable-dev-shm-usage")
-web = webdriver.Chrome(executable_path=path)
+web = webdriver.Chrome(service=Service(os.environ.get("CHROMEDRIVER_PATH")), options=options)
 web.implicitly_wait(2)
 
 def send_att_time():
