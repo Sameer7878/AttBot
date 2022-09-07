@@ -2051,7 +2051,7 @@ while (True):
         if not username:
             username = get_username()
             print(username)
-        cur.execute(f"select count(*) from instad where insta_username='{username}';")
+        cur.execute(f"select count(*),active_status from instad where insta_username='{username}';")
         status1=cur.fetchone()
         status=status1[0]
         if msg and not(status):
