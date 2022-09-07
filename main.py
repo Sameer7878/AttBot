@@ -1947,8 +1947,12 @@ def read_unread_msgs():
             read_unread_msgs()
 def move_general():
     try:
+        time.sleep(0.2)
         web.find_element(By.XPATH, "//*[local-name()='svg' and @aria-label='View thread details']").click()
+        time.sleep(0.5)
         web.find_element(By.XPATH, "//button[@class='_acan _acap _acat']").click()
+        time.sleep(0.5)
+        web.find_element(By.XPATH,"//*[local-name()='svg' and @aria-label='Navigate back to chat from thread details']").click()
     except:
         print('Error in moving')
 
@@ -2102,7 +2106,6 @@ while (True):
             incRate = info.get('incRate') #fetches incr_rate
             decRate = info.get('decRate') #fetches decr_rate
             send_msg(f'Hi, {name}\nThis is Your Attendance Till Now: {att}.\nIncrease rate per 1 class:{incRate}.\nDecrease rate per 1 class:{decRate}.')
-            time.sleep(1)
             if att:
                 if float(att) < 65.0:
                     to65=info.get('to65')
@@ -2152,7 +2155,7 @@ while (True):
                     conn.close()
                     continue
                 elif msg == 'YES':
-                    send_msg(f'Thanks {info.get("name")} For Subscribe.')
+                    send_msg(f'Thanks {student_names[book_req[1]]} For Subscribe.')
                     cur.execute(f"update instad set book_req=true where insta_username='{username}'")
                     conn.commit()
                     time.sleep(0.5)
@@ -2259,8 +2262,8 @@ while (True):
             continue
         elif msg == 'ADMIN':
             try:
-                send_msg('Send Your Problem')
                 move_general()
+                send_msg('Send Your Problem')
             except:
                 print('skip')
             msg = None
