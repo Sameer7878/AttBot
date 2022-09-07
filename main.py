@@ -1799,7 +1799,7 @@ def send_att_time():
                          user="cgncgmtvnnnjki", port="5432",
                          password="9c67b17c47ac756d8b94edf5b9a65dc71f9da48e272a73e77860aa057b20204f")'''
     cur=conn.cursor()
-    cur.execute("select insta_username from instad;")
+    cur.execute("select insta_username from instad where book_req=true;")
     bo_data=cur.fetchall()
     conn.close()
     for roll in bo_data:
