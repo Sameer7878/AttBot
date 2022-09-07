@@ -2054,6 +2054,10 @@ while (True):
         cur.execute(f"select count(*)from instad where insta_username='{username}';")
         status=cur.fetchone()
         status=status[0]
+        cur.execute(f"select active_status from instad where insta_username='{username}';")
+        status1=cur.fetchone()
+        if status1:
+            status1=status1[0]
         if msg and not(status):
             if msg in student_data:
                cur.execute(f"select count(*) from instad where rolid='{msg}'")
@@ -2097,10 +2101,8 @@ while (True):
                         msg_count=0
                         conn.close()
                         read_unread_msgs()
-                        continue
-        cur.execute(f"select active_status from instad where insta_username='{username}';")
-        status1=cur.fetchone()               
-        elif status1[0] and msg == 'START':
+                        continue               
+        elif not status1 and msg == 'START':
             cur.execute(f"update instad set active_status=true where insta_username='{username}'")
             conn.commit()
             send_msg('Status:Active')
@@ -2110,7 +2112,7 @@ while (True):
             conn.close()
             read_unread_msgs()
             continue
-        elif not status1[0]:
+        elif not status1:
             username=None
             msg=None
             msg_count=0
