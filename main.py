@@ -2009,7 +2009,7 @@ def readmsg(oldmsg):
         except Exception as error:
             readmsg(msg)
         if count == 30:
-            send_msg('Late respose Please try after some time')
+            send_msg("click on 'https://attnbkrist.live' for more details")
             username = None
             msg = None
             msg_count = 0
@@ -2126,7 +2126,7 @@ while (True):
             incRate = info.get('incRate') #fetches incr_rate
             decRate = info.get('decRate') #fetches decr_rate
             send_msg(f'Hi, {name}\nThis is Your Attendance Till Now: {att}.\nIncrease rate per 1 class:{incRate}.\nDecrease rate per 1 class:{decRate}.')
-            if att:
+            '''if att:
                 if float(att) < 65.0:
                     to65=info.get('to65')
                     to75=info.get('to75')
@@ -2137,7 +2137,7 @@ while (True):
                     send_msg(f'Attend {to75} classes to get 75%.')
                     time.sleep(0.5)
             else:
-                pass
+                pass'''
             cur.execute(f"select book_req from instad where insta_username='{username}'")
             book_req=cur.fetchone()
             if not book_req[0]:
@@ -2148,14 +2148,14 @@ while (True):
                 read_unread_msgs()
                 conn.close()
                 continue
-            else:
+            '''else:
                 send_msg("If You want again Type '1'.\nType 'admin' to get Support\nclick on 'https://attnbkrist.live' for more details")
                 msg = None
                 username = None
                 msg_count = 0
                 read_unread_msgs()
                 conn.close()
-                continue
+                continue'''
         elif msg == '2':
             cur.execute(f"select book_req,rolid from instad where insta_username='{username}'")
             book_req=cur.fetchone()
@@ -2212,7 +2212,7 @@ while (True):
                     conn.commit()
                     send_msg(f'Hello {student_names[msg]},\nRollNo changed.')
                 else:
-                    send_msg('Ur rollno already link another username.\ncontact support@attnbkrist.live\nType "admin" to get Support')
+                    send_msg('Ur rollno already linked to another username.\ncontact support@attnbkrist.live\nType "admin" to get Support')
             else:
                 send_msg('Rollno is not found.\nTry Again\nType "admin" to get Support')
             username = None
