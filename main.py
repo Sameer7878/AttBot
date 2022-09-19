@@ -2125,19 +2125,7 @@ while (True):
             att=info.get('attendance') #fetches att
             incRate = info.get('incRate') #fetches incr_rate
             decRate = info.get('decRate') #fetches decr_rate
-            send_msg(f'Hi, {name}\nThis is Your Attendance Till Now: {att}.\nIncrease rate per 1 class:{incRate}.\nDecrease rate per 1 class:{decRate}.')
-            '''if att:
-                if float(att) < 65.0:
-                    to65=info.get('to65')
-                    to75=info.get('to75')
-                    send_msg(f'Attend {to65} classes to get 65%.\nAttend {to75} classes to get 75%.')
-                    time.sleep(0.5)
-                elif float(att) < 75.0:
-                    to75=info.get('to75')
-                    send_msg(f'Attend {to75} classes to get 75%.')
-                    time.sleep(0.5)
-            else:
-                pass'''
+            send_msg(f'Hi, {name}\nThis is Your Attendance Till Now: {att}.')
             cur.execute(f"select book_req from instad where insta_username='{username}'")
             book_req=cur.fetchone()
             if not book_req[0]:
@@ -2148,14 +2136,6 @@ while (True):
                 read_unread_msgs()
                 conn.close()
                 continue
-            '''else:
-                send_msg("If You want again Type '1'.\nType 'admin' to get Support\nclick on 'https://attnbkrist.live' for more details")
-                msg = None
-                username = None
-                msg_count = 0
-                read_unread_msgs()
-                conn.close()
-                continue'''
         elif msg == '2':
             cur.execute(f"select book_req,rolid from instad where insta_username='{username}'")
             book_req=cur.fetchone()
