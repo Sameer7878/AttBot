@@ -1819,7 +1819,7 @@ def send_att_time():
         time.sleep(1)
         try:
             usern = WebDriverWait(web, 10).until(EC.presence_of_element_located((By.XPATH,
-                                                                                 "//div[@class='_ab8w  _ab94 _ab99 _ab9f _ab9m _ab9o  _ab9v _abcm']/div[1]//div[@class='_aacl _aaco _aacw _adda _aacx _aad6']"))).text
+                                                                                 "//div[@class='_ab8w  _ab94 _ab99 _ab9f _ab9m _ab9o  _ab9v _abcm']/div[1]//div[@class='_aacl _aaco _aacw _aacx _aad6']"))).text
             i = 1
             while True:
                 if i == 5:
@@ -1832,7 +1832,7 @@ def send_att_time():
                     break
                 else:
                     usern = WebDriverWait(web, 10).until(EC.presence_of_element_located((By.XPATH,
-                                                                                         f"//div[@class='_ab8w  _ab94 _ab99 _ab9f _ab9m _ab9o  _ab9v _abcm']/div[{i + 1}]//div[@class='_aacl _aaco _aacw _adda _aacx _aad6']"))).text
+                                                                                         f"//div[@class='_ab8w  _ab94 _ab99 _ab9f _ab9m _ab9o  _ab9v _abcm']/div[{i + 1}]//div[@class='_aacl _aaco _aacw _aacx _aad6']"))).text
                     i += 1
                     continue
         except:
@@ -2009,7 +2009,7 @@ def readmsg(oldmsg):
         except Exception as error:
             readmsg(msg)
         if count == 30:
-            send_msg("click on 'https://attnbkrist.live' for more details")
+            send_msg("click on 'www.attnbkrist.live' for more details")
             username = None
             msg = None
             msg_count = 0
@@ -2101,7 +2101,7 @@ while (True):
                         msg_count=0
                         conn.close()
                         read_unread_msgs()
-                        continue               
+                        continue
         elif not status1 and msg == 'START':
             cur.execute(f"update instad set active_status=true where insta_username='{username}'")
             conn.commit()
@@ -2133,6 +2133,14 @@ while (True):
                 msg = None
                 username = None
                 msg_count = 0
+                read_unread_msgs()
+                conn.close()
+                continue
+            else:
+                send_msg('Type "1" If you want Again\nType "admin" to get Support')
+                msg=None
+                username=None
+                msg_count=0
                 read_unread_msgs()
                 conn.close()
                 continue
