@@ -1972,20 +1972,21 @@ def send_msg(msg_data):
 
 
 def get_username():
-    try:
+    '''try:
         time.sleep(0.2)
         web.find_element(By.XPATH, "//*[local-name()='svg' and @aria-label='View thread details']").click()
         time.sleep(0.2)
         username=web.find_element(By.XPATH, "//div[@class='_aacl _aaco _aacw _adda _aacx _aad6']").text
         time.sleep(0.2)
         web.find_element(By.XPATH,"//*[local-name()='svg' and @aria-label='Navigate back to chat from thread details']").click()
-    except:
-        WebDriverWait(web, 10).until(
+    except:'''
+    WebDriverWait(web, 10).until(
             EC.element_to_be_clickable((By.XPATH, "//button[@class='_acan _acao _acaq _acat']"))).click()
-        try:
-            username = web.find_element(By.XPATH, "//h2[@class='_aacl _aacs _aact _aacx _aada']").text
-        except:
-            username = web.find_element(By.XPATH, "//h1[@class='_aacl _aacs _aact _aacx _aada']").text
+    try:
+        username = web.find_element(By.XPATH, "//h2[@class='_aacl _aacs _aact _aacx _aada']").text
+    except:
+        username = web.find_element(By.XPATH, "//h1[@class='_aacl _aacs _aact _aacx _aada']").text
+    finally:
         time.sleep(0.3)
         web.back()
     return username
@@ -2009,7 +2010,7 @@ def readmsg(oldmsg):
         except Exception as error:
             readmsg(msg)
         if count == 30:
-            send_msg("click on 'www.attnbkrist.live' for more details")
+            send_msg("click on 'http://attnbkrist.live' for more details")
             username = None
             msg = None
             msg_count = 0
