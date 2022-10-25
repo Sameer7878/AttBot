@@ -1818,13 +1818,11 @@ def send_att_time():
             web.get('https://www.instagram.com/direct/inbox/general/')
     '''for roll in bo_data:
         try:
-=======
     cur.execute("select insta_username from instad where book_req=true;")
     bo_data=cur.fetchall()
     conn.close()
     for roll in bo_data:
         try:
->>>>>>> origin/master
             info = provide_rollno(roll[0])
         except:
             continue
@@ -1864,11 +1862,8 @@ def send_att_time():
             WebDriverWait(web, 10).until(
                 EC.presence_of_element_located(
                     (By.XPATH, "//button[@class='_acan _acao _acas _acav']"))).click()
-<<<<<<< HEAD
             time.sleep(2)
-=======
             time.sleep(1)
->>>>>>> origin/master
             reuser=get_username()
             if reuser!=roll[0]:
                 continue
@@ -1928,10 +1923,10 @@ def login_insta(usern, passw):
 def not_now():
     try:
         #notnow
-        time.sleep(10)
-        web.get('https://www.instagram.com/direct/inbox/general/')
-        WebDriverWait(web, 10).until(EC.presence_of_element_located(
-            (By.XPATH, "//button[contains(text(),'Not Now')]"))).click()
+        WebDriverWait(web, 10).until(EC.presence_of_element_located((By.XPATH,'//*[@id="react-root"]/section/main/div/div/div/div/button'))).click()
+        #notnow
+        time.sleep(3)
+        WebDriverWait(web, 10).until(EC.presence_of_element_located((By.XPATH, '//button[@class="_a9-- _a9_1"]'))).click()
         print('Not Now clicked')
     except NoSuchElementException:
         print('Not Found And passed')
