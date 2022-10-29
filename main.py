@@ -15,6 +15,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service
 
 DATABASE_URL = os.environ['DATABASE_URL']
+#DATABASE_URL='postgres://scylfjyygeactf:4a059e54ad264651837df64a3a7248a11225b7b75571db39590c37d7b8e4a6fa@ec2-23-20-140-229.compute-1.amazonaws.com:5432/de14p785paocd3'
 
 admins=['a__.r_.u_.n__', 'user_not_found_x20']
 
@@ -2181,6 +2182,7 @@ options = Options()
 path ="/Users/sameershaik/Downloads/chromedriver 2"
 options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
 options.add_argument("--headless")
+options.add_argument('--disable-notifications')
 options.add_argument("--disable-gpu")
 options.add_argument("--no-sandbox")
 options.add_argument("enable-automation")
@@ -2195,31 +2197,10 @@ def send_att_time():
                          user="cgncgmtvnnnjki", port="5432",
                          password="9c67b17c47ac756d8b94edf5b9a65dc71f9da48e272a73e77860aa057b20204f")'''
     cur=conn.cursor()
-    cur.execute("select dm_link,insta_username from instad where book_req=true and active_status=true and dm_link is not null;")
-    bo_data=cur.fetchall()
-    conn.close()
-    for link in bo_data:
-        try:
-            info=provide_rollno(link[1])
-        except:
-            continue
-        try:
-            web.get(link[0])
-            if link[1]==get_username():
-                send_msg(f'Hello, {info.get("name")}\nThis Is Your Attendance Till Now: {info.get("attendance")}\n From AttBot Subscribed Data')
-        except:
-            print('Not send')
-            web.get('https://www.instagram.com/direct/inbox/general/')
-    '''for roll in bo_data:
-        try:
     cur.execute("select insta_username from instad where book_req=true;")
     bo_data=cur.fetchall()
     conn.close()
     for roll in bo_data:
-        try:
-            info = provide_rollno(roll[0])
-        except:
-            continue
         try:
             WebDriverWait(web, 15).until(
                 EC.element_to_be_clickable((By.XPATH, "//div[@class='_aa4m _aa4p']/button"))).click()
@@ -2256,16 +2237,17 @@ def send_att_time():
             WebDriverWait(web, 10).until(
                 EC.presence_of_element_located(
                     (By.XPATH, "//button[@class='_acan _acao _acas _acav']"))).click()
-            time.sleep(2)
-            time.sleep(1)
-            reuser=get_username()
-            if reuser!=roll[0]:
-                continue
-            send_msg(
-                f'Hello, {info.get("name")}\nThis Is Your Attendance Till Now: {info.get("attendance")}\n From AttBot Subscribed Data')
+            try:
+                info=provide_rollno(roll [0])
+                send_msg(
+                    f'Hello, {info.get("name")}\nThis Is Your Attendance Till Now: {info.get("attendance")}\n From AttBot Subscribed Data')
+            except:
+                pass
+            finally:
+                web.get('https://www.instagram.com/direct/inbox/general/')
         except:
             web.get('https://www.instagram.com/direct/inbox/general/')
-            continue'''
+            continue
 
 
 def login(web):
@@ -2358,16 +2340,7 @@ def read_unread_msgs():
             (By.XPATH, '//div[@aria-label="Unread"]'))).click()
         print('msg found')
     except:
-
         read_unread_msgs()
-
-        web.get('https://www.instagram.com/direct/inbox/general/') #clicks general
-        try:
-            WebDriverWait(web, 300).until(EC.presence_of_element_located(
-                (By.XPATH, '//div[@aria-label="Unread"]'))).click()
-            print('msg found')
-        except:
-            read_unread_msgs()
 def move_general():
     try:
         time.sleep(0.2)
@@ -2406,11 +2379,13 @@ def get_username():
     WebDriverWait(web, 10).until(
             EC.element_to_be_clickable((By.XPATH, "//button[@class='_acan _acao _acaq _acat']"))).click()
     try:
-        username = web.find_element(By.XPATH, "//h2[@class='_aacl _aacs _aact _aacx _aada']").text
+        username = WebDriverWait(web, 10).until(
+            EC.presence_of_element_located((By.XPATH, "//h2[@class='_aacl _aacs _aact _aacx _aada']"))).text
     except:
-        username = web.find_element(By.XPATH, "//h1[@class='_aacl _aacs _aact _aacx _aada']").text
+        username = WebDriverWait(web, 10).until(
+            EC.presence_of_element_located((By.XPATH, "//h1[@class='_aacl _aacs _aact _aacx _aada']"))).text
     finally:
-        time.sleep(0.3)
+        time.sleep(0.5)
         web.back()
     return username
 
@@ -2431,6 +2406,7 @@ def readmsg(oldmsg):
             else:
                 msg = msg.upper()
         except Exception as error:
+            print(error)
             readmsg(msg)
         if count == 30:
             send_msg("click on 'http://attnbkrist.live' for more details")
@@ -2550,16 +2526,10 @@ while (True):
             incRate = info.get('incRate') #fetches incr_rate
             decRate = info.get('decRate') #fetches decr_rate
             send_msg(f'Hi, {name}\nThis is Your Attendance Till Now: {att}.')
-
             cur.execute(f"select book_req,dm_link from instad where insta_username='{username}'")
             book_req=cur.fetchone()
-            if book_req[1] is None:
-                dm_link=web.current_url
-                cur.execute(f"update instad set dm_link='{dm_link}' where insta_username='{username}'")
-                conn.commit()
-
-            cur.execute(f"select book_req from instad where insta_username='{username}'")
-            book_req=cur.fetchone()
+            #cur.execute(f"select book_req from instad where insta_username='{username}'")
+            #book_req=cur.fetchone()
 
             if not book_req[0]:
                 send_msg('Type "1" If you want Again\nType "2" to Book Requests By Time\nType "admin" to get Support')
