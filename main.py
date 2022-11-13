@@ -449,7 +449,7 @@ while (True):
             send_msg('Enter Roll No.')
             msg=readmsg(msg)
             cur.execute(f"select count(*) from main where rollno='{msg}'")
-            if msg in cur.fetchone()[0]:
+            if cur.fetchone()[0]:
                 cur.execute(f"select count(*) from instad where rolid='{msg}'")
                 rd=cur.fetchone()
                 if not rd[0]:
