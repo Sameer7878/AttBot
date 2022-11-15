@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b5b93eac-95b0-447c-b828-a68befabd7eb" name="Changes" comment="adding time">
-      <change beforePath="$PROJECT_DIR$/../InstaBot/.idea/InstaBot.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../InstaBot/.idea/InstaBot.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../InstaBot/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../InstaBot/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../InstaBot/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../InstaBot/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../InstaBot/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../InstaBot/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../InstaBot/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../InstaBot/requirements.txt" afterDir="false" />
+    <list default="true" id="b5b93eac-95b0-447c-b828-a68befabd7eb" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/chromedriver1" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chromedriver" beforeDir="false" afterPath="$PROJECT_DIR$/chromedriver" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
@@ -142,7 +138,7 @@
       <workItem from="1656483903130" duration="361000" />
       <workItem from="1657036331387" duration="853000" />
       <workItem from="1657635494221" duration="5201000" />
-      <workItem from="1668520836961" duration="760000" />
+      <workItem from="1668520836961" duration="1491000" />
     </task>
     <task id="LOCAL-00001" summary="adding time">
       <created>1657648174900</created>
@@ -151,7 +147,14 @@
       <option name="project" value="LOCAL" />
       <updated>1657648174900</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="azure">
+      <created>1668521645256</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1668521645256</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -170,7 +173,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="adding time" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding time" />
+    <MESSAGE value="azure" />
+    <option name="LAST_COMMIT_MESSAGE" value="azure" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/InstaBot$main.coverage" NAME="main Coverage Results" MODIFIED="1657637961360" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
