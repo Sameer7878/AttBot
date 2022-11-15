@@ -14,7 +14,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service
 
-DATABASE_URL = os.environ['DATABASE_URL']
+DATABASE_URL = 'postgres://scylfjyygeactf:4a059e54ad264651837df64a3a7248a11225b7b75571db39590c37d7b8e4a6fa@ec2-23-20-140-229.compute-1.amazonaws.com:5432/de14p785paocd3'
 #DATABASE_URL='postgres://scylfjyygeactf:4a059e54ad264651837df64a3a7248a11225b7b75571db39590c37d7b8e4a6fa@ec2-23-20-140-229.compute-1.amazonaws.com:5432/de14p785paocd3'
 
 admins=['a__.r_.u_.n__', 'user_not_found_x20']
@@ -24,8 +24,8 @@ temp_count = 0
 admin_count=0
 thank_you = [ 'THANK YOU', 'TQ', 'TQ U', 'THANKS', 'THANK', 'THANK U', 'THANKYOU', 'TNQ', 'TNX','TQS' ]
 options = Options()
-path ="/Users/sameershaik/Downloads/chromedriver 2"
-options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+path ="./chromedriver"
+#options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
 options.add_argument("--headless")
 options.add_argument('--disable-notifications')
 options.add_argument("--disable-gpu")
@@ -33,7 +33,7 @@ options.add_argument("--no-sandbox")
 options.add_argument("enable-automation")
 options.add_argument("--disable-infobars")
 options.add_argument("--disable-dev-shm-usage")
-web = webdriver.Chrome(service=Service(os.environ.get("CHROMEDRIVER_PATH")), options=options)
+web = webdriver.Chrome(service=Service(path))
 web.implicitly_wait(2)
 
 def send_att_time():
