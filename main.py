@@ -122,7 +122,7 @@ def provide_rollno(username):
 def get_data(rollno):
     att = None
     try:
-        data = requests.get(f'https://attnbkrist1.herokuapp.com/attapi?roll={rollno}')
+        data = requests.get(f'https://attnbkrist.live/attapi?roll={rollno}')
         data = data.json()
         if 'status' in data:
             return att
