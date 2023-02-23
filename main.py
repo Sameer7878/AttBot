@@ -159,7 +159,7 @@ def not_now():
 
 web.get('https://www.instagram.com/direct/inbox/general/')
 print('Login initiated')
-login_insta('attnbkrist@gmail.com', 'nbkr@93999')
+login_ins()
 not_now()
 
 
